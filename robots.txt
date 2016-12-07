@@ -1,0 +1,13 @@
+User-agent: *
+Allow: /
+Allow: /archives/
+Allow: /tags/
+
+Disallow: /js/
+Disallow: /css/
+Disallow: /lib/
+Disallow: /fonts/
+Disallow: /vendors/
+
+Sitemap: http://www.hijacking.cn/sitemap.xml
+Sitemap: http://www.hijacking.cn/baidusitemap.xml
