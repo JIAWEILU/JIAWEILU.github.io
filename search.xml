@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  
+    
+    <entry>
+      <title><![CDATA[Hexo Blog 同步备份]]></title>
+      <url>%2F2016%2F12%2F06%2FHexo-Backup%2F</url>
+      <content type="text"><![CDATA[备份电脑A：1.在 Github 上新建一个仓库，例如 blog。2.上传电脑A本地Hexo博客的源文件到 Github 的 blog 仓库中：1) 删除根目录和主题目录下的 .git 文件夹2) 修改根目录下的 .gitignore 文件为： 12.deploy*/public/ 3) 依次执行以下指令，同步源文件至 Github： 123456$ git init$ git add .$ git commit -m "创建Hexo" # 更新信息$ git git remote add origin git@github.com:Username/Reponame$ git push -u origin master$ git pull -rebase origin master # 如果出现冲突先执行这条语句 即可将博客源文件上传到 Github。 同步电脑B：1.安装 Git。2.安装 Node.js。3.安装 Hexo： 1$ npm install -g hexo-cli 4.选择一个同步到本地的文件夹，执行 git clone： 1$ git clone git@github.com:Username/Reponame 到这里，两台电脑的 Hexo 环境一致，Hexo 博客源文件也一样。 两台电脑同步更新博客：1.先检查git pull，将本地博客源文件更新至最新版本： 1$ git pull 2.新建或修改博客内容，进行本机预览等操作： 12$ hexo new &lt;新的博客&gt;$ hexo server 3.同步 Hexo 源文件至 Github： 123$ git add .$ git commit -m "更新描述"$ git push origin master 4.最后生成 Hexo 静态博客文件并部署。 12$ hexo generate$ hexo deploy]]></content>
+    </entry>
+
+    
+    <entry>
+      <title><![CDATA[macOS 去除优酷视频广告]]></title>
+      <url>%2F2016%2F06%2F27%2FMacOS-Block-Youku-Ad%2F</url>
+      <content type="text"><![CDATA[教程最早发表于威锋网，原帖地址。未经允许，不得转载。 修改hosts文件1.打开 Finder，同时按住 Shift + Command + G ，输入 /private/etc/ ，然后前往，找到 hosts 文件。 2.将 hosts 文件拷贝一份到桌面上，然后使用文本编辑器添加如下字段： 123456789101112131415127.0.0.1 atm.youku.com127.0.0.1 fvid.atm.youku.com127.0.0.1 html.atm.youku.com127.0.0.1 valb.atm.youku.com127.0.0.1 valf.atm.youku.com127.0.0.1 valo.atm.youku.com127.0.0.1 valp.atm.youku.com127.0.0.1 lstat.youku.com127.0.0.1 speed.lstat.youku.com127.0.0.1 urchin.lstat.youku.com127.0.0.1 stat.youku.com127.0.0.1 static.lstat.youku.com127.0.0.1 valc.atm.youku.com127.0.0.1 vid.atm.youku.com127.0.0.1 walp.atm.youku.com 3.保存并退出，将修改好的 hosts 文件替换原来的 hosts 文件，有密码会提示输入密码。 删除优酷缓存文件夹打开 Finder，同时按住 Shift + Command + G ，输入 ~/Library/Preferences/Macromedia/Flash Player/#SharedObjects/ ，看到一个字母数字组成的文件夹，例如 479H5MNT（名字随机生成），将文件夹内的 static.youku.com 文件夹删除。 网页设置随便打开一个优酷视频网页，此时应该没有广告了，点击右下角的设置按钮，优先画质选择超清或高清，确定。 设置文件权限再次进入 ~/Library/Preferences/Macromedia/Flash Player/#SharedObjects/ 位置，一直进入里面的文件夹，找到 YOUKU_FSO_PROXY.sol 文件。右键点击选择“显示简介”，在最后共享与权限中将所有账户权限改成只读（不能修改点击右下角的锁解锁），最后点击通用中的已锁定。 对于极少部分人，如果按照上面步骤出现优酷黑屏，提示广告被屏蔽的话，试着将第二步中那个数字和字母随即生成的文件夹，如 479H5MNT ，整个删除，再按照上面的方法试一遍。]]></content>
+    </entry>
+
+    
+  
+  
+</search>
