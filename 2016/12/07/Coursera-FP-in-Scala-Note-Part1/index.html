@@ -1,0 +1,965 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="大数据处理,Scala,Coursera," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="此笔记是在学习 Coursera 上 Functional Programming Principles in Scala 课程时所整理，方便今后查阅。
+Getting StartedSBT 相关知识以及作业提交在 sbt 的术语中，基础目录或者是项目的根目录，指的是包含项目的目录。而 build.sbt 就是基础目录。src的目录结构：1234567891011121314151617src/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Coursera - Scala 函数式程序设计原理 - 学习笔记 (1)">
+<meta property="og:url" content="http://hijacking.cn/2016/12/07/Coursera-FP-in-Scala-Note-Part1/index.html">
+<meta property="og:site_name" content="Giraffe.ME">
+<meta property="og:description" content="此笔记是在学习 Coursera 上 Functional Programming Principles in Scala 课程时所整理，方便今后查阅。
+Getting StartedSBT 相关知识以及作业提交在 sbt 的术语中，基础目录或者是项目的根目录，指的是包含项目的目录。而 build.sbt 就是基础目录。src的目录结构：1234567891011121314151617src/">
+<meta property="og:image" content="http://7xvvfk.com1.z0.glb.clouddn.com/blog/20161207/121542116.png">
+<meta property="og:image" content="http://7xvvfk.com1.z0.glb.clouddn.com/blog/20161207/121639283.png">
+<meta property="og:image" content="http://7xvvfk.com1.z0.glb.clouddn.com/blog/20161207/121747439.png">
+<meta property="og:updated_time" content="2016-12-07T04:45:17.015Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Coursera - Scala 函数式程序设计原理 - 学习笔记 (1)">
+<meta name="twitter:description" content="此笔记是在学习 Coursera 上 Functional Programming Principles in Scala 课程时所整理，方便今后查阅。
+Getting StartedSBT 相关知识以及作业提交在 sbt 的术语中，基础目录或者是项目的根目录，指的是包含项目的目录。而 build.sbt 就是基础目录。src的目录结构：1234567891011121314151617src/">
+<meta name="twitter:image" content="http://7xvvfk.com1.z0.glb.clouddn.com/blog/20161207/121542116.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '6360980307578979000',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://hijacking.cn/2016/12/07/Coursera-FP-in-Scala-Note-Part1/"/>
+
+
+
+
+
+  <title> Coursera - Scala 函数式程序设计原理 - 学习笔记 (1) | Giraffe.ME </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?df211222742fcaeae537201dddb59d31";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Giraffe.ME</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://hijacking.cn/2016/12/07/Coursera-FP-in-Scala-Note-Part1/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Jiawei LU">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="http://7xvvfk.com1.z0.glb.clouddn.com/blog/20161207/000018373.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Giraffe.ME">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Giraffe.ME" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Coursera - Scala 函数式程序设计原理 - 学习笔记 (1)
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-07T11:00:01+08:00">
+                2016-12-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2016/12/07/Coursera-FP-in-Scala-Note-Part1/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/07/Coursera-FP-in-Scala-Note-Part1/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>此笔记是在学习 Coursera 上 <a href="https://www.coursera.org/learn/progfun1/home" title="课程链接" target="_blank" rel="external"><em>Functional Programming Principles in Scala</em></a> 课程时所整理，方便今后查阅。</p>
+<h2 id="Getting-Started"><a href="#Getting-Started" class="headerlink" title="Getting Started"></a>Getting Started</h2><h3 id="SBT-相关知识以及作业提交"><a href="#SBT-相关知识以及作业提交" class="headerlink" title="SBT 相关知识以及作业提交"></a>SBT 相关知识以及作业提交</h3><p>在 sbt 的术语中，基础目录或者是项目的根目录，指的是包含项目的目录。而 <code>build.sbt</code> 就是基础目录。<br>src的目录结构：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">src/</div><div class="line">  main/</div><div class="line">    resources/</div><div class="line">       &lt;files to include in main jar here&gt;</div><div class="line">    scala/</div><div class="line">       &lt;main Scala sources&gt;</div><div class="line">    java/</div><div class="line">       &lt;main Java sources&gt;</div><div class="line">  test/</div><div class="line">    resources</div><div class="line">       &lt;files to include in test jar here&gt;</div><div class="line">    scala/</div><div class="line">       &lt;test Scala sources&gt;</div><div class="line">    java/</div><div class="line">       &lt;test Java sources&gt;</div><div class="line">Other directories in src/ will be ignored. Additionally, all hidden</div><div class="line">directories will be ignored.</div></pre></td></tr></table></figure></p>
+<p><code>project/</code> 文件夹下也可能有 <code>.sbt</code>文件，但是它们与基础目录的 sbt 文件作用不同。</p>
+<a id="more"></a>
+<p>在 sbt 文件所在处打开 CMD，键入<code>sbt</code>指令。sbt 指令只能在 sbt shell 中使用，不能在 Scala REPL 中使用。<br>但是，可以在 sbt shell 中开启Scala解释器，输入<code>console</code>指令。当从sbt中启动解释器的时候，项目中的所有代码会被加载，并且可以直接访问。因此，Scala REPL 只能在项目没有错误的时候才能启动成功。<code>ctrl + D</code>退出。<br>使用 <code>compile</code> 指令编译代码。<br><code>src/test/scala</code> 目录中包含的是测试代码，使用 <code>test</code> 指令进行测试。<br>当项目中有一个 object 对象，并且含有 main 函数（或者是继承自 App），那么可以使用 <code>run</code> 指令运行程序。如果有多个 main 函数，那么会询问执行哪一个。</p>
+<h3 id="Scala-Tutorial"><a href="#Scala-Tutorial" class="headerlink" title="Scala Tutorial"></a>Scala Tutorial</h3><p>两种方式实现 HelloWorld：<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// #1</span></div><div class="line"><span class="class"><span class="keyword">object</span> <span class="title">HelloWorld</span> <span class="keyword">extends</span> <span class="title">App</span> </span>&#123;</div><div class="line">  println(<span class="string">"Hello, World!"</span>)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// #2</span></div><div class="line"><span class="class"><span class="keyword">object</span> <span class="title">HelloWorld</span> </span>&#123;</div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">main</span></span>(args: <span class="type">Array</span>[<span class="type">String</span>]) &#123;</div><div class="line">    println(<span class="string">"Hello, World!"</span>)</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>官方文档建议<strong>使用定义 main 函数</strong>的方法来实现，前者有可能出现各种问题。</p>
+<h2 id="Functions-amp-Evaluation"><a href="#Functions-amp-Evaluation" class="headerlink" title="Functions &amp; Evaluation"></a>Functions &amp; Evaluation</h2><h3 id="Lecture-1-1-Programming-Paradigms-编程范型"><a href="#Lecture-1-1-Programming-Paradigms-编程范型" class="headerlink" title="Lecture 1.1 - Programming Paradigms 编程范型"></a>Lecture 1.1 - Programming Paradigms 编程范型</h3><p>函数式编程意味着避免<strong>变化 mutation</strong>。<br>狭义上说，函数式编程FP意味着不使用<strong>变量 mutable variable</strong>、<strong>分配 assignment</strong>、<strong>循环 loop</strong>以及其他<strong>必要的控制结构 imperative control structure</strong>。<br>广义上说，集中注意在程序中的函数上。<br>函数在 FP 语言中是第一等公民：</p>
+<ul>
+<li>可以在任何地方定义，包括其他函数的内部</li>
+<li>可以被当做参数传入以及返回</li>
+</ul>
+<h3 id="Lecture-1-2-Elements-of-Programming-编程元素"><a href="#Lecture-1-2-Elements-of-Programming-编程元素" class="headerlink" title="Lecture 1.2 - Elements of Programming 编程元素"></a>Lecture 1.2 - Elements of Programming 编程元素</h3><p>交互式 shell，也被称作 <strong>RELP(Read-Eval-Print-Loop)</strong>，通过输入 scala 开启。<br>Scala 参数与返回值类型：</p>
+<ul>
+<li>Int：32位整数</li>
+<li>Double：64位浮点数</li>
+<li>Boolean：布尔值 true 或者 false</li>
+</ul>
+<p>计算步骤：<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 表达式计算：</span></div><div class="line">(<span class="number">2</span> * pi) * radius</div><div class="line">(<span class="number">2</span> * <span class="number">3.14159</span>) * radius</div><div class="line"><span class="number">6.28318</span> * radius</div><div class="line"><span class="number">6.28318</span> * <span class="number">10</span></div><div class="line"><span class="number">62.8318</span></div><div class="line"></div><div class="line"><span class="comment">// 函数计算：</span></div><div class="line">sumOfSquares(<span class="number">3</span>, <span class="number">2</span>+<span class="number">2</span>)</div><div class="line">sumOfSquares(<span class="number">3</span>, <span class="number">4</span>)</div><div class="line">square(<span class="number">3</span>) + square(<span class="number">4</span>)</div><div class="line"><span class="number">3</span> * <span class="number">3</span> + square(<span class="number">4</span>)</div><div class="line"><span class="number">9</span> + square(<span class="number">4</span>)</div><div class="line"><span class="number">9</span> + <span class="number">4</span> * <span class="number">4</span></div><div class="line"><span class="number">9</span> + <span class="number">16</span></div><div class="line"><span class="number">25</span></div></pre></td></tr></table></figure></p>
+<p>替代模型 substitution model：<br><img src="http://7xvvfk.com1.z0.glb.clouddn.com/blog/20161207/121542116.png" alt="替代模型" title="替代模型"></p>
+<p>只要没有副作用，所有的表示式都可以用替代模型表示。C++ 这个表达式就具有副作用，因为每次计算后C的值都会改变，并不是所有的表达式最后都会计算出一个值（在有限的步骤内），例如：<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">loop</span></span>: <span class="type">Int</span> = loop</div><div class="line"><span class="comment">// 调用</span></div><div class="line">loop</div></pre></td></tr></table></figure></p>
+<p>Call-by-name and Call-by-value：<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// call-by-value</span></div><div class="line">sumOfSquares(<span class="number">3</span>, <span class="number">2</span>+<span class="number">2</span>)</div><div class="line">sumOfSquares(<span class="number">3</span>, <span class="number">4</span>)</div><div class="line">square(<span class="number">3</span>) + square(<span class="number">4</span>)</div><div class="line"><span class="number">3</span> * <span class="number">3</span> + square(<span class="number">4</span>)</div><div class="line"><span class="number">9</span> + square(<span class="number">4</span>)</div><div class="line"><span class="number">9</span> + <span class="number">4</span> * <span class="number">4</span></div><div class="line"><span class="number">9</span> + <span class="number">16</span></div><div class="line"><span class="number">25</span></div><div class="line"></div><div class="line"><span class="comment">// call-by-name</span></div><div class="line">sumOfSquares(<span class="number">3</span>, <span class="number">2</span>+<span class="number">2</span>)</div><div class="line">square(<span class="number">3</span>) + square(<span class="number">2</span>+<span class="number">2</span>)</div><div class="line"><span class="number">3</span> * <span class="number">3</span> + square(<span class="number">2</span>+<span class="number">2</span>)</div><div class="line"><span class="number">9</span> + square(<span class="number">2</span>+<span class="number">2</span>)</div><div class="line"><span class="number">9</span> + (<span class="number">2</span>+<span class="number">2</span>) * (<span class="number">2</span>+<span class="number">2</span>)</div><div class="line"><span class="number">9</span> + <span class="number">4</span> * (<span class="number">2</span>+<span class="number">2</span>)</div><div class="line"><span class="number">9</span> + <span class="number">4</span> * <span class="number">4</span></div><div class="line"><span class="number">9</span> + <span class="number">16</span></div><div class="line"><span class="number">25</span></div></pre></td></tr></table></figure></p>
+<p>call-by-value：每个函数参数都只计算一次<br>call-by-name：当对应该的参数在函数计算体内没有被时用到的话，就不会被计算<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// which strategy is fastest?</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">test</span></span>(x: <span class="type">Int</span>, y: <span class="type">Int</span>) = x * x</div><div class="line"></div><div class="line">test(<span class="number">2</span>,<span class="number">3</span>) <span class="comment">// same</span></div><div class="line">test(<span class="number">3</span>+<span class="number">4</span>, <span class="number">8</span>) <span class="comment">// CBV</span></div><div class="line">test(<span class="number">7</span>, <span class="number">2</span>*<span class="number">4</span>) <span class="comment">// CBN</span></div><div class="line">test(<span class="number">3</span>+<span class="number">4</span>, <span class="number">2</span>*<span class="number">4</span>) <span class="comment">//same</span></div></pre></td></tr></table></figure></p>
+<h3 id="Lecture-1-3-Evaluation-Strategies-and-Termination-计算策略与终止"><a href="#Lecture-1-3-Evaluation-Strategies-and-Termination-计算策略与终止" class="headerlink" title="Lecture 1.3 - Evaluation Strategies and Termination 计算策略与终止"></a>Lecture 1.3 - Evaluation Strategies and Termination 计算策略与终止</h3><p>如果表达式 e 的 CBV 计算终止了，那么 CBN 的计算也会终止；反过来则不一定是正确的。<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">first</span></span>(x: <span class="type">Int</span>, y: <span class="type">Int</span>) = x</div><div class="line"></div><div class="line"><span class="comment">// CBN</span></div><div class="line">first(<span class="number">1</span>, loop)</div><div class="line"></div><div class="line"><span class="comment">// CBV</span></div><div class="line">first(<span class="number">1</span>, loop)</div></pre></td></tr></table></figure></p>
+<p>Scala 通常使用上的计算策略是 call-by-value ，但是如果一个参数类型以 <code>=&gt;</code>开头，那么它使用的策略是 call-by-name：<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">constOne</span></span>(x: <span class="type">Int</span>, y: =&gt; <span class="type">Int</span>) = <span class="number">1</span></div><div class="line"></div><div class="line">constOne(<span class="number">1</span>+<span class="number">2</span>, loop) <span class="comment">// 1</span></div><div class="line"></div><div class="line">constOne(loop, <span class="number">1</span>+<span class="number">2</span>) <span class="comment">// loop</span></div></pre></td></tr></table></figure></p>
+<h3 id="Lecture-1-4-Conditionals-and-Value-Definitions-条件语句与值定义"><a href="#Lecture-1-4-Conditionals-and-Value-Definitions-条件语句与值定义" class="headerlink" title="Lecture 1.4 - Conditionals and Value Definitions 条件语句与值定义"></a>Lecture 1.4 - Conditionals and Value Definitions 条件语句与值定义</h3><p><code>if-else</code>在 Scala 中用作表达式，而不是声明：<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">abs</span></span>(x: <span class="type">Int</span>) = <span class="keyword">if</span> (x &gt;= <span class="number">0</span>) x <span class="keyword">else</span> -x</div></pre></td></tr></table></figure></p>
+<p>值定义也没有 by-name 与 by-value，<code>def</code>用来定义 by-name,每一次时候都会重新进行计算；而 <code>val</code> 用来定义 by-value，val 的值只会计算一次：<br>def 和 val 的区别在等式右边的表达式不会终止的时候很明显：<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">loop</span></span>: <span class="type">Boolean</span> = loop</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">x</span> </span>= loop <span class="comment">// OK</span></div><div class="line"></div><div class="line"><span class="keyword">val</span> x = loop <span class="comment">// lead to an infinite loop</span></div></pre></td></tr></table></figure></p>
+<p><code>&amp;&amp;</code> 和 <code>||</code> 可以写成：<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// and</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">and</span></span>(x:<span class="type">Boolean</span>,y:=&gt;<span class="type">Boolean</span>) = <span class="keyword">if</span>(x) y <span class="keyword">else</span> <span class="literal">false</span></div><div class="line"></div><div class="line"><span class="comment">// or</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">or</span></span>(x:<span class="type">Boolean</span>,y:=&gt;<span class="type">Boolean</span>) = <span class="keyword">if</span>(x) <span class="literal">true</span> <span class="keyword">else</span> y</div></pre></td></tr></table></figure></p>
+<h3 id="Lecture-1-5-Example-square-roots-with-Newton’s-method-使用牛顿方法实现平方根"><a href="#Lecture-1-5-Example-square-roots-with-Newton’s-method-使用牛顿方法实现平方根" class="headerlink" title="Lecture 1.5 - Example square roots with Newton’s method 使用牛顿方法实现平方根"></a>Lecture 1.5 - Example square roots with Newton’s method 使用牛顿方法实现平方根</h3><p>实现平方根算法：<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">abs</span></span>(x: <span class="type">Double</span>) = <span class="keyword">if</span> (x &lt; <span class="number">0</span>) -x <span class="keyword">else</span> x</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">sqrtIter</span></span>(guess: <span class="type">Double</span>, x: <span class="type">Double</span>): <span class="type">Double</span> =</div><div class="line">  <span class="keyword">if</span> (isGoodEnough(guess, x)) guess</div><div class="line">  <span class="keyword">else</span> sqrtIter(improve(guess, x), x)</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">isGoodEnough</span></span>(guess: <span class="type">Double</span>, x: <span class="type">Double</span>) =</div><div class="line">  abs(guess * guess - x) / x &lt; <span class="number">0.001</span> <span class="comment">// instead of abs(guess * guess - x) &lt; 0.001</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">improve</span></span>(guess: <span class="type">Double</span>, x: <span class="type">Double</span>) =</div><div class="line">  (guess + x / guess) / <span class="number">2</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">sqrt</span></span>(x: <span class="type">Double</span>) = sqrtIter(<span class="number">1.0</span>, x)</div><div class="line"></div><div class="line">sqrt(<span class="number">2</span>)</div><div class="line">sqrt(<span class="number">4</span>)</div><div class="line">sqrt(<span class="number">1e-6</span>)</div><div class="line">sqrt(<span class="number">1e60</span>)</div></pre></td></tr></table></figure></p>
+<h3 id="Lecture-1-6-Blocks-and-Lexical-Scope-块代码以及词法作用域"><a href="#Lecture-1-6-Blocks-and-Lexical-Scope-块代码以及词法作用域" class="headerlink" title="Lecture 1.6 - Blocks and Lexical Scope 块代码以及词法作用域"></a>Lecture 1.6 - Blocks and Lexical Scope 块代码以及词法作用域</h3><p>将一个任务分解成若干个函数实现是很好的编程风格，但是 sqrtIter, improve, isGoodEnough 这个方法知识 sqrt 的实现，而不是使用。<br>因此，我们可以将这个函数放到另外一个函数的内部，这样还可以有效避免<strong>命名空间污染 name-space pollution</strong>。<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">sqrt</span></span>(x: <span class="type">Double</span>) = &#123;</div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">sqrtIter</span></span>(guess: <span class="type">Double</span>, x: <span class="type">Double</span>): <span class="type">Double</span> =</div><div class="line">    <span class="keyword">if</span> (isGoodEnough(guess, x)) guess</div><div class="line">    <span class="keyword">else</span> sqrtIter(improve(guess, x), x)</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">isGoodEnough</span></span>(guess: <span class="type">Double</span>, x: <span class="type">Double</span>) =</div><div class="line">    abs(guess * guess - x) / x &lt; <span class="number">0.001</span></div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">improve</span></span>(guess: <span class="type">Double</span>, x: <span class="type">Double</span>) =</div><div class="line">    (guess + x / guess) / <span class="number">2</span></div><div class="line"></div><div class="line">  sqrtIter(<span class="number">1.0</span>, x)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>Scala 中的 Block：<br>block 定义在一堆花括号中<code>{...}</code>，内部包含了一系列的定义和表达式，block 的最后一个元素代表了它的值，block 自身是表达式，表达式可以出现在哪儿，block 就能出现在哪儿。<br>block 内部的定义只有在 block 内部是可见的，外部不可见。而外部的定义只要没有在内部重新被定义，那么内部可以直接使用外部的定义。<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> x = <span class="number">0</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span></span>(y: <span class="type">Int</span>) = y + <span class="number">1</span></div><div class="line"><span class="keyword">val</span> result = &#123;</div><div class="line">  <span class="keyword">val</span> x = f(<span class="number">3</span>)</div><div class="line">  x * x</div><div class="line">&#125; + x <span class="comment">// result = 16</span></div></pre></td></tr></table></figure></p>
+<p>除非定义在 block 内部被遮蔽 shadow 了，它都是可见的。因此，可以通过清除多余的变量来使程序变得简洁，sqrt 可以简化如下：<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">sqrt</span></span>(x: <span class="type">Double</span>) = &#123;</div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">sqrtIter</span></span>(guess: <span class="type">Double</span>): <span class="type">Double</span> =</div><div class="line">    <span class="keyword">if</span> (isGoodEnough(guess)) guess</div><div class="line">    <span class="keyword">else</span> sqrtIter(improve(guess))</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">isGoodEnough</span></span>(guess: <span class="type">Double</span>) =</div><div class="line">    abs(guess * guess - x) / x &lt; <span class="number">0.001</span></div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">improve</span></span>(guess: <span class="type">Double</span>) =</div><div class="line">    (guess + x / guess) / <span class="number">2</span></div><div class="line"></div><div class="line">  sqrtIter(<span class="number">1.0</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>如果一个表达式太长，通常会将表达式写成多行，但是：<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">someLongExpression</div><div class="line">+ someOtherExpression</div><div class="line"></div><div class="line"><span class="comment">// 相当于</span></div><div class="line">someLongExpression;</div><div class="line">+ someOtherExpression</div></pre></td></tr></table></figure></p>
+<p>通常会被当做是两个表达式，可以通过加小括号或者使+放在第一行来告诉 Scala，这个表达式还没有结束，如：<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">(someLongExpression</div><div class="line">+ someOtherExpression)</div><div class="line"></div><div class="line">someLongExpression +</div><div class="line">someOtherExpression</div></pre></td></tr></table></figure></p>
+<h3 id="Lecture-1-7-Tail-Recursion-尾递归"><a href="#Lecture-1-7-Tail-Recursion-尾递归" class="headerlink" title="Lecture 1.7 - Tail Recursion 尾递归"></a>Lecture 1.7 - Tail Recursion 尾递归</h3><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">gcd</span></span>(a: <span class="type">Int</span>, b: <span class="type">Int</span>): <span class="type">Int</span> =</div><div class="line">	<span class="keyword">if</span> (b == <span class="number">0</span>) a <span class="keyword">else</span> gcd(b, a % b)</div><div class="line"><span class="comment">// rewrite</span></div><div class="line">gcd(<span class="number">14</span>, <span class="number">21</span>)</div><div class="line">→ <span class="keyword">if</span> (<span class="number">21</span> == <span class="number">0</span>) <span class="number">14</span> <span class="keyword">else</span> gcd(<span class="number">21</span>, <span class="number">14</span> % <span class="number">21</span>)</div><div class="line">→ <span class="keyword">if</span> (<span class="literal">false</span>) <span class="number">14</span> <span class="keyword">else</span> gcd(<span class="number">21</span>, <span class="number">14</span> % <span class="number">21</span>)</div><div class="line">→ gcd(<span class="number">21</span>, <span class="number">14</span> % <span class="number">21</span>)</div><div class="line">→ gcd(<span class="number">21</span>, <span class="number">14</span>)</div><div class="line">→ <span class="keyword">if</span> (<span class="number">14</span> == <span class="number">0</span>) <span class="number">21</span> <span class="keyword">else</span> gcd(<span class="number">14</span>, <span class="number">21</span> % <span class="number">14</span>)</div><div class="line">→→ gcd(<span class="number">14</span>, <span class="number">7</span>)</div><div class="line">→→ gcd(<span class="number">7</span>, <span class="number">0</span>)</div><div class="line">→ <span class="keyword">if</span> (<span class="number">0</span> == <span class="number">0</span>) <span class="number">7</span> <span class="keyword">else</span> gcd(<span class="number">0</span>, <span class="number">7</span> % <span class="number">0</span>)</div><div class="line">→ <span class="number">7</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">factorial</span></span>(n: <span class="type">Int</span>): <span class="type">Int</span> =</div><div class="line">	<span class="keyword">if</span> (n == <span class="number">0</span>) <span class="number">1</span> <span class="keyword">else</span> n * factorial(n - <span class="number">1</span>)</div><div class="line"><span class="comment">// rewrite</span></div><div class="line">factorial(<span class="number">4</span>)</div><div class="line">→ <span class="keyword">if</span> (<span class="number">4</span> == <span class="number">0</span>) <span class="number">1</span> <span class="keyword">else</span> <span class="number">4</span> * factorial(<span class="number">4</span> - <span class="number">1</span>)</div><div class="line">→→ <span class="number">4</span> * factorial(<span class="number">3</span>)</div><div class="line">→→ <span class="number">4</span> * (<span class="number">3</span> * factorial(<span class="number">2</span>))</div><div class="line">→→ <span class="number">4</span> * (<span class="number">3</span> * (<span class="number">2</span> * factorial(<span class="number">1</span>)))</div><div class="line">→→ <span class="number">4</span> * (<span class="number">3</span> * (<span class="number">2</span> * (<span class="number">1</span> * factorial(<span class="number">0</span>)))</div><div class="line">→→ <span class="number">4</span> * (<span class="number">3</span> * (<span class="number">2</span> * (<span class="number">1</span> * <span class="number">1</span>)))</div><div class="line">→→ <span class="number">120</span></div></pre></td></tr></table></figure>
+<p>两个函数的区别，前者不停地摆动，<code>gcd(14,21) -&gt; gcd(21,14) -&gt; gcd(14,7) -&gt; gcd(7,0)</code>,但是总会重新变成对gcd的调用；后者中，每隔几步，我们都会增加一个新的元素到表达式中，表达式越来越长，直到简化到最后的结果。<br><strong>尾递归tail recursion</strong><br>一个函数在最后一步的时候调用它<strong>自己</strong>，而不能是自己去其他操作的混合操作，这样，这个函数的栈帧 stack frame 可以被重用，被称为尾递归。gcd 函数属于尾递归，而 factorial 函数不属于尾递归。<em>尾递归的判断标准是函数运行最后一步是否调用自身，而不是是否在函数的最后一行调用自身。</em></p>
+<blockquote>
+<p>function story() {<br>从前有座山，山上有座庙，庙里有个老和尚，一天老和尚对小和尚讲故事：story() // 尾递归，进入下一个函数不再需要上一个函数的环境了，得出结果以后直接返回。<br>}<br>function story() {<br>从前有座山，山上有座庙，庙里有个老和尚，一天老和尚对小和尚讲故事：story()，小和尚听了，找了块豆腐撞死了 // 非尾递归，下一个函数结束以后此函数还有后续，所以必须保存本身的环境以供处理返回值。<br>}</p>
+<p>来源<br>作者：酿泉<br>链接：<a href="http://www.zhihu.com/question/20761771/answer/23254340" target="_blank" rel="external">http://www.zhihu.com/question/20761771/answer/23254340</a></p>
+</blockquote>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 普通递归调用</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">factorial</span></span>(n: <span class="type">Int</span>): <span class="type">Int</span> =</div><div class="line">  <span class="keyword">if</span> (n == <span class="number">0</span>) <span class="number">1</span> <span class="keyword">else</span> n * factorial(n - <span class="number">1</span>)</div><div class="line"></div><div class="line"><span class="comment">// 尾递归调用</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">factorial2</span></span>(n:<span class="type">Int</span>, result:<span class="type">Int</span>): <span class="type">Int</span> =</div><div class="line">  <span class="keyword">if</span> (n == <span class="number">0</span>) result <span class="keyword">else</span> factorial2(n<span class="number">-1</span>, result * n)</div><div class="line"></div><div class="line">factorial(<span class="number">5</span>) <span class="comment">// 120</span></div><div class="line">factorial2(<span class="number">5</span>,<span class="number">1</span>) <span class="comment">// 120</span></div><div class="line"></div><div class="line"><span class="comment">// 普通递归调用</span></div><div class="line">function f(x) &#123;</div><div class="line">   <span class="keyword">if</span> (x === <span class="number">1</span>) <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">   <span class="keyword">return</span> <span class="number">1</span> + f(x<span class="number">-1</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 尾递归调用</span></div><div class="line">function f(x) &#123;</div><div class="line">   <span class="keyword">if</span> (x === <span class="number">1</span>) <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">   <span class="keyword">return</span> f(x<span class="number">-1</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="Higher-Order-Functions"><a href="#Higher-Order-Functions" class="headerlink" title="Higher Order Functions"></a>Higher Order Functions</h2><h3 id="Lecture-2-1-Higher-Order-Functions-高阶函数"><a href="#Lecture-2-1-Higher-Order-Functions-高阶函数" class="headerlink" title="Lecture 2.1 - Higher-Order Functions 高阶函数"></a>Lecture 2.1 - Higher-Order Functions 高阶函数</h3><p>函数式编程语言把函数看成是 <strong>第一等值first-class value</strong>，也就是说，函数可以被当成参数传递给一个函数或者当成一个结果返回。而将函数当成参数传给另一个函数，或者将函数当做结果返回被称之为高阶函数。<br>函数类型：<br>使用<code>A =&gt; B</code>来表示函数类型，它表示，这个函数接受一个参数类型 A，并且返回结果是类型 B。<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">sum</span></span>(f: <span class="type">Int</span> =&gt; <span class="type">Int</span>, a: <span class="type">Int</span>, b: <span class="type">Int</span>): <span class="type">Int</span> =</div><div class="line">  <span class="keyword">if</span> (a &gt; b) <span class="number">0</span></div><div class="line">  <span class="keyword">else</span> f(a) + sum(f, a+<span class="number">1</span>, b)</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">sumInt</span></span>(a: <span class="type">Int</span>, b: <span class="type">Int</span>) = sum(id, a, b)</div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">sumCube</span></span>(a: <span class="type">Int</span>, b: <span class="type">Int</span>) = sum(cube, a, b)</div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">sumFact</span></span>(a: <span class="type">Int</span>, b: <span class="type">Int</span>) = sum(fact, a, b)</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">id</span></span>(x: <span class="type">Int</span>): <span class="type">Int</span> = x</div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">cube</span></span>(x: <span class="type">Int</span>): <span class="type">Int</span> = x * x * x</div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">fact</span></span>(x: <span class="type">Int</span>): <span class="type">Int</span> = <span class="keyword">if</span> (x == <span class="number">0</span>) <span class="number">1</span> <span class="keyword">else</span> x * fact(x<span class="number">-1</span>)</div><div class="line"></div><div class="line">sumInt(<span class="number">0</span>,<span class="number">2</span>)</div><div class="line">sumCube(<span class="number">0</span>,<span class="number">2</span>)</div><div class="line">sumFact(<span class="number">0</span>,<span class="number">2</span>)</div></pre></td></tr></table></figure></p>
+<p>但是，这样会有一个问题，我们创建了很多小的函数，如 id、cube、fact，这样会显得程序很臃肿，因此介绍函数字面量 function literal，又被称为<strong>匿名函数 anonymous function</strong>。例如：<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// (x: Int)是函数的参数，x*x*x是函数体</span></div><div class="line"><span class="comment">// 其中，参数的类型可以省略，因为编辑器可以根据上下文自动推断出类型</span></div><div class="line">(x: <span class="type">Int</span>) =&gt; x * x * x</div><div class="line"><span class="comment">// same as</span></div><div class="line">x =&gt; x * x * x</div><div class="line"><span class="comment">// 接收多个参数的函数</span></div><div class="line">(x: <span class="type">Int</span>, y: <span class="type">Int</span>) =&gt; x + y</div><div class="line"><span class="comment">// same as</span></div><div class="line">(x, y) =&gt; x + y</div></pre></td></tr></table></figure></p>
+<p>匿名函数是一种语法糖，可以让程序更加好写，<code>(x1: T1, …, xn: Tn) =&gt; E</code> 可以使用def来定义：<br><code>{ def f(x1: T1, …, xn: Tn) = E; f }</code>。</p>
+<h3 id="Lecture-2-2-Currying-柯西里化"><a href="#Lecture-2-2-Currying-柯西里化" class="headerlink" title="Lecture 2.2 - Currying 柯西里化"></a>Lecture 2.2 - Currying 柯西里化</h3><p>函数返回值为函数：<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 接收参数是一个函数，返回值也是一个函数</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">sum</span></span>(f: <span class="type">Int</span> =&gt; <span class="type">Int</span>) : (<span class="type">Int</span>, <span class="type">Int</span>) =&gt; <span class="type">Int</span> = &#123;</div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">sumF</span></span>(a: <span class="type">Int</span>, b: <span class="type">Int</span>) : <span class="type">Int</span> =</div><div class="line">    <span class="keyword">if</span> (a &gt; b) <span class="number">0</span></div><div class="line">    <span class="keyword">else</span> f(a) + sumF(a + <span class="number">1</span>, b)</div><div class="line">  sumF</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 上面代码可以改写</span></div><div class="line"><span class="comment">// 这里就没有了重复的参数</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">sumInts</span> </span>= sum(x =&gt; x)</div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">sumCubes</span> </span>= sum(x =&gt; x * x * x)</div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">sumFactorials</span> </span>= sum(fact)</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">fact</span></span>(x: <span class="type">Int</span>): <span class="type">Int</span> = &#123;</div><div class="line">  <span class="keyword">if</span> (x == <span class="number">0</span>) <span class="number">1</span></div><div class="line">  <span class="keyword">else</span> x * fact(x - <span class="number">1</span>)</div><div class="line">&#125;</div><div class="line"></div><div class="line">sumCubes(<span class="number">1</span>, <span class="number">10</span>) + sumFactorials(<span class="number">10</span>, <span class="number">20</span>) <span class="comment">// 267634641</span></div><div class="line"></div><div class="line"><span class="comment">// 可以直接跳过定义辅助函数</span></div><div class="line">sum(x =&gt; x)(<span class="number">1</span>, <span class="number">10</span>) <span class="comment">// 55</span></div></pre></td></tr></table></figure></p>
+<p>转化为多参数：<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 使用语法糖，进一步改写</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">sum</span></span>(f: <span class="type">Int</span> =&gt; <span class="type">Int</span>)(a: <span class="type">Int</span>, b: <span class="type">Int</span>): <span class="type">Int</span> =</div><div class="line">  <span class="keyword">if</span> (a &gt; b) <span class="number">0</span> <span class="keyword">else</span> f(a) + sum(f)(a + <span class="number">1</span>, b)</div></pre></td></tr></table></figure></p>
+<p><img src="http://7xvvfk.com1.z0.glb.clouddn.com/blog/20161207/121639283.png" alt="多个参数" title="多个参数"></p>
+<p>那么，上面 sum 函数的类型是什么？<br>类型为 <code>(Int =&gt; Int) =&gt; (Int, Int) =&gt; Int</code>，函数类型为右结合，也就是说，<code>Int =&gt; Int =&gt; Int</code> 相当于 <code>Int =&gt; (Int =&gt; Int)</code>。<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">mapReduce</span></span>(f: <span class="type">Int</span> =&gt; <span class="type">Int</span>, combine: (<span class="type">Int</span>, <span class="type">Int</span>) =&gt; <span class="type">Int</span>, zero: <span class="type">Int</span>)(a: <span class="type">Int</span>, b: <span class="type">Int</span>): <span class="type">Int</span> = &#123;</div><div class="line">  <span class="keyword">if</span> (a&gt;b) zero</div><div class="line">  <span class="keyword">else</span> combine(f(a), mapReduce(f, combine, zero)(a+<span class="number">1</span>, b))</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">product</span></span>(f: <span class="type">Int</span> =&gt; <span class="type">Int</span>)(a: <span class="type">Int</span>, b: <span class="type">Int</span>): <span class="type">Int</span> = mapReduce(f, (x, y) =&gt; x * y, <span class="number">1</span>)(a, b)</div><div class="line"></div><div class="line">product(x =&gt; x)(<span class="number">1</span>, <span class="number">4</span>)</div></pre></td></tr></table></figure></p>
+<p>当 mapReduce函数 与 product 函数中间出现其他函数定义的时候，可能会报错：<br>multiple markers at this line<br>- forward reference extends over definition of value res\$0<br>- forward reference extends over definition of value res\$1</p>
+<h3 id="Lecture-2-3-Example-Finding-Fixed-Points-例子：找不动点"><a href="#Lecture-2-3-Example-Finding-Fixed-Points-例子：找不动点" class="headerlink" title="Lecture 2.3 - Example Finding Fixed Points 例子：找不动点"></a>Lecture 2.3 - Example Finding Fixed Points 例子：找不动点</h3><p>不动点：x = f(x) 如果一个 x 的值满足前面的等式，那么可以看成是这个函数的不动点。<br>因此，我们可以通过找不动点的方法来实现 sqrt。sqrt(x) 是方程 y =&gt; x / y 的不动点，但是这样计算不能够收敛于一点，于是我们通过与原值取平均的方法来使其收敛，并且可以将其抽取出一个函数：<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> scala.math._</div><div class="line"></div><div class="line"><span class="keyword">val</span> tolerance = <span class="number">0.0001</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">isCloseEnough</span></span>(x: <span class="type">Double</span>, y: <span class="type">Double</span>) =</div><div class="line">  abs((x - y) / x) / x &lt; tolerance</div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">fixedPoint</span></span>(f: <span class="type">Double</span> =&gt; <span class="type">Double</span>)(firstGuess: <span class="type">Double</span>) = &#123;</div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">iterate</span></span>(guess: <span class="type">Double</span>): <span class="type">Double</span> = &#123;</div><div class="line">    println(<span class="string">s"guess = <span class="subst">$guess</span>"</span>)</div><div class="line">    <span class="keyword">val</span> next = f(guess)</div><div class="line">    <span class="keyword">if</span> (isCloseEnough(guess, next)) next</div><div class="line">    <span class="keyword">else</span> iterate(next)</div><div class="line">  &#125;</div><div class="line">  iterate(firstGuess)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//fixedPoint(x =&gt; 1 + x/2)(1)</span></div><div class="line"><span class="comment">//fixedPoint(x =&gt; cos(x))(1)</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">averageDamp</span></span>(f: <span class="type">Double</span> =&gt; <span class="type">Double</span>)(x: <span class="type">Double</span>) = (x + f(x)) / <span class="number">2</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">sqrt</span></span>(x: <span class="type">Double</span>) = fixedPoint(averageDamp(y =&gt; x / y))(<span class="number">1.0</span>)</div><div class="line"></div><div class="line">sqrt(<span class="number">2</span>)</div></pre></td></tr></table></figure></p>
+<h3 id="Lecture-2-4-Scala-Syntax-Summary-语法总结"><a href="#Lecture-2-4-Scala-Syntax-Summary-语法总结" class="headerlink" title="Lecture 2.4 - Scala Syntax Summary 语法总结"></a>Lecture 2.4 - Scala Syntax Summary 语法总结</h3><p>扩展的巴科斯范式 <strong>EBNF(Extended Backus-Naur form)</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">- | 表示可选</div><div class="line">- [...] 表示选择（0 或 1）</div><div class="line">- &#123;...&#125; 表示反复（0 或更多）</div></pre></td></tr></table></figure></p>
+<p>Types 类型<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Type			= SimpleType | FunctionType</div><div class="line">FunctionType	= SimpleType &apos;=&gt;&apos; Type</div><div class="line">				| &apos;(&apos; [Types] &apos;)&apos; &apos;=&gt;&apos; Type</div><div class="line">SimpleType		= Ident</div><div class="line">Types			= Type &#123;&apos;,&apos; Type&#125;</div></pre></td></tr></table></figure></p>
+<p>A type can be:</p>
+<ul>
+<li>A <code>numeric</code> type: Int, Double (and Byte, Short, Char, Long, Float)</li>
+<li>The <code>Boolean</code> type with the value true and false</li>
+<li>The <code>String</code> type</li>
+<li>A <code>function</code> type, like Int =&gt; Int, (Int, Int) =&gt; Int</li>
+</ul>
+<p>Expressions 类型<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">Expr		= InfixExpr | FunctionExpr</div><div class="line">			| if &apos;(&apos; Expr &apos;)&apos; Expr else Expr</div><div class="line">InfixExpr 	= PrefixExpr | InfixExpr Operator InfixExpr</div><div class="line">Operator 	= ident</div><div class="line">PrefixExpr 	= [&apos;+&apos; | &apos;-&apos; | &apos;!&apos; | &apos;~&apos; ] SimpleExpr</div><div class="line">SimpleExpr 	= ident | literal | SimpleExpr &apos;.&apos; ident</div><div class="line">			| Block</div><div class="line">FunctionExpr = Bindings &apos;=&gt;&apos; Expr</div><div class="line">Bindings 	= ident [&apos;:&apos; SimpleType ]</div><div class="line">			| &apos;(&apos; [ Binding &#123;&apos;,&apos; Binding &#125;] &apos;)&apos;</div><div class="line">Binding 	= ident [&apos;:&apos; Type ]</div><div class="line">Block 		= &apos;&#123;&apos; &#123; Def &apos;;&apos;&#125; Expr &apos;&#125;&apos;</div></pre></td></tr></table></figure></p>
+<p>An expression can be:</p>
+<ul>
+<li>An <code>identifier</code> such as x, isGoodEnough</li>
+<li>A <code>literal</code>, like 0, 1.0, “abc”</li>
+<li>A <code>function application</code>, like sqrt(x)</li>
+<li>An <code>operator application</code>, like -x, y + x</li>
+<li>A <code>selection</code>, like math.abs</li>
+<li>A <code>conditional expression</code>, like if (x &lt; 0) -x else x</li>
+<li>A <code>block</code>, like { val x = math.abs(y) ; x * 2 }</li>
+<li>An <code>anonymous function</code>, like x =&gt; x + 1</li>
+</ul>
+<p>Definitions<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Def			= FunDef | ValDef</div><div class="line">FunDef		= def ident &#123;‘(’ [ Parameters ] ‘)’&#125;</div><div class="line">			[‘:’ Type ] ‘=’ Expr</div><div class="line">ValDef 		= val ident [‘:’ Type ] ‘=’ Expr</div><div class="line">Parameter 	= ident ‘:’ [ ‘=&gt;’ ] Type</div><div class="line">Parameters 	= Parameter &#123;‘,’ Parameter &#125;</div></pre></td></tr></table></figure></p>
+<p>A definition can be:</p>
+<ul>
+<li>A function definition, like def square(x: Int) = x * x</li>
+<li>A value definition, like val y = square(2)</li>
+</ul>
+<p>A parameter can be:</p>
+<ul>
+<li>A call-by-value parameter, like (x: Int)</li>
+<li>A call-by-name parameter, like (y: =&gt; Double)</li>
+</ul>
+<h3 id="Lecture-2-5-Functions-and-Data-函数和数据"><a href="#Lecture-2-5-Functions-and-Data-函数和数据" class="headerlink" title="Lecture 2.5 - Functions and Data 函数和数据"></a>Lecture 2.5 - Functions and Data 函数和数据</h3><p>类：<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Rational</span>(<span class="params">x: <span class="type">Int</span>, y: <span class="type">Int</span></span>) </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">def</span> <span class="title">numer</span> </span>= x</div><div class="line">	<span class="function"><span class="keyword">def</span> <span class="title">denom</span> </span>= y</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这样的语句定义了两个实体：</p>
+<ul>
+<li>一个新的<strong>类型</strong>，名字叫做 Rational</li>
+<li>一个<strong>构造器</strong>Rational，用来创建这种类型的元素</li>
+</ul>
+<p>对象：<br>一个类型在程序中本质上是一系列的值，而属于一个类型的值称作对象，并且使用 <code>new</code> 操作符和类的构造器来创建一个对象。<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">new</span> <span class="type">Rational</span>(<span class="number">1</span>, <span class="number">2</span>)</div></pre></td></tr></table></figure></p>
+<p>定义类中的函数称之为方法。</p>
+<h3 id="Lecture-2-6-More-Fun-With-Rationals-更多关于有理数的内容"><a href="#Lecture-2-6-More-Fun-With-Rationals-更多关于有理数的内容" class="headerlink" title="Lecture 2.6 - More Fun With Rationals 更多关于有理数的内容"></a>Lecture 2.6 - More Fun With Rationals 更多关于有理数的内容</h3><p>通过选择不同的数据实现方式，但是使用者不会察觉到的这种能力，我们称之为<strong>数据抽象 data abstraction</strong>。<br><strong>自我引用 self reference</strong><br>在一个类的内部，this 关键字代表了当前方法正在执行的那个对象上。<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Rational</span>(<span class="params">x: <span class="type">Int</span>, y: <span class="type">Int</span></span>) </span>&#123;</div><div class="line"></div><div class="line">  <span class="keyword">private</span> <span class="function"><span class="keyword">def</span> <span class="title">gcd</span></span>(a: <span class="type">Int</span>, b: <span class="type">Int</span>): <span class="type">Int</span> = <span class="keyword">if</span> (b == <span class="number">0</span>) a <span class="keyword">else</span> gcd(b, a % b)</div><div class="line">  <span class="keyword">private</span> <span class="keyword">val</span> g = gcd(x, y)</div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">numer</span> </span>= x / g</div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">denom</span> </span>= y / g</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">less</span></span>(another: <span class="type">Rational</span>) =</div><div class="line">    <span class="keyword">this</span>.numer * another.denom &lt; <span class="keyword">this</span>.denom * another.numer</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">max</span></span>(another: <span class="type">Rational</span>) =</div><div class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.less(another)) another <span class="keyword">else</span> <span class="keyword">this</span></div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">add</span></span>(another: <span class="type">Rational</span>) =</div><div class="line">    <span class="keyword">new</span> <span class="type">Rational</span>(</div><div class="line">      numer * another.denom + denom * another.numer,</div><div class="line">      denom * another.denom)</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">neg</span> </span>= <span class="keyword">new</span> <span class="type">Rational</span>(-numer, denom)</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">sub</span></span>(another: <span class="type">Rational</span>) = add(another.neg)</div><div class="line"></div><div class="line">  <span class="keyword">override</span> <span class="function"><span class="keyword">def</span> <span class="title">toString</span> </span>=</div><div class="line">    numer + <span class="string">"/"</span> + denom</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>可以使用 <code>require</code> 来限定构建一个新的对象必须满足的条件，如果不满足这样的条件，提示错误信息，我们称为 <code>前提precondition</code>。<br>除了 require 之外，我们还有 <code>assert</code> 函数，assert 同样接收一个条件和一个可选的提示信息。但是不同的是，assert 抛出的是 AssertionError，而 require 抛出的是 IllegalArgumentException。<br>这表明，它们使用的目的不同：</p>
+<ul>
+<li>require 被用来强制规定一个函数调用者的先决条件</li>
+<li>assert 被用来检验函数自身的代码</li>
+</ul>
+<p>在 Scala 中，类隐性地定义了一个构造器，称之为类的<strong>主构造器 primary constructor</strong>。主构造器取得类的所有参数，并且执行类体内的全部语句。<br>像 Java 一样，我们可以设置不同的构造器，实现如下：<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Rational</span>(<span class="params">x: <span class="type">Int</span>, y: <span class="type">Int</span></span>) </span>&#123;</div><div class="line">  ...</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">this</span></span>(x: <span class="type">Int</span>) = <span class="keyword">this</span>(x, <span class="number">1</span>)</div><div class="line">  </div><div class="line">  ...</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>this 用作函数名的时候表示这是类的另一个构造器，并且后面调用了类的主构造器。</p>
+<h3 id="Lecture-2-7-Evaluation-and-Operators-求值与操作符"><a href="#Lecture-2-7-Evaluation-and-Operators-求值与操作符" class="headerlink" title="Lecture 2.7 - Evaluation and Operators 求值与操作符"></a>Lecture 2.7 - Evaluation and Operators 求值与操作符</h3><p><code>求值evaluation</code><br>类的定义如下：<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span>(<span class="params">x1, ..., xm</span>) </span>&#123; ... <span class="function"><span class="keyword">def</span> <span class="title">f</span></span>(y1, ..., yn) = b ... &#125;</div><div class="line"></div><div class="line"><span class="comment">// 下面表达式的值如何计算？</span></div><div class="line"><span class="keyword">new</span> <span class="type">C</span>(v1, ..., vm).f(w1, ..., wn)</div></pre></td></tr></table></figure></p>
+<p><img src="http://7xvvfk.com1.z0.glb.clouddn.com/blog/20161207/121747439.png" alt="答案" title="答案"><br><code>/</code> 代表，用左边的值替换表达式中右边的值。<br>Example:<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">new</span> <span class="type">Rational</span>(<span class="number">1</span>, <span class="number">2</span>).numer</div><div class="line">→ [<span class="number">1</span>/x, <span class="number">2</span>/y][][<span class="keyword">new</span> <span class="type">Rational</span>(<span class="number">1</span>, <span class="number">2</span>)/<span class="keyword">this</span>] x</div><div class="line">= <span class="number">1</span> <span class="comment">// 1 for x</span></div><div class="line"></div><div class="line"><span class="keyword">new</span> <span class="type">Rational</span>(<span class="number">1</span>, <span class="number">2</span>).less(<span class="keyword">new</span> <span class="type">Rational</span>(<span class="number">2</span>, <span class="number">3</span>))</div><div class="line">→ [<span class="number">1</span>/x, <span class="number">2</span>/y][<span class="keyword">new</span> <span class="type">Rational</span>(<span class="number">2</span>, <span class="number">3</span>)/that][<span class="keyword">new</span> <span class="type">Rational</span>(<span class="number">1</span>, <span class="number">2</span>)/<span class="keyword">this</span>] <span class="keyword">this</span>.numer * that.denom &lt; that.numer * <span class="keyword">this</span>.denom</div><div class="line">= <span class="keyword">new</span> <span class="type">Ration</span>(<span class="number">1</span>, <span class="number">2</span>).numer * <span class="keyword">new</span> <span class="type">Rational</span>(<span class="number">2</span>, <span class="number">3</span>).denom &lt; <span class="keyword">new</span> <span class="type">Ration</span>(<span class="number">2</span>, <span class="number">3</span>).numer * <span class="keyword">new</span> <span class="type">Rational</span>(<span class="number">1</span>, <span class="number">2</span>).denom</div><div class="line">→→ <span class="number">1</span> * <span class="number">3</span> &lt; <span class="number">2</span> * <span class="number">2</span></div><div class="line">→→ <span class="literal">true</span></div></pre></td></tr></table></figure></p>
+<p><code>操作符operator</code><br>任何接收一个参数的方法都可以想一个插入的操作符一样使用，例如：<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">r add s							r.add(s)</div><div class="line">r less s	<span class="comment">/* in place of */</span>	r.less(s)</div><div class="line">r max s							r.max(s)</div></pre></td></tr></table></figure></p>
+<p>在Scala中，操作符可以当做标识符，因此，标示符可以是：</p>
+<ul>
+<li>数字、字母组合：以字母开头，后面跟着一系列的字母或者数字</li>
+<li>符号：以一个操作符开头，后面跟着其他的操作符</li>
+<li>下划线符号 ‘_’ 被当做一个字母</li>
+<li>数字、字母组合的标识符同样可以下划线加操作符结尾</li>
+</ul>
+<p>以下操作符都是合法的：<br>x1<br>*<br>+?%&amp;<br>vector<em>++<br>counter</em>=<br>由于在Scala中，前置的操作符，例如负数操作符 <code>-</code> 和中间的操作符，例如减号操作符 <code>-</code> 是不同的，因此需要进行特殊的转换，使用前缀 <code>unary_</code> 加上操作符来表示。<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Rational</span>(<span class="params">x: <span class="type">Int</span>, y: <span class="type">Int</span></span>) </span>&#123;</div><div class="line">  ...</div><div class="line">  </div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">&lt;</span> </span>(that: <span class="type">Rational</span>) =</div><div class="line">    <span class="keyword">this</span>.numer * that.denom &lt; <span class="keyword">this</span>.denom * that.numer</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">max</span></span>(that: <span class="type">Rational</span>) =</div><div class="line">    <span class="keyword">if</span> (<span class="keyword">this</span> &lt; that) that <span class="keyword">else</span> <span class="keyword">this</span></div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">+</span> </span>(another: <span class="type">Rational</span>) =</div><div class="line">    <span class="keyword">new</span> <span class="type">Rational</span>(</div><div class="line">      numer * another.denom + denom * another.numer,</div><div class="line">      denom * another.denom)</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">unary_-</span> </span>: <span class="type">Rational</span> = <span class="keyword">new</span> <span class="type">Rational</span>(-numer, denom)</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">-</span> </span>(another: <span class="type">Rational</span>) = <span class="keyword">this</span> + -another</div><div class="line"></div><div class="line">  ...</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>需要注意的是， 如果一个方法以符号结尾，那么它与返回值: 之间必须要有空格隔开，否则会报错，因为冒号也是一个合法的符号，编译器会把冒号也看成是方法名的一部分。<br>操作符的优先级：<br>取决于它的第一个字符，如下表优先级依次变大：<br>(all letters)<br>|<br>^<br>&amp;<br>&lt; &gt;<br>= !<br>:<br>+ -<br>* / %<br>(all other special characters)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">a + b ^? c ?^ d less a ==&gt; b | c</div><div class="line">=&gt;</div><div class="line">a + b ^? (c ?^ d) less a ==&gt; b | c</div><div class="line">(a + b) ^? (c ?^ d) less a ==&gt; b | c</div><div class="line">(a + b) ^? (c ?^ d) less (a ==&gt; b) | c</div><div class="line">((a + b) ^? (c ?^ d)) less (a ==&gt; b) | c</div><div class="line">((a + b) ^? (c ?^ d)) less ((a ==&gt; b) | c)</div></pre></td></tr></table></figure></p>
+<h3 id="Assignment"><a href="#Assignment" class="headerlink" title="Assignment"></a>Assignment</h3><p>自己编写 test 测试，内容的格式如下：<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">test(<span class="string">"adding ints"</span>) &#123;</div><div class="line">	assert(<span class="number">1</span> + <span class="number">2</span> === <span class="number">4</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>测试名称叫做 add ints，asser t表示尝试进行 === 左边的操作，看是否与右边的结果相等，不相等则测试不通过，输出测试名称，以及测试没有通过的原因。如果使用 == 则只报错不输出原因。<br>如果暂时不需要对写好的某个测试犯法执行，那么将 test 改成 ignore，就不会执行。<br>我们可能需要给同样的测试对象实现不同的方法，一种办法是重复创建多次，更简便的方法是创建一个与测试分离的特征 trait 中，这样当我们创建 trait 实例的时候我们可以访问内部的所有变量。<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">trait</span> <span class="title">TestSets</span> </span>&#123;</div><div class="line">    <span class="keyword">val</span> s1 = singletonSet(<span class="number">1</span>)</div><div class="line">    <span class="keyword">val</span> s2 = singletonSet(<span class="number">2</span>)</div><div class="line">    <span class="keyword">val</span> s3 = singletonSet(<span class="number">3</span>)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">new</span> <span class="type">TestSets</span> &#123;</div><div class="line">    assert(contains(s1, <span class="number">2</span>), <span class="string">"Singleton"</span>) <span class="comment">// FunSets.contains($anon.this.s1, 2) was false Singleton</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div></div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="http://7xvvfk.com1.z0.glb.clouddn.com/blog/20161206/211739895.jpg" alt="Jiawei LU WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/大数据处理/" rel="tag"># 大数据处理</a>
+          
+            <a href="/tags/Scala/" rel="tag"># Scala</a>
+          
+            <a href="/tags/Coursera/" rel="tag"># Coursera</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/12/06/Hexo-Backup/" rel="next" title="Hexo Blog 同步备份">
+                <i class="fa fa-chevron-left"></i> Hexo Blog 同步备份
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/12/07/Coursera-FP-in-Scala-Note-Part1/"
+           data-title="Coursera - Scala 函数式程序设计原理 - 学习笔记 (1)" data-url="http://hijacking.cn/2016/12/07/Coursera-FP-in-Scala-Note-Part1/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://7xvvfk.com1.z0.glb.clouddn.com/blog/20161207/000018373.jpg"
+               alt="Jiawei LU" />
+          <p class="site-author-name" itemprop="name">Jiawei LU</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Getting-Started"><span class="nav-number">1.</span> <span class="nav-text">Getting Started</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SBT-相关知识以及作业提交"><span class="nav-number">1.1.</span> <span class="nav-text">SBT 相关知识以及作业提交</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Scala-Tutorial"><span class="nav-number">1.2.</span> <span class="nav-text">Scala Tutorial</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Functions-amp-Evaluation"><span class="nav-number">2.</span> <span class="nav-text">Functions & Evaluation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Lecture-1-1-Programming-Paradigms-编程范型"><span class="nav-number">2.1.</span> <span class="nav-text">Lecture 1.1 - Programming Paradigms 编程范型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Lecture-1-2-Elements-of-Programming-编程元素"><span class="nav-number">2.2.</span> <span class="nav-text">Lecture 1.2 - Elements of Programming 编程元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Lecture-1-3-Evaluation-Strategies-and-Termination-计算策略与终止"><span class="nav-number">2.3.</span> <span class="nav-text">Lecture 1.3 - Evaluation Strategies and Termination 计算策略与终止</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Lecture-1-4-Conditionals-and-Value-Definitions-条件语句与值定义"><span class="nav-number">2.4.</span> <span class="nav-text">Lecture 1.4 - Conditionals and Value Definitions 条件语句与值定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Lecture-1-5-Example-square-roots-with-Newton’s-method-使用牛顿方法实现平方根"><span class="nav-number">2.5.</span> <span class="nav-text">Lecture 1.5 - Example square roots with Newton’s method 使用牛顿方法实现平方根</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Lecture-1-6-Blocks-and-Lexical-Scope-块代码以及词法作用域"><span class="nav-number">2.6.</span> <span class="nav-text">Lecture 1.6 - Blocks and Lexical Scope 块代码以及词法作用域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Lecture-1-7-Tail-Recursion-尾递归"><span class="nav-number">2.7.</span> <span class="nav-text">Lecture 1.7 - Tail Recursion 尾递归</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Higher-Order-Functions"><span class="nav-number">3.</span> <span class="nav-text">Higher Order Functions</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Lecture-2-1-Higher-Order-Functions-高阶函数"><span class="nav-number">3.1.</span> <span class="nav-text">Lecture 2.1 - Higher-Order Functions 高阶函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Lecture-2-2-Currying-柯西里化"><span class="nav-number">3.2.</span> <span class="nav-text">Lecture 2.2 - Currying 柯西里化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Lecture-2-3-Example-Finding-Fixed-Points-例子：找不动点"><span class="nav-number">3.3.</span> <span class="nav-text">Lecture 2.3 - Example Finding Fixed Points 例子：找不动点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Lecture-2-4-Scala-Syntax-Summary-语法总结"><span class="nav-number">3.4.</span> <span class="nav-text">Lecture 2.4 - Scala Syntax Summary 语法总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Lecture-2-5-Functions-and-Data-函数和数据"><span class="nav-number">3.5.</span> <span class="nav-text">Lecture 2.5 - Functions and Data 函数和数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Lecture-2-6-More-Fun-With-Rationals-更多关于有理数的内容"><span class="nav-number">3.6.</span> <span class="nav-text">Lecture 2.6 - More Fun With Rationals 更多关于有理数的内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Lecture-2-7-Evaluation-and-Operators-求值与操作符"><span class="nav-number">3.7.</span> <span class="nav-text">Lecture 2.7 - Evaluation and Operators 求值与操作符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Assignment"><span class="nav-number">3.8.</span> <span class="nav-text">Assignment</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jiawei LU</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"hijacking"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+      
+      <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+      <script src="/js/src/hook-duoshuo.js?v=5.1.0"></script>
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+</body>
+</html>
