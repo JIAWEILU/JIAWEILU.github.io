@@ -101,7 +101,7 @@ $${{\bf{M}}_{m \times n}} = {{\bf{U}}_{m \times m}}{{\bf{\Sigma }}_{m \times n}}
 <meta property="og:image" content="http://7xvvfk.com1.z0.glb.clouddn.com/blog/20161212/111006385.png">
 <meta property="og:image" content="http://7xvvfk.com1.z0.glb.clouddn.com/blog/20161212/111041846.png">
 <meta property="og:image" content="http://7xvvfk.com1.z0.glb.clouddn.com/blog/20161212/111105522.png">
-<meta property="og:updated_time" content="2016-12-12T08:48:14.693Z">
+<meta property="og:updated_time" content="2016-12-12T09:10:13.792Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="协同过滤推荐之 矩阵分解模型">
 <meta name="twitter:description" content="推荐
@@ -398,13 +398,14 @@ $${{\bf{M}}_{m \times n}} \approx {{\bf{U}}_{m \times r}}{{\bf{\Sigma }}_{r \tim
 <p><img src="http://7xvvfk.com1.z0.glb.clouddn.com/blog/20161212/111041846.png" alt="SVD 近似" title="SVD 近似"></p>
 <a id="more"></a>
 <h3 id="计算"><a href="#计算" class="headerlink" title="计算"></a>计算</h3><p><a href="http://www.d.umn.edu/~mhampton/m4326svd_example.pdf" target="_blank" rel="external">SVD computation example</a></p>
-<h3 id="评分预测"><a href="#评分预测" class="headerlink" title="评分预测"></a>评分预测</h3>
-1. 利用SVD将评分矩阵${\bf{R}}$分解为${\bf{U}}$、${\bf{\Sigma }}$、${\bf{V}}$；
-2. 将${\bf{\Sigma }}$简化为维数是$r$的矩阵，得到${{\bf{\Sigma }}_r}$；
-3. 相应地简化${\bf{U}}$、${\bf{V}}$得到矩阵${{\bf{U}}_r}$与${{\bf{V}}_r}$；
-4. 计算两个相关矩阵${{\bf{U}}_k} = {{\bf{U}}_r} \cdot \sqrt {{{\bf{\Sigma }}_r}} $与${{\bf{V}}_k} = \sqrt {{{\bf{\Sigma }}_r}}  \cdot {\bf{V}}_r^T$；
-5. 计算用户$u$对未评分项目$i$的预测评分：${\hat r_{ui}} = {{\bf{U}}_r}\left( u \right) \cdot {{\bf{V}}_r}\left( i \right)$。
-
+<h3 id="评分预测"><a href="#评分预测" class="headerlink" title="评分预测"></a>评分预测</h3><ol>
+<li>利用SVD将评分矩阵${\bf{R}}$分解为${\bf{U}}$、${\bf{\Sigma }}$、${\bf{V}}$；</li>
+<li>将${\bf{\Sigma }}$简化为维数是$r$的矩阵，得到${{\bf{\Sigma }}_r}$；</li>
+<li>相应地简化${\bf{U}}$、${\bf{V}}$得到矩阵${{\bf{U}}_r}$与${{\bf{V}}_r}$；</li>
+<li>计算两个相关矩阵${{\bf{U}}_k} = {{\bf{U}}_r} \cdot \sqrt {{{\bf{\Sigma }}_r}} $与${{\bf{V}}_k} = \sqrt {{{\bf{\Sigma }}_r}}  \cdot {\bf{V}}_r^T$；</li>
+<li>计算用户$u$对未评分项目$i$的预测评分：${\hat r_{ui}} = {{\bf{U}}_r}\left( u \right) \cdot {{\bf{V}}_r}\left( i \right)$。
+</li>
+</ol>
 <p>优点：</p>
 <ul>
 <li>提取评分矩阵关键特征，简化数据，去除噪声和冗余数据</li>
