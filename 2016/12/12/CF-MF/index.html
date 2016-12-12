@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="大数据处理,推荐,矩阵分解,SVD," />
+  <meta name="keywords" content="大数据处理,推荐,矩阵分解,SVD,Spark," />
 
 
 
@@ -101,7 +101,7 @@ $${{\bf{M}}_{m \times n}} = {{\bf{U}}_{m \times m}}{{\bf{\Sigma }}_{m \times n}}
 <meta property="og:image" content="http://7xvvfk.com1.z0.glb.clouddn.com/blog/20161212/111006385.png">
 <meta property="og:image" content="http://7xvvfk.com1.z0.glb.clouddn.com/blog/20161212/111041846.png">
 <meta property="og:image" content="http://7xvvfk.com1.z0.glb.clouddn.com/blog/20161212/111105522.png">
-<meta property="og:updated_time" content="2016-12-12T09:10:13.792Z">
+<meta property="og:updated_time" content="2016-12-12T13:45:41.528Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="协同过滤推荐之 矩阵分解模型">
 <meta name="twitter:description" content="推荐
@@ -439,6 +439,7 @@ $$\mathop {\min }\limits_{{{\bf{p}}_u},{{\bf{q}}_i}} C$$
 目标：
 $$\mathop {\min }\limits_{{{\bf{p}}_u},{{\bf{q}}_i}} \sum\limits_{(u,i) \in R} {\left[ {{{\left( {{r_{u,i}} - {\bf{p}}_u^T{{\bf{q}}_i}} \right)}^2} + \lambda \left( {{{\left\| {{{\bf{p}}_u}} \right\|}^2} + {{\left\| {{{\bf{q}}_i}} \right\|}^2}} \right)} \right]} $$
 因为变量${{{\bf{p}}_u}}$和${{{\bf{q}}_i}}$耦合到一起，不好求解，因此可以先固定${\bf{Q}}$，求解${\bf{P}}$；在固定${\bf{P}}$，求解${\bf{Q}}$，如此交替反复，直至收敛。
+
 - 先固定${\bf{Q}}$，将损失函数$C$对${{{\bf{p}}_u}}$求偏导，并令导数等于0，得到：
 <center>${{\bf{p}}_u} = {\left( {{{\bf{Q}}^T}{\bf{Q}} + \lambda {\bf{E}}} \right)^{ - 1}}{{\bf{Q}}^T}{{\bf{r}}_u}$&nbsp;&nbsp;&nbsp;&nbsp;(1)</center>
 - 同理固定${\bf{P}}$，可得：
@@ -547,6 +548,8 @@ ${N\left( u \right)}$是用户$u$浏览或评论过的物品集合，${{y_j}}$�
             <a href="/tags/矩阵分解/" rel="tag"># 矩阵分解</a>
           
             <a href="/tags/SVD/" rel="tag"># SVD</a>
+          
+            <a href="/tags/Spark/" rel="tag"># Spark</a>
           
         </div>
       
@@ -668,7 +671,7 @@ ${N\left( u \right)}$是用户$u$浏览或评论过的物品集合，${{y_j}}$�
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

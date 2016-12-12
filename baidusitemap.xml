@@ -4,6 +4,31 @@
 
     
   <url>
+    <loc>http://hijacking.cn/2016/12/12/CF-MF/</loc>
+    <lastmod>2016-12-12T13:45:41.528Z</lastmod>
+    <data>
+        <display>
+        <title>协同过滤推荐之 矩阵分解模型</title>
+        <pubTime>2016-12-12T03:08:25.000Z</pubTime>
+        
+        <tag>大数据处理</tag>
+         
+        <tag>推荐</tag>
+         
+        <tag>矩阵分解</tag>
+         
+        <tag>SVD</tag>
+         
+        <tag>Spark</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://hijacking.cn/2016/06/27/MacOS-Block-Youku-Ad/</loc>
     <lastmod>2016-12-12T12:12:47.656Z</lastmod>
     <data>
@@ -33,29 +58,6 @@
         <tag>Scala</tag>
          
         <tag>Coursera</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://hijacking.cn/2016/12/12/CF-MF/</loc>
-    <lastmod>2016-12-12T09:10:13.792Z</lastmod>
-    <data>
-        <display>
-        <title>协同过滤推荐之 矩阵分解模型</title>
-        <pubTime>2016-12-12T03:08:25.000Z</pubTime>
-        
-        <tag>大数据处理</tag>
-         
-        <tag>推荐</tag>
-         
-        <tag>矩阵分解</tag>
-         
-        <tag>SVD</tag>
          
          
            
