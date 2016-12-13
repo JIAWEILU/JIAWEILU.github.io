@@ -2,6 +2,34 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://hijacking.cn/2016/07/01/Effective-OC-Note-Part1/</loc>
+    
+    <lastmod>2016-12-13T11:39:09.747Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://hijacking.cn/2016/12/06/Hexo-Backup/</loc>
+    
+    <lastmod>2016-12-13T11:36:10.995Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://hijacking.cn/2016/06/27/MacOS-Block-Youku-Ad/</loc>
+    
+    <lastmod>2016-12-13T11:35:42.763Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://hijacking.cn/2016/12/07/Coursera-FP-in-Scala-Note-Part1/</loc>
+    
+    <lastmod>2016-12-13T11:31:12.427Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://hijacking.cn/baidu_verify_WADCudbI05.html</loc>
     
     <lastmod>2016-12-13T10:57:23.010Z</lastmod>
@@ -23,30 +51,9 @@
   </url>
   
   <url>
-    <loc>http://hijacking.cn/2016/06/27/MacOS-Block-Youku-Ad/</loc>
-    
-    <lastmod>2016-12-12T12:12:47.656Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://hijacking.cn/2016/12/07/Coursera-FP-in-Scala-Note-Part1/</loc>
-    
-    <lastmod>2016-12-12T12:12:14.817Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://hijacking.cn/tags/index.html</loc>
     
     <lastmod>2016-12-07T04:37:12.945Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://hijacking.cn/2016/12/06/Hexo-Backup/</loc>
-    
-    <lastmod>2016-12-07T04:34:46.002Z</lastmod>
     
   </url>
   
