@@ -92,7 +92,7 @@
 <meta property="og:site_name" content="Giraffe.ME">
 <meta property="og:description" content="此笔记是在阅读《Effective Objective-C 2.0：编写高质量iOS与OS X代码的52个有效方法》 时所整理，方便今后查阅。
 第1章 熟悉OC1. 了解OC语言的起源2. 在类的头文件中尽量少引入其他头文件尽量晚地#import需要的头文件，使用@class进行『向前声明』（forward declaring）。如果两个类在各自头文件中引入对方的头文件，则会导致『循环引用』（ch">
-<meta property="og:updated_time" content="2016-12-13T11:39:09.747Z">
+<meta property="og:updated_time" content="2016-12-13T11:53:47.349Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Effective Objective-C 2.0 - 读书笔记 (1)">
 <meta name="twitter:description" content="此笔记是在阅读《Effective Objective-C 2.0：编写高质量iOS与OS X代码的52个有效方法》 时所整理，方便今后查阅。
@@ -496,7 +496,7 @@
 <figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">id</span>)mutableCopyWithZone:(<span class="built_in">NSZone</span> *)zone</div></pre></td></tr></table></figure>
 <p>无论当前实例是否可变，若需获取其可变版本的拷贝，均应调用mutableCopy方法。同理，若需要不可变的拷贝，则总应通过copy方法来获取。<br>深拷贝（deep copy）：在拷贝对象自身时，将其底层数据也一并复制过去。<br>浅拷贝（shallow copy）：只拷贝容器对象本身，而不复制其中数据。一般情况下会使用浅拷贝。<br>如果所写的对象需要深拷贝，那么可考虑新增一个专门执行深拷贝的方法。</p>
 <figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">id</span>)deepCopy &#123;</div><div class="line">	Person *<span class="keyword">copy</span> = [[[<span class="keyword">self</span> <span class="keyword">class</span>] alloc] initWithFirstName:_firstName andLastName:_lastName];</div><div class="line">	<span class="keyword">copy</span>-&gt;_friends = [[<span class="built_in">NSMutableSet</span> alloc] initWithSet:_friends copyItems:<span class="literal">YES</span>];</div><div class="line">	<span class="keyword">return</span> <span class="keyword">copy</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>未完，不定期更新，接<a href="http://hijacking.cn/2016/07/01/Effective-OC-Note-Part2/]">下篇</a>。</p>
+<p>未完，不定期更新，接<a href="http://hijacking.cn/2016/07/01/Effective-OC-Note-Part2/">下篇</a>。</p>
 <hr>
 <p><em>© 本文为<a href="http://hijacking.cn">Giraffe.ME</a>原创，转载请联系<a href="mailto:me@jiaweilu.com" target="_blank" rel="external">Jiawei LU</a>，并注明出处来自：<a href="http://hijacking.cn/2016/07/01/Effective-OC-Note-Part1/">http://hijacking.cn/2016/07/01/Effective-OC-Note-Part1/</a></em></p>
 
