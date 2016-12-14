@@ -104,7 +104,7 @@ $${{\bf{M}}_{m \times n}} = {{\bf{U}}_{m \times m}}{{\bf{\Sigma }}_{m \times n}}
 <meta property="og:image" content="http://7xvvfk.com1.z0.glb.clouddn.com/blog/20161212/111041846.png">
 <meta property="og:image" content="http://7xvvfk.com1.z0.glb.clouddn.com/blog/20161212/111105522.png">
 <meta property="og:image" content="http://7xvvfk.com1.z0.glb.clouddn.com/blog/20161214/101015213.png">
-<meta property="og:updated_time" content="2016-12-14T02:37:51.705Z">
+<meta property="og:updated_time" content="2016-12-14T11:49:19.138Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="协同过滤推荐之 矩阵分解模型">
 <meta name="twitter:description" content="1. 推荐
@@ -429,7 +429,7 @@ $${\hat r_{ui}} = {\bf{p}}_u^T{{\bf{q}}_i}$$
 <h3 id="3-2-求解"><a href="#3-2-求解" class="headerlink" title="3.2 求解"></a>3.2 求解</h3>
 采用最小化误差函数的方法来求解，转化为最优化问题。
 定义损失函数：
-$$C = \sum\limits_{(u,i) \in R} {\left[ {{{\left( {{r_{u,i}} - {\bf{p}}_u^T{{\bf{q}}_i}} \right)}^2} + \lambda \left( {{{\left\| {{{\bf{p}}_u}} \right\|}^2} + {{\left\| {{{\bf{q}}_i}} \right\|}^2}} \right)} \right]} $$
+$$C = \sum\limits_{(u,i) \in R} {{{\left( {{r_{u,i}} - {\bf{p}}_u^T{{\bf{q}}_i}} \right)}^2}} {\rm{ + }}\lambda \left( {{{\left\| {{{\bf{p}}_u}} \right\|}^2} + {{\left\| {{{\bf{q}}_i}} \right\|}^2}} \right)$$
 目标：
 $$\mathop {\min }\limits_{{{\bf{p}}_u},{{\bf{q}}_i}} C$$
 
@@ -440,7 +440,7 @@ $$\mathop {\min }\limits_{{{\bf{p}}_u},{{\bf{q}}_i}} C$$
 </ul>
 <h3 id="3-4-ALS"><a href="#3-4-ALS" class="headerlink" title="3.4 ALS"></a>3.4 ALS</h3>
 目标：
-$$\mathop {\min }\limits_{{{\bf{p}}_u},{{\bf{q}}_i}} \sum\limits_{(u,i) \in R} {\left[ {{{\left( {{r_{u,i}} - {\bf{p}}_u^T{{\bf{q}}_i}} \right)}^2} + \lambda \left( {{{\left\| {{{\bf{p}}_u}} \right\|}^2} + {{\left\| {{{\bf{q}}_i}} \right\|}^2}} \right)} \right]} $$
+$$\mathop {\min }\limits_{{{\bf{p}}_u},{{\bf{q}}_i}} \sum\limits_{(u,i) \in R} {{{\left( {{r_{u,i}} - {\bf{p}}_u^T{{\bf{q}}_i}} \right)}^2}} {\rm{ + }}\lambda \left( {{{\left\| {{{\bf{p}}_u}} \right\|}^2} + {{\left\| {{{\bf{q}}_i}} \right\|}^2}} \right)$$
 因为变量${{{\bf{p}}_u}}$和${{{\bf{q}}_i}}$耦合到一起，不好求解，因此可以先固定${\bf{Q}}$，求解${\bf{P}}$；在固定${\bf{P}}$，求解${\bf{Q}}$，如此交替反复，直至收敛。
 
 <ul>
