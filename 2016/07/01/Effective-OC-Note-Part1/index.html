@@ -74,6 +74,8 @@
 
 
 
+  <link rel="alternate" href="/atom.xml" title="Giraffe.ME" type="application/atom+xml" />
+
 
 
 
@@ -92,11 +94,13 @@
 <meta property="og:site_name" content="Giraffe.ME">
 <meta property="og:description" content="此笔记是在阅读《Effective Objective-C 2.0：编写高质量iOS与OS X代码的52个有效方法》 时所整理，方便今后查阅。
 第1章 熟悉OC1. 了解OC语言的起源2. 在类的头文件中尽量少引入其他头文件尽量晚地#import需要的头文件，使用@class进行『向前声明』（forward declaring）。如果两个类在各自头文件中引入对方的头文件，则会导致『循环引用』（ch">
-<meta property="og:updated_time" content="2016-12-14T00:54:52.438Z">
+<meta property="og:image" content="http://7xvvfk.com1.z0.glb.clouddn.com/blog/20161214/101015213.png">
+<meta property="og:updated_time" content="2016-12-14T02:38:34.318Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Effective Objective-C 2.0 - 读书笔记 (1)">
 <meta name="twitter:description" content="此笔记是在阅读《Effective Objective-C 2.0：编写高质量iOS与OS X代码的52个有效方法》 时所整理，方便今后查阅。
 第1章 熟悉OC1. 了解OC语言的起源2. 在类的头文件中尽量少引入其他头文件尽量晚地#import需要的头文件，使用@class进行『向前声明』（forward declaring）。如果两个类在各自头文件中引入对方的头文件，则会导致『循环引用』（ch">
+<meta name="twitter:image" content="http://7xvvfk.com1.z0.glb.clouddn.com/blog/20161214/101015213.png">
 
 
 
@@ -498,7 +502,7 @@
 <figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">id</span>)deepCopy &#123;</div><div class="line">	Person *<span class="keyword">copy</span> = [[[<span class="keyword">self</span> <span class="keyword">class</span>] alloc] initWithFirstName:_firstName andLastName:_lastName];</div><div class="line">	<span class="keyword">copy</span>-&gt;_friends = [[<span class="built_in">NSMutableSet</span> alloc] initWithSet:_friends copyItems:<span class="literal">YES</span>];</div><div class="line">	<span class="keyword">return</span> <span class="keyword">copy</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>未完，不定期更新，接<a href="http://hijacking.cn/2016/07/01/Effective-OC-Note-Part2/">下篇</a>。</p>
 <hr>
-<p><em>© 本文为<a href="http://hijacking.cn">Giraffe.ME</a>原创，转载请联系[Jiawei LU](mailto:me@jiaweilu.com?subject=</em>hijacking.cn<em>)，并注明出处来自：<a href="http://hijacking.cn/2016/07/01/Effective-OC-Note-Part1/">http://hijacking.cn/2016/07/01/Effective-OC-Note-Part1/</a></em></p>
+<p><div><br><img src="http://7xvvfk.com1.z0.glb.clouddn.com/blog/20161214/101015213.png" alt="CC4.0" align="left"><br></div><br><em>本文采用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="external">CC4.0</a>协议授权，转载请注明出处：<a href="http://hijacking.cn/2016/07/01/Effective-OC-Note-Part1/">http://hijacking.cn/2016/07/01/Effective-OC-Note-Part1/</a>，其他请联系<a href="mailto:me@jiaweilu.com?subject=【hijacking.cn】" target="_blank" rel="external">Jiawei LU</a></em></p>
 
       
     </div>
@@ -651,7 +655,7 @@
                src="http://7xvvfk.com1.z0.glb.clouddn.com/blog/20161207/000018373.jpg"
                alt="Jiawei LU" />
           <p class="site-author-name" itemprop="name">Jiawei LU</p>
-          <p class="site-description motion-element" itemprop="description">Writing And Sharing.</p>
+          <p class="site-description motion-element" itemprop="description">Writing and Sharing</p>
         </div>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
@@ -674,7 +678,6 @@
 
         </nav>
 
-        
 
         <div class="links-of-author motion-element">
           
@@ -711,8 +714,23 @@
 
         
         
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
 
         
+        
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
         
 
         
@@ -1122,6 +1140,21 @@
 
 
   
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
 
   
 

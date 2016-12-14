@@ -74,6 +74,8 @@
 
 
 
+  <link rel="alternate" href="/atom.xml" title="Giraffe.ME" type="application/atom+xml" />
+
 
 
 
@@ -95,7 +97,8 @@
 <meta property="og:image" content="http://7xvvfk.com1.z0.glb.clouddn.com/blog/20161207/121542116.png">
 <meta property="og:image" content="http://7xvvfk.com1.z0.glb.clouddn.com/blog/20161207/121639283.png">
 <meta property="og:image" content="http://7xvvfk.com1.z0.glb.clouddn.com/blog/20161207/121747439.png">
-<meta property="og:updated_time" content="2016-12-14T00:54:41.425Z">
+<meta property="og:image" content="http://7xvvfk.com1.z0.glb.clouddn.com/blog/20161214/101015213.png">
+<meta property="og:updated_time" content="2016-12-14T02:38:17.194Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Coursera - Scala 函数式程序设计原理 - 学习笔记 (1)">
 <meta name="twitter:description" content="此笔记是在学习 Coursera 上 Functional Programming Principles in Scala 课程时所整理，方便今后查阅。
@@ -491,7 +494,7 @@
 <p>测试名称叫做 add ints，asser t表示尝试进行 === 左边的操作，看是否与右边的结果相等，不相等则测试不通过，输出测试名称，以及测试没有通过的原因。如果使用 == 则只报错不输出原因。<br>如果暂时不需要对写好的某个测试犯法执行，那么将 test 改成 ignore，就不会执行。<br>我们可能需要给同样的测试对象实现不同的方法，一种办法是重复创建多次，更简便的方法是创建一个与测试分离的特征 trait 中，这样当我们创建 trait 实例的时候我们可以访问内部的所有变量。<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">trait</span> <span class="title">TestSets</span> </span>&#123;</div><div class="line">    <span class="keyword">val</span> s1 = singletonSet(<span class="number">1</span>)</div><div class="line">    <span class="keyword">val</span> s2 = singletonSet(<span class="number">2</span>)</div><div class="line">    <span class="keyword">val</span> s3 = singletonSet(<span class="number">3</span>)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">new</span> <span class="type">TestSets</span> &#123;</div><div class="line">    assert(contains(s1, <span class="number">2</span>), <span class="string">"Singleton"</span>) <span class="comment">// FunSets.contains($anon.this.s1, 2) was false Singleton</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>未完，接<a href="http://hijacking.cn/2016/12/07/Coursera-FP-in-Scala-Note-Part2/">下篇</a>。</p>
 <hr>
-<p><em>© 本文为<a href="http://hijacking.cn">Giraffe.ME</a>原创，转载请联系[Jiawei LU](mailto:me@jiaweilu.com?subject=</em>hijacking.cn<em>)，并注明出处来自：<a href="http://hijacking.cn/2016/12/07/Coursera-FP-in-Scala-Note-Part1/">http://hijacking.cn/2016/12/07/Coursera-FP-in-Scala-Note-Part1/</a></em></p>
+<p><div><br><img src="http://7xvvfk.com1.z0.glb.clouddn.com/blog/20161214/101015213.png" alt="CC4.0" align="left"><br></div><br><em>本文采用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="external">CC4.0</a>协议授权，转载请注明出处：<a href="http://hijacking.cn/2016/12/07/Coursera-FP-in-Scala-Note-Part1/">http://hijacking.cn/2016/12/07/Coursera-FP-in-Scala-Note-Part1/</a>，其他请联系<a href="mailto:me@jiaweilu.com?subject=【hijacking.cn】" target="_blank" rel="external">Jiawei LU</a></em></p>
 
       
     </div>
@@ -646,7 +649,7 @@
                src="http://7xvvfk.com1.z0.glb.clouddn.com/blog/20161207/000018373.jpg"
                alt="Jiawei LU" />
           <p class="site-author-name" itemprop="name">Jiawei LU</p>
-          <p class="site-description motion-element" itemprop="description">Writing And Sharing.</p>
+          <p class="site-description motion-element" itemprop="description">Writing and Sharing</p>
         </div>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
@@ -669,7 +672,6 @@
 
         </nav>
 
-        
 
         <div class="links-of-author motion-element">
           
@@ -706,8 +708,23 @@
 
         
         
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
 
         
+        
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
         
 
         
@@ -1117,6 +1134,21 @@
 
 
   
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
 
   
 
