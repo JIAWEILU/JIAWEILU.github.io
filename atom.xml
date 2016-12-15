@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://hijacking.cn/"/>
-  <updated>2016-12-14T11:49:19.138Z</updated>
+  <updated>2016-12-15T00:51:01.839Z</updated>
   <id>http://hijacking.cn/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://hijacking.cn/2016/12/12/CF-MF/"/>
     <id>http://hijacking.cn/2016/12/12/CF-MF/</id>
     <published>2016-12-12T03:08:25.000Z</published>
-    <updated>2016-12-14T11:49:19.138Z</updated>
+    <updated>2016-12-15T00:51:01.839Z</updated>
     
     <content type="html"><![CDATA[<h2 id="1-推荐"><a href="#1-推荐" class="headerlink" title="1. 推荐"></a>1. 推荐</h2><p><img src="http://7xvvfk.com1.z0.glb.clouddn.com/blog/20161212/111006385.png" alt="推荐算法分类" title="推荐算法分类"></p>
 <h2 id="2-SVD"><a href="#2-SVD" class="headerlink" title="2. SVD"></a>2. SVD</h2><p>Singular Value Decomposition, 奇异值分解</p>
@@ -74,7 +74,7 @@ $$\mathop {\min }\limits_{{{\bf{p}}_u},{{\bf{q}}_i}} C$$
 <h3 id="3-4-ALS"><a href="#3-4-ALS" class="headerlink" title="3.4 ALS"></a>3.4 ALS</h3>
 目标：
 $$\mathop {\min }\limits_{{{\bf{p}}_u},{{\bf{q}}_i}} \sum\limits_{(u,i) \in R} {{{\left( {{r_{u,i}} - {\bf{p}}_u^T{{\bf{q}}_i}} \right)}^2}} {\rm{ + }}\lambda \left( {{{\left\| {{{\bf{p}}_u}} \right\|}^2} + {{\left\| {{{\bf{q}}_i}} \right\|}^2}} \right)$$
-因为变量${{{\bf{p}}_u}}$和${{{\bf{q}}_i}}$耦合到一起，不好求解，因此可以先固定${\bf{Q}}$，求解${\bf{P}}$；在固定${\bf{P}}$，求解${\bf{Q}}$，如此交替反复，直至收敛。
+因为变量${{{\bf{p}}_u}}$和${{{\bf{q}}_i}}$耦合到一起，不好求解，因此可以先固定${\bf{Q}}$，求解${\bf{P}}$；再固定${\bf{P}}$，求解${\bf{Q}}$，如此交替反复，直至收敛。
 
 <ul>
 <li>先固定${\bf{Q}}$，将损失函数$C$对${{{\bf{p}}_u}}$求偏导，并令导数等于0，得到：
