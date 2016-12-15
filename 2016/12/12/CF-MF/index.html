@@ -89,8 +89,8 @@
 <meta name="description" content="1. 推荐
 2. SVDSingular Value Decomposition, 奇异值分解
 2.1 定义
-假设${\bf{M}}$是一个$m \times n$阶矩阵，其中的元素全部属于实数域或复数域。那么存在一个分解使得：
-$${{\bf{M}}_{m \times n}} = {{\bf{U}}_{m \times m}}{{\bf{\Sigma }}_{m \times n}}{\bf{">
+假设${\bf{M}}$是一个$m \times n$矩阵，其中的元素全部属于实数域或复数域。那么存在一个分解使得：
+$${{\bf{M}}_{m \times n}} = {{\bf{U}}_{m \times m}}{{\bf{\Sigma }}_{m \times n}}{\bf{V">
 <meta property="og:type" content="article">
 <meta property="og:title" content="协同过滤推荐之 矩阵分解模型">
 <meta property="og:url" content="http://hijacking.cn/2016/12/12/CF-MF/index.html">
@@ -98,20 +98,20 @@ $${{\bf{M}}_{m \times n}} = {{\bf{U}}_{m \times m}}{{\bf{\Sigma }}_{m \times n}}
 <meta property="og:description" content="1. 推荐
 2. SVDSingular Value Decomposition, 奇异值分解
 2.1 定义
-假设${\bf{M}}$是一个$m \times n$阶矩阵，其中的元素全部属于实数域或复数域。那么存在一个分解使得：
-$${{\bf{M}}_{m \times n}} = {{\bf{U}}_{m \times m}}{{\bf{\Sigma }}_{m \times n}}{\bf{">
+假设${\bf{M}}$是一个$m \times n$矩阵，其中的元素全部属于实数域或复数域。那么存在一个分解使得：
+$${{\bf{M}}_{m \times n}} = {{\bf{U}}_{m \times m}}{{\bf{\Sigma }}_{m \times n}}{\bf{V">
 <meta property="og:image" content="http://7xvvfk.com1.z0.glb.clouddn.com/blog/20161212/111006385.png">
 <meta property="og:image" content="http://7xvvfk.com1.z0.glb.clouddn.com/blog/20161212/111041846.png">
 <meta property="og:image" content="http://7xvvfk.com1.z0.glb.clouddn.com/blog/20161212/111105522.png">
 <meta property="og:image" content="http://7xvvfk.com1.z0.glb.clouddn.com/blog/20161214/101015213.png">
-<meta property="og:updated_time" content="2016-12-15T00:51:01.839Z">
+<meta property="og:updated_time" content="2016-12-15T07:12:30.903Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="协同过滤推荐之 矩阵分解模型">
 <meta name="twitter:description" content="1. 推荐
 2. SVDSingular Value Decomposition, 奇异值分解
 2.1 定义
-假设${\bf{M}}$是一个$m \times n$阶矩阵，其中的元素全部属于实数域或复数域。那么存在一个分解使得：
-$${{\bf{M}}_{m \times n}} = {{\bf{U}}_{m \times m}}{{\bf{\Sigma }}_{m \times n}}{\bf{">
+假设${\bf{M}}$是一个$m \times n$矩阵，其中的元素全部属于实数域或复数域。那么存在一个分解使得：
+$${{\bf{M}}_{m \times n}} = {{\bf{U}}_{m \times m}}{{\bf{\Sigma }}_{m \times n}}{\bf{V">
 <meta name="twitter:image" content="http://7xvvfk.com1.z0.glb.clouddn.com/blog/20161212/111006385.png">
 
 
@@ -392,7 +392,7 @@ $${{\bf{M}}_{m \times n}} = {{\bf{U}}_{m \times m}}{{\bf{\Sigma }}_{m \times n}}
         <h2 id="1-推荐"><a href="#1-推荐" class="headerlink" title="1. 推荐"></a>1. 推荐</h2><p><img src="http://7xvvfk.com1.z0.glb.clouddn.com/blog/20161212/111006385.png" alt="推荐算法分类" title="推荐算法分类"></p>
 <h2 id="2-SVD"><a href="#2-SVD" class="headerlink" title="2. SVD"></a>2. SVD</h2><p>Singular Value Decomposition, 奇异值分解</p>
 <h3 id="2-1-定义"><a href="#2-1-定义" class="headerlink" title="2.1 定义"></a>2.1 定义</h3>
-假设${\bf{M}}$是一个$m \times n$阶矩阵，其中的元素全部属于实数域或复数域。那么存在一个分解使得：
+假设${\bf{M}}$是一个$m \times n$矩阵，其中的元素全部属于实数域或复数域。那么存在一个分解使得：
 $${{\bf{M}}_{m \times n}} = {{\bf{U}}_{m \times m}}{{\bf{\Sigma }}_{m \times n}}{\bf{V}}_{n \times n}^*$$
 其中，${\bf{U}}$、${\bf{V}}$分别称为左、右奇异向量，$*$表示共轭转置，${\bf{\Sigma}}$对角线上的值是奇异值，其值按从大到小排列，且下降迅速。因此我们可以用前$r$个奇异值来近似描述原矩阵：
 $${{\bf{M}}_{m \times n}} \approx {{\bf{U}}_{m \times r}}{{\bf{\Sigma }}_{r \times r}}{\bf{V}}_{n \times r}^*$$
