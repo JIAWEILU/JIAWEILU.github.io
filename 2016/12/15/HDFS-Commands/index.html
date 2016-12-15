@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="macOS," />
+  <meta name="keywords" content="大数据处理,Hadoop," />
 
 
 
@@ -86,29 +86,22 @@
 
 
 
-<meta name="description" content="教程最早发表于威锋网，原帖地址。未经允许，不得转载。
-1. 修改hosts文件1.打开 Finder，同时按住 Shift + Command + G ，输入 /private/etc/ ，然后前往，找到 hosts 文件。
-2.将 hosts 文件拷贝一份到桌面上，然后使用文本编辑器添加如下字段：">
+<meta name="description" content="1. FS Shell调用FS Shell指令为：bin/hadoop fs &amp;lt;args&amp;gt;的形式，如果在系统的环境变量的路径中添加了$Hadoop_HOME/bin，那么可以直接使用hadoop fs &amp;lt;args&amp;gt;指令。
+2. 常用指令2.1 创建文件夹hadoop fs -mkdir &amp;lt;paths&amp;gt;：在HDFS上创建指令路径的目录。12# 在HDFS上新建一个">
 <meta property="og:type" content="article">
-<meta property="og:title" content="macOS 去除优酷视频广告">
-<meta property="og:url" content="http://hijacking.cn/2016/06/27/MacOS-Block-Youku-Ad/index.html">
+<meta property="og:title" content="HDFS 常用操作">
+<meta property="og:url" content="http://hijacking.cn/2016/12/15/HDFS-Commands/index.html">
 <meta property="og:site_name" content="Giraffe.ME">
-<meta property="og:description" content="教程最早发表于威锋网，原帖地址。未经允许，不得转载。
-1. 修改hosts文件1.打开 Finder，同时按住 Shift + Command + G ，输入 /private/etc/ ，然后前往，找到 hosts 文件。
-2.将 hosts 文件拷贝一份到桌面上，然后使用文本编辑器添加如下字段：">
-<meta property="og:image" content="http://7xvvfk.com1.z0.glb.clouddn.com/blog/20161207/101621073.png">
-<meta property="og:image" content="http://7xvvfk.com1.z0.glb.clouddn.com/blog/20161207/102014249.png">
-<meta property="og:image" content="http://7xvvfk.com1.z0.glb.clouddn.com/blog/20161207/102146464.png">
-<meta property="og:image" content="http://7xvvfk.com1.z0.glb.clouddn.com/blog/20161207/102215628.png">
-<meta property="og:image" content="http://7xvvfk.com1.z0.glb.clouddn.com/blog/20161207/102253967.png">
+<meta property="og:description" content="1. FS Shell调用FS Shell指令为：bin/hadoop fs &amp;lt;args&amp;gt;的形式，如果在系统的环境变量的路径中添加了$Hadoop_HOME/bin，那么可以直接使用hadoop fs &amp;lt;args&amp;gt;指令。
+2. 常用指令2.1 创建文件夹hadoop fs -mkdir &amp;lt;paths&amp;gt;：在HDFS上创建指令路径的目录。12# 在HDFS上新建一个">
+<meta property="og:image" content="http://7xvvfk.com1.z0.glb.clouddn.com/blog/20161215/110801595.png">
 <meta property="og:image" content="http://7xvvfk.com1.z0.glb.clouddn.com/blog/20161214/101015213.png">
-<meta property="og:updated_time" content="2016-12-14T02:38:47.505Z">
+<meta property="og:updated_time" content="2016-12-15T03:11:31.803Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="macOS 去除优酷视频广告">
-<meta name="twitter:description" content="教程最早发表于威锋网，原帖地址。未经允许，不得转载。
-1. 修改hosts文件1.打开 Finder，同时按住 Shift + Command + G ，输入 /private/etc/ ，然后前往，找到 hosts 文件。
-2.将 hosts 文件拷贝一份到桌面上，然后使用文本编辑器添加如下字段：">
-<meta name="twitter:image" content="http://7xvvfk.com1.z0.glb.clouddn.com/blog/20161207/101621073.png">
+<meta name="twitter:title" content="HDFS 常用操作">
+<meta name="twitter:description" content="1. FS Shell调用FS Shell指令为：bin/hadoop fs &amp;lt;args&amp;gt;的形式，如果在系统的环境变量的路径中添加了$Hadoop_HOME/bin，那么可以直接使用hadoop fs &amp;lt;args&amp;gt;指令。
+2. 常用指令2.1 创建文件夹hadoop fs -mkdir &amp;lt;paths&amp;gt;：在HDFS上创建指令路径的目录。12# 在HDFS上新建一个">
+<meta name="twitter:image" content="http://7xvvfk.com1.z0.glb.clouddn.com/blog/20161215/110801595.png">
 
 
 
@@ -136,13 +129,13 @@
 
 
 
-  <link rel="canonical" href="http://hijacking.cn/2016/06/27/MacOS-Block-Youku-Ad/"/>
+  <link rel="canonical" href="http://hijacking.cn/2016/12/15/HDFS-Commands/"/>
 
 
 
 
 
-  <title> macOS 去除优酷视频广告 | Giraffe.ME </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title> HDFS 常用操作 | Giraffe.ME </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -296,7 +289,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://hijacking.cn/2016/06/27/MacOS-Block-Youku-Ad/">
+  <link itemprop="mainEntityOfPage" href="http://hijacking.cn/2016/12/15/HDFS-Commands/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="Jiawei LU">
@@ -320,7 +313,7 @@
             
             
               
-                macOS 去除优酷视频广告
+                HDFS 常用操作
               
             
           </h1>
@@ -333,8 +326,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-06-27T10:14:13+08:00">
-                2016-06-27
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-15T11:06:27+08:00">
+                2016-12-15
               </time>
             
 
@@ -349,8 +342,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2016/06/27/MacOS-Block-Youku-Ad/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/27/MacOS-Block-Youku-Ad/" itemprop="commentCount"></span>
+                <a href="/2016/12/15/HDFS-Commands/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/15/HDFS-Commands/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -360,7 +353,7 @@
 
           
           
-             <span id="/2016/06/27/MacOS-Block-Youku-Ad/" class="leancloud_visitors" data-flag-title="macOS 去除优酷视频广告">
+             <span id="/2016/12/15/HDFS-Commands/" class="leancloud_visitors" data-flag-title="HDFS 常用操作">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -385,19 +378,24 @@
       
 
       
-        <p>教程最早发表于威锋网，<a href="http://bbs.feng.com/read-htm-tid-8304000.html" target="_blank" rel="external">原帖地址</a>。未经允许，不得转载。</p>
-<h2 id="1-修改hosts文件"><a href="#1-修改hosts文件" class="headerlink" title="1. 修改hosts文件"></a>1. 修改hosts文件</h2><p>1.打开 Finder，同时按住 Shift + Command + G ，输入 /private/etc/ ，然后前往，找到 hosts 文件。<br><img src="http://7xvvfk.com1.z0.glb.clouddn.com/blog/20161207/101621073.png" alt="前往文件夹" title="前往文件夹"></p>
-<p>2.将 hosts 文件拷贝一份到桌面上，然后使用文本编辑器添加如下字段：</p>
+        <h2 id="1-FS-Shell"><a href="#1-FS-Shell" class="headerlink" title="1. FS Shell"></a>1. FS Shell</h2><p>调用FS Shell指令为：<code>bin/hadoop fs &lt;args&gt;</code>的形式，如果在系统的环境变量的路径中添加了<code>$Hadoop_HOME/bin</code>，那么可以直接使用<code>hadoop fs &lt;args&gt;</code>指令。<br><img src="http://7xvvfk.com1.z0.glb.clouddn.com/blog/20161215/110801595.png" alt="环境变量"></p>
+<h2 id="2-常用指令"><a href="#2-常用指令" class="headerlink" title="2. 常用指令"></a>2. 常用指令</h2><h3 id="2-1-创建文件夹"><a href="#2-1-创建文件夹" class="headerlink" title="2.1 创建文件夹"></a>2.1 创建文件夹</h3><p><code>hadoop fs -mkdir &lt;paths&gt;</code>：在HDFS上创建指令路径的目录。<br><figure class="highlight powershell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 在HDFS上新建一个data目录</span></div><div class="line">hadoop fs -mkdir /<span class="keyword">data</span></div></pre></td></tr></table></figure></p>
 <a id="more"></a>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">127.0.0.1 atm.youku.com</div><div class="line">127.0.0.1 fvid.atm.youku.com</div><div class="line">127.0.0.1 html.atm.youku.com</div><div class="line">127.0.0.1 valb.atm.youku.com</div><div class="line">127.0.0.1 valf.atm.youku.com</div><div class="line">127.0.0.1 valo.atm.youku.com</div><div class="line">127.0.0.1 valp.atm.youku.com</div><div class="line">127.0.0.1 lstat.youku.com</div><div class="line">127.0.0.1 speed.lstat.youku.com</div><div class="line">127.0.0.1 urchin.lstat.youku.com</div><div class="line">127.0.0.1 stat.youku.com</div><div class="line">127.0.0.1 static.lstat.youku.com</div><div class="line">127.0.0.1 valc.atm.youku.com</div><div class="line">127.0.0.1 vid.atm.youku.com</div><div class="line">127.0.0.1 walp.atm.youku.com</div></pre></td></tr></table></figure>
-<p><img src="http://7xvvfk.com1.z0.glb.clouddn.com/blog/20161207/102014249.png" alt="修改hosts文件" title="修改hosts文件"></p>
-<p>3.保存并退出，将修改好的 hosts 文件替换原来的 hosts 文件，有密码会提示输入密码。</p>
-<h2 id="2-删除优酷缓存文件夹"><a href="#2-删除优酷缓存文件夹" class="headerlink" title="2. 删除优酷缓存文件夹"></a>2. 删除优酷缓存文件夹</h2><p>打开 Finder，同时按住 <code>Shift + Command + G</code> ，输入 <code>~/Library/Preferences/Macromedia/Flash Player/#SharedObjects/</code> ，看到一个字母数字组成的文件夹，例如 <code>479H5MNT</code>（名字随机生成），将文件夹内的 <code>static.youku.com</code> 文件夹删除。<br><img src="http://7xvvfk.com1.z0.glb.clouddn.com/blog/20161207/102146464.png" alt="删除缓存文件" title="删除缓存文件"></p>
-<h2 id="3-网页设置"><a href="#3-网页设置" class="headerlink" title="3. 网页设置"></a>3. 网页设置</h2><p>随便打开一个优酷视频网页，此时应该没有广告了，点击右下角的设置按钮，优先画质选择超清或高清，确定。<br><img src="http://7xvvfk.com1.z0.glb.clouddn.com/blog/20161207/102215628.png" alt="网页设置" title="网页设置"></p>
-<h2 id="4-设置文件权限"><a href="#4-设置文件权限" class="headerlink" title="4. 设置文件权限"></a>4. 设置文件权限</h2><p>再次进入 <code>~/Library/Preferences/Macromedia/Flash Player/#SharedObjects/</code> 位置，一直进入里面的文件夹，找到 <code>YOUKU_FSO_PROXY.sol</code> 文件。右键点击选择“显示简介”，在最后共享与权限中将所有账户权限改成只读（不能修改点击右下角的锁解锁），最后点击通用中的已锁定。<br><img src="http://7xvvfk.com1.z0.glb.clouddn.com/blog/20161207/102253967.png" alt="设置权限" title="设置权限"></p>
-<p>对于极少部分人，如果按照上面步骤出现优酷黑屏，提示广告被屏蔽的话，试着将第二步中那个数字和字母随即生成的文件夹，如 <code>479H5MNT</code> ，整个删除，再按照上面的方法试一遍。</p>
+<h3 id="2-2-上载文件"><a href="#2-2-上载文件" class="headerlink" title="2.2 上载文件"></a>2.2 上载文件</h3><p><code>hadoop fs -put &lt;localsrc&gt; ... &lt;dst&gt;</code>：将一个或多个本地文件上载到HDFS目录中。<br><figure class="highlight powershell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 将本地的u1.base和u1.test文件写入到HDFS中的data目录</span></div><div class="line">hadoop fs -put /home/linux/Documents/u1.base home/linux/Documents/u1.test /<span class="keyword">data</span></div></pre></td></tr></table></figure></p>
+<h3 id="2-3-下载文件"><a href="#2-3-下载文件" class="headerlink" title="2.3 下载文件"></a>2.3 下载文件</h3><p><code>hadoop fs -get &lt;src&gt; &lt;localdst&gt;</code>：复制文件到本地文件系统。<br><figure class="highlight powershell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 将HDFS中u1.base和u1.test复制到本地</span></div><div class="line">hadoop fs -get /<span class="keyword">data</span>/u1.base /home/linux/Documents</div><div class="line">hadoop fs -get /<span class="keyword">data</span>/u1.test /home/linux/Documents</div></pre></td></tr></table></figure></p>
+<h3 id="2-4-复制文件"><a href="#2-4-复制文件" class="headerlink" title="2.4 复制文件"></a>2.4 复制文件</h3><p><code>hadoop fs -cp URI [URI …] &lt;dest&gt;</code>：将文件从源路径复制到目的路径。<br><figure class="highlight powershell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 将data目录下的u1.base和u1.test文件复制到/data/ml100k文件夹下</span></div><div class="line">hadoop fs -cp /<span class="keyword">data</span>/u1.base /<span class="keyword">data</span>/u1.test /<span class="keyword">data</span>/ml100k</div></pre></td></tr></table></figure></p>
+<h3 id="2-5-移动文件"><a href="#2-5-移动文件" class="headerlink" title="2.5 移动文件"></a>2.5 移动文件</h3><p><code>hadoop fs -mv URI [URI …] &lt;dest&gt;</code>：将文件从源路径移动到目的路径。不允许不同文件系统间移动文件。<br><figure class="highlight powershell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 将data目录下的u1.base和u1.test文件移动到/data/ml100k文件夹下</span></div><div class="line">hadoop fs -mv /<span class="keyword">data</span>/u1.base /<span class="keyword">data</span>/u1.test /<span class="keyword">data</span>/ml100k</div></pre></td></tr></table></figure></p>
+<h3 id="2-6-查看目录内容"><a href="#2-6-查看目录内容" class="headerlink" title="2.6 查看目录内容"></a>2.6 查看目录内容</h3><p><code>hadoop fs -ls &lt;args&gt;</code>：</p>
+<ul>
+<li>如果是文件：返回<code>文件名 &lt;副本数&gt; 文件大小 修改日期 修改时间 权限 用户ID 组ID</code></li>
+<li>如果是目录：返回<code>目录名 &lt;dir&gt; 修改日期 修改时间 权限 用户ID 组ID</code><figure class="highlight powershell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 查看data目录下的直接子文件</span></div><div class="line">hadoop fs -ls /<span class="keyword">data</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="2-7-删除文件"><a href="#2-7-删除文件" class="headerlink" title="2.7 删除文件"></a>2.7 删除文件</h3><p><code>hadoop fs -rm URI [URI …]</code>：删除指令的文件。只删除非空目录和文件。<br><figure class="highlight powershell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 将data目录下u1.base、u1.test，以及/data/ml100k目录下所有文件删除</span></div><div class="line">hadoop fs -rm /<span class="keyword">data</span>/u1.base /<span class="keyword">data</span>/u1.test /<span class="keyword">data</span>/ml100k</div></pre></td></tr></table></figure></p>
+<h2 id="3-读取"><a href="#3-读取" class="headerlink" title="3. 读取"></a>3. 读取</h2><p>对于不同的文件系统，有不同的scheme，读取本地文件系统时候，应该使用<code>file:///localpath</code>；而对于HDFS，应该使用<code>hdfs:///hdfspath</code>。<br>HDFS所有节点都可以读取，但是本地文件系统只能够读取本地文件，如果程序需要读本地文件，应该在所有节点的相同目录下都有该文件的备份。</p>
+<p>更多指令，参考<a href="https://hadoop.apache.org/docs/r1.0.4/cn/hdfs_shell.html" target="_blank" rel="external">Hadoop官方文档</a>。</p>
 <hr>
-<p><div><br><img src="http://7xvvfk.com1.z0.glb.clouddn.com/blog/20161214/101015213.png" alt="CC4.0" align="left"><br></div><br><em>本文采用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="external">CC4.0</a>协议授权，转载请注明出处：<a href="http://hijacking.cn/2016/06/27/MacOS-Block-Youku-Ad/">http://hijacking.cn/2016/06/27/MacOS-Block-Youku-Ad/</a>，其他请联系<a href="mailto:me@jiaweilu.com?subject=【hijacking.cn】" target="_blank" rel="external">Jiawei LU</a></em></p>
+<p><div><br><img src="http://7xvvfk.com1.z0.glb.clouddn.com/blog/20161214/101015213.png" alt="CC4.0" align="left"><br></div><br><em>本文采用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="external">CC4.0</a>协议授权，转载请注明出处：<a href="http://hijacking.cn/2016/12/15/HDFS-Commands/">http://hijacking.cn/2016/12/15/HDFS-Commands/</a>，其他请联系<a href="mailto:me@jiaweilu.com?subject=【hijacking.cn】" target="_blank" rel="external">Jiawei LU</a></em></p>
 
       
     </div>
@@ -437,7 +435,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/macOS/" rel="tag"># macOS</a>
+            <a href="/tags/大数据处理/" rel="tag"># 大数据处理</a>
+          
+            <a href="/tags/Hadoop/" rel="tag"># Hadoop</a>
           
         </div>
       
@@ -446,15 +446,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2016/12/12/CF-MF/" rel="next" title="协同过滤推荐之 矩阵分解模型">
+                <i class="fa fa-chevron-left"></i> 协同过滤推荐之 矩阵分解模型
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/07/01/Effective-OC-Note-Part1/" rel="prev" title="Effective Objective-C 2.0 - 读书笔记 (1)">
-                Effective Objective-C 2.0 - 读书笔记 (1) <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -503,8 +503,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/06/27/MacOS-Block-Youku-Ad/"
-           data-title="macOS 去除优酷视频广告" data-url="http://hijacking.cn/2016/06/27/MacOS-Block-Youku-Ad/">
+      <div class="ds-thread" data-thread-key="2016/12/15/HDFS-Commands/"
+           data-title="HDFS 常用操作" data-url="http://hijacking.cn/2016/12/15/HDFS-Commands/">
       </div>
     
   </div>
@@ -637,7 +637,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-修改hosts文件"><span class="nav-text">1. 修改hosts文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-删除优酷缓存文件夹"><span class="nav-text">2. 删除优酷缓存文件夹</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-网页设置"><span class="nav-text">3. 网页设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-设置文件权限"><span class="nav-text">4. 设置文件权限</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-FS-Shell"><span class="nav-text">1. FS Shell</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-常用指令"><span class="nav-text">2. 常用指令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-创建文件夹"><span class="nav-text">2.1 创建文件夹</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-上载文件"><span class="nav-text">2.2 上载文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-下载文件"><span class="nav-text">2.3 下载文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-复制文件"><span class="nav-text">2.4 复制文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-移动文件"><span class="nav-text">2.5 移动文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-6-查看目录内容"><span class="nav-text">2.6 查看目录内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-7-删除文件"><span class="nav-text">2.7 删除文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-读取"><span class="nav-text">3. 读取</span></a></li></ol></div>
             
 
           </div>
