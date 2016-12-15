@@ -61,7 +61,7 @@
     <link href="http://hijacking.cn/2016/12/12/CF-MF/"/>
     <id>http://hijacking.cn/2016/12/12/CF-MF/</id>
     <published>2016-12-12T03:08:25.000Z</published>
-    <updated>2016-12-15T07:12:30.903Z</updated>
+    <updated>2016-12-15T07:39:39.759Z</updated>
     
     <content type="html"><![CDATA[<h2 id="1-推荐"><a href="#1-推荐" class="headerlink" title="1. 推荐"></a>1. 推荐</h2><p><img src="http://7xvvfk.com1.z0.glb.clouddn.com/blog/20161212/111006385.png" alt="推荐算法分类" title="推荐算法分类"></p>
 <h2 id="2-SVD"><a href="#2-SVD" class="headerlink" title="2. SVD"></a>2. SVD</h2><p>Singular Value Decomposition, 奇异值分解</p>
@@ -80,7 +80,7 @@ $${{\bf{M}}_{m \times n}} \approx {{\bf{U}}_{m \times r}}{{\bf{\Sigma }}_{r \tim
 <li>将${\bf{\Sigma }}$简化为维数是$r$的矩阵，得到${{\bf{\Sigma }}_r}$；</li>
 <li>相应地简化${\bf{U}}$、${\bf{V}}$得到矩阵${{\bf{U}}_r}$与${{\bf{V}}_r}$；</li>
 <li>计算两个相关矩阵${{\bf{U}}_k} = {{\bf{U}}_r} \cdot \sqrt {{{\bf{\Sigma }}_r}} $与${{\bf{V}}_k} = \sqrt {{{\bf{\Sigma }}_r}}  \cdot {\bf{V}}_r^T$；</li>
-<li>计算用户$u$对未评分项目$i$的预测评分：${\hat r_{ui}} = {{\bf{U}}_r}\left( u \right) \cdot {{\bf{V}}_r}\left( i \right)$。
+<li>计算用户$u$对未评分项目$i$的预测评分：${\hat r_{ui}} = {{\bf{U}}_k}\left( u \right) \cdot {{\bf{V}}_k}\left( i \right)$。
 </li>
 </ol>
 <p>优点：</p>
@@ -160,7 +160,7 @@ $${\hat r_{ui}} = \mu  + {b_u} + {b_i} + {\bf{p}}_u^T{{\bf{q}}_i}$$
 <h3 id="5-2-带有隐反馈的MF-SVD"><a href="#5-2-带有隐反馈的MF-SVD" class="headerlink" title="5.2 带有隐反馈的MF(SVD++)"></a>5.2 带有隐反馈的MF(SVD++)</h3>
 用户评分的物品只占很少一部分，但是用户的浏览、点击行为从一定程度上也反应了他对物品的兴趣，而这些都是隐性的反馈因素。因此，考虑修改评分预测公式：
 $${\hat r_{ui}} = \mu  + {b_u} + {b_i} + \left( {{\bf{p}}_u^T{\rm{ + }}{1 \over {\sqrt {\left| {N\left( u \right)} \right|} }}\sum\limits_{j \in N\left( u \right)} {{{\bf{y}}_{\bf{j}}}} } \right){{\bf{q}}_i}$$
-${N\left( u \right)}$是用户$u$浏览或评论过的物品集合，${{y_j}}$表示历史数据所变现出来的偏好的向量，和前面向量的维度相同。
+${N\left( u \right)}$是用户$u$浏览或评论过的物品集合，${{\bf{y}}_j}$表示历史行为表现出来的偏好，和前面向量的维度相同。
 
 <h3 id="5-3-非负矩阵分解-NMF"><a href="#5-3-非负矩阵分解-NMF" class="headerlink" title="5.3 非负矩阵分解(NMF)"></a>5.3 非负矩阵分解(NMF)</h3>
 在矩阵分解的过程中增添一些限制，如分解出来的矩阵${\bf{P}}$和${\bf{Q}}$的元素不允许出现负值。
