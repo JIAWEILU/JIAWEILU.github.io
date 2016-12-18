@@ -106,7 +106,7 @@ hdfs dfs: 进行HDFS的相关操作。
 值得注意，如果ha">
 <meta property="og:image" content="http://7xvvfk.com1.z0.glb.clouddn.com/blog/20161215/110801595.png">
 <meta property="og:image" content="http://7xvvfk.com1.z0.glb.clouddn.com/blog/20161214/101015213.png">
-<meta property="og:updated_time" content="2016-12-18T05:28:00.827Z">
+<meta property="og:updated_time" content="2016-12-18T07:11:37.655Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HDFS 常用操作">
 <meta name="twitter:description" content="几种指令区别在操作HDFS上的文件的时候，Hadoop给我们提供了以下三种（其中一种已被废弃）指令，它们分别是：
@@ -414,9 +414,9 @@ hdfs dfs: 进行HDFS的相关操作。
 <li>如果是目录：返回<code>目录名 &lt;dir&gt; 修改日期 修改时间 权限 用户ID 组ID</code></li>
 </ul>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 查看data目录下的直接子文件</span></div><div class="line">hadoop fs -ls /<span class="keyword">data</span></div></pre></td></tr></table></figure>
-<h3 id="查看文件内容"><a href="#查看文件内容" class="headerlink" title="查看文件内容"></a>查看文件内容</h3><p><code>hadoop fs -cat URI [URI …]</code>：将路径指定文件的内容输出到stdout。<br><figure class="highlight powershell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">查看u1.test文件的内容</div><div class="line">hadoop fs -cat /<span class="keyword">data</span>/u1.test</div></pre></td></tr></table></figure></p>
+<h3 id="查看文件内容"><a href="#查看文件内容" class="headerlink" title="查看文件内容"></a>查看文件内容</h3><p><code>hadoop fs -cat URI [URI …]</code>：将路径指定文件的内容输出到stdout。<br><figure class="highlight powershell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 查看u1.test文件的内容</span></div><div class="line">hadoop fs -cat /<span class="keyword">data</span>/u1.test</div></pre></td></tr></table></figure></p>
 <h3 id="删除文件"><a href="#删除文件" class="headerlink" title="删除文件"></a>删除文件</h3><p><code>hadoop fs -rm [-R] URI [URI …]</code>：删除指定文件。<br><figure class="highlight powershell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 将data目录下u1.base、u1.test</span></div><div class="line">hadoop fs -rm /<span class="keyword">data</span>/u1.base /<span class="keyword">data</span>/u1.test</div></pre></td></tr></table></figure></p>
-<p>若想要删除文件夹及其路径内所有文件，则使用下面指令：<br><figure class="highlight powershell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">删除/<span class="keyword">data</span>/ml100k目录下所有文件</div><div class="line">hadoop fs -rm -R /<span class="keyword">data</span>/ml100k</div></pre></td></tr></table></figure></p>
+<p>若想要删除文件夹及其路径内所有文件，则使用下面指令：<br><figure class="highlight powershell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 删除/data/ml100k目录下所有文件</span></div><div class="line">hadoop fs -rm -R /<span class="keyword">data</span>/ml100k</div></pre></td></tr></table></figure></p>
 <h2 id="读取"><a href="#读取" class="headerlink" title="读取"></a>读取</h2><p>对于不同的文件系统，有不同的scheme，读取本地文件系统时候，应该使用<code>file:///localpath</code>；而对于HDFS，应该使用<code>hdfs:///hdfspath</code>。<br>HDFS所有节点都可以读取，但是本地文件系统只能够读取本地文件，如果程序需要读本地文件，应该在所有节点的相同目录下都有该文件的备份。</p>
 <hr>
 <p>阅读参考：</p>
