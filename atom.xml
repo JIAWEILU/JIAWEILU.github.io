@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://hijacking.cn/"/>
-  <updated>2016-12-18T05:21:38.120Z</updated>
+  <updated>2016-12-18T05:28:00.827Z</updated>
   <id>http://hijacking.cn/</id>
   
   <author>
@@ -20,9 +20,9 @@
     <link href="http://hijacking.cn/2016/12/15/HDFS-Commands/"/>
     <id>http://hijacking.cn/2016/12/15/HDFS-Commands/</id>
     <published>2016-12-15T03:06:27.000Z</published>
-    <updated>2016-12-18T05:21:38.120Z</updated>
+    <updated>2016-12-18T05:28:00.827Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="几种指令区别"><a href="#几种指令区别" class="headerlink" title="几种指令区别"></a>几种指令区别</h2><p>在操作HDFS上的文件的时候，Hadoop给我们提供了一下两种（三种，但有一种被废弃）指令，它们分别是：</p>
+    <content type="html"><![CDATA[<h2 id="几种指令区别"><a href="#几种指令区别" class="headerlink" title="几种指令区别"></a>几种指令区别</h2><p>在操作HDFS上的文件的时候，Hadoop给我们提供了以下三种（其中一种已被废弃）指令，它们分别是：</p>
 <ul>
 <li><code>hadoop fs</code>: 适用范围最广，操作通用文件系统，例如Local FS、HDFS、HFTP FS、S3 FS等。</li>
 <li><code>hadoop dfs</code>: 进行与HDFS相关的操作，但是该方法已经被<strong>废弃</strong>，使用<code>hdfs dfs</code>代替。</li>
@@ -57,7 +57,7 @@
     
     <summary type="html">
     
-      &lt;h2 id=&quot;几种指令区别&quot;&gt;&lt;a href=&quot;#几种指令区别&quot; class=&quot;headerlink&quot; title=&quot;几种指令区别&quot;&gt;&lt;/a&gt;几种指令区别&lt;/h2&gt;&lt;p&gt;在操作HDFS上的文件的时候，Hadoop给我们提供了一下两种（三种，但有一种被废弃）指令，它们分别是：&lt;/p&gt;
+      &lt;h2 id=&quot;几种指令区别&quot;&gt;&lt;a href=&quot;#几种指令区别&quot; class=&quot;headerlink&quot; title=&quot;几种指令区别&quot;&gt;&lt;/a&gt;几种指令区别&lt;/h2&gt;&lt;p&gt;在操作HDFS上的文件的时候，Hadoop给我们提供了以下三种（其中一种已被废弃）指令，它们分别是：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;hadoop fs&lt;/code&gt;: 适用范围最广，操作通用文件系统，例如Local FS、HDFS、HFTP FS、S3 FS等。&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;hadoop dfs&lt;/code&gt;: 进行与HDFS相关的操作，但是该方法已经被&lt;strong&gt;废弃&lt;/strong&gt;，使用&lt;code&gt;hdfs dfs&lt;/code&gt;代替。&lt;/li&gt;
