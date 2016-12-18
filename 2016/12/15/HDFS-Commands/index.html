@@ -106,7 +106,7 @@ hdfs dfs: 进行HDFS的相关操作。
 值得注意">
 <meta property="og:image" content="http://7xvvfk.com1.z0.glb.clouddn.com/blog/20161215/110801595.png">
 <meta property="og:image" content="http://7xvvfk.com1.z0.glb.clouddn.com/blog/20161214/101015213.png">
-<meta property="og:updated_time" content="2016-12-18T03:10:03.518Z">
+<meta property="og:updated_time" content="2016-12-18T03:16:30.223Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HDFS 常用操作">
 <meta name="twitter:description" content="0. 几种指令区别在操作HDFS上的文件的时候，Hadoop给我们提供了一下两种（三种，但有一种被废弃）指令，它们分别是：
@@ -411,9 +411,9 @@ hdfs dfs: 进行HDFS的相关操作。
 <h3 id="2-6-查看目录内容"><a href="#2-6-查看目录内容" class="headerlink" title="2.6 查看目录内容"></a>2.6 查看目录内容</h3><p><code>hadoop fs -ls &lt;args&gt;</code>：</p>
 <ul>
 <li>如果是文件：返回<code>文件名 &lt;副本数&gt; 文件大小 修改日期 修改时间 权限 用户ID 组ID</code></li>
-<li>如果是目录：返回<code>目录名 &lt;dir&gt; 修改日期 修改时间 权限 用户ID 组ID</code><figure class="highlight powershell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 查看data目录下的直接子文件</span></div><div class="line">hadoop fs -ls /<span class="keyword">data</span></div></pre></td></tr></table></figure>
-</li>
+<li>如果是目录：返回<code>目录名 &lt;dir&gt; 修改日期 修改时间 权限 用户ID 组ID</code></li>
 </ul>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 查看data目录下的直接子文件</span></div><div class="line">hadoop fs -ls /<span class="keyword">data</span></div></pre></td></tr></table></figure>
 <h3 id="2-7-查看内容"><a href="#2-7-查看内容" class="headerlink" title="2.7 查看内容"></a>2.7 查看内容</h3><p><code>hadoop fs -cat URI [URI …]</code>：将路径指定文件的内容输出到stdout。<br><figure class="highlight powershell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">查看u1.test文件的内容</div><div class="line">hadoop fs -cat /<span class="keyword">data</span>/u1.test</div></pre></td></tr></table></figure></p>
 <h3 id="2-8-删除文件"><a href="#2-8-删除文件" class="headerlink" title="2.8 删除文件"></a>2.8 删除文件</h3><p><code>hadoop fs -rm [-R] URI [URI …]</code>：删除指定文件。<br><figure class="highlight powershell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 将data目录下u1.base、u1.test</span></div><div class="line">hadoop fs -rm /<span class="keyword">data</span>/u1.base /<span class="keyword">data</span>/u1.test</div></pre></td></tr></table></figure></p>
 <p>若想要删除文件夹及其路径内所有文件，则使用下面指令：<br><figure class="highlight powershell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">删除/<span class="keyword">data</span>/ml100k目录下所有文件</div><div class="line">hadoop fs -rm -R /<span class="keyword">data</span>/ml100k</div></pre></td></tr></table></figure></p>
