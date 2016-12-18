@@ -377,8 +377,14 @@
 
       
         
-          <h2 id="1-FS-Shell"><a href="#1-FS-Shell" class="headerlink" title="1. FS Shell"></a>1. FS Shell</h2><p>调用FS Shell指令为：<code>bin/hadoop fs &lt;args&gt;</code>的形式，如果在系统的环境变量的路径中添加了<code>$Hadoop_HOME/bin</code>，那么可以直接使用<code>hadoop fs &lt;args&gt;</code>指令。<br><img src="http://7xvvfk.com1.z0.glb.clouddn.com/blog/20161215/110801595.png" alt="环境变量" title="环境变量"></p>
-<h2 id="2-常用指令"><a href="#2-常用指令" class="headerlink" title="2. 常用指令"></a>2. 常用指令</h2><h3 id="2-1-创建文件夹"><a href="#2-1-创建文件夹" class="headerlink" title="2.1 创建文件夹"></a>2.1 创建文件夹</h3><p><code>hadoop fs -mkdir &lt;paths&gt;</code>：在HDFS上创建指令路径的目录。<br><figure class="highlight powershell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 在HDFS上新建一个data目录</span></div><div class="line">hadoop fs -mkdir /<span class="keyword">data</span></div></pre></td></tr></table></figure></p>
+          <h2 id="0-几种指令区别"><a href="#0-几种指令区别" class="headerlink" title="0. 几种指令区别"></a>0. 几种指令区别</h2><p>在操作HDFS上的文件的时候，Hadoop给我们提供了一下两种（三种，但有一种被废弃）指令，它们分别是：</p>
+<ul>
+<li><code>hadoop fs</code>: 适用范围最广，操作通用文件系统，例如Local FS、HDFS、HFTP FS、S3 FS等。</li>
+<li><code>hadoop dfs</code>: 进行与HDFS相关的操作，但是该方法已经被<strong>废弃</strong>，使用<code>hdfs dfs</code>代替。</li>
+<li><code>hdfs dfs</code>: 进行HDFS的相关操作。</li>
+</ul>
+<p><strong>值得注意</strong>，如果<code>hadoop fs</code>指令后未指明是何种文件系统，那么默认是HDFS，也就是说<code>hadoop fs -ls /</code>相当于<code>hadoop fs -ls hdfs:///</code>。<br><strong>还有一点</strong>，<code>/path</code>路径和<code>path</code>并不指向同一个目录，后者其实是<code>/user/username/path</code>的简写形式。这一点与Linux本地文件系统类似。</p>
+<p>几种指令操作类似，下面以<code>hadoop fs</code>为例，介绍常用的几种操作。</p>
           <!--noindex-->
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/12/15/HDFS-Commands/#more" rel="contents">

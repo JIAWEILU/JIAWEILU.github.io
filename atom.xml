@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://hijacking.cn/"/>
-  <updated>2016-12-15T03:13:51.347Z</updated>
+  <updated>2016-12-18T03:10:03.518Z</updated>
   <id>http://hijacking.cn/</id>
   
   <author>
@@ -20,11 +20,19 @@
     <link href="http://hijacking.cn/2016/12/15/HDFS-Commands/"/>
     <id>http://hijacking.cn/2016/12/15/HDFS-Commands/</id>
     <published>2016-12-15T03:06:27.000Z</published>
-    <updated>2016-12-15T03:13:51.347Z</updated>
+    <updated>2016-12-18T03:10:03.518Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="1-FS-Shell"><a href="#1-FS-Shell" class="headerlink" title="1. FS Shell"></a>1. FS Shell</h2><p>调用FS Shell指令为：<code>bin/hadoop fs &lt;args&gt;</code>的形式，如果在系统的环境变量的路径中添加了<code>$Hadoop_HOME/bin</code>，那么可以直接使用<code>hadoop fs &lt;args&gt;</code>指令。<br><img src="http://7xvvfk.com1.z0.glb.clouddn.com/blog/20161215/110801595.png" alt="环境变量" title="环境变量"></p>
-<h2 id="2-常用指令"><a href="#2-常用指令" class="headerlink" title="2. 常用指令"></a>2. 常用指令</h2><h3 id="2-1-创建文件夹"><a href="#2-1-创建文件夹" class="headerlink" title="2.1 创建文件夹"></a>2.1 创建文件夹</h3><p><code>hadoop fs -mkdir &lt;paths&gt;</code>：在HDFS上创建指令路径的目录。<br><figure class="highlight powershell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 在HDFS上新建一个data目录</span></div><div class="line">hadoop fs -mkdir /<span class="keyword">data</span></div></pre></td></tr></table></figure></p>
+    <content type="html"><![CDATA[<h2 id="0-几种指令区别"><a href="#0-几种指令区别" class="headerlink" title="0. 几种指令区别"></a>0. 几种指令区别</h2><p>在操作HDFS上的文件的时候，Hadoop给我们提供了一下两种（三种，但有一种被废弃）指令，它们分别是：</p>
+<ul>
+<li><code>hadoop fs</code>: 适用范围最广，操作通用文件系统，例如Local FS、HDFS、HFTP FS、S3 FS等。</li>
+<li><code>hadoop dfs</code>: 进行与HDFS相关的操作，但是该方法已经被<strong>废弃</strong>，使用<code>hdfs dfs</code>代替。</li>
+<li><code>hdfs dfs</code>: 进行HDFS的相关操作。</li>
+</ul>
+<p><strong>值得注意</strong>，如果<code>hadoop fs</code>指令后未指明是何种文件系统，那么默认是HDFS，也就是说<code>hadoop fs -ls /</code>相当于<code>hadoop fs -ls hdfs:///</code>。<br><strong>还有一点</strong>，<code>/path</code>路径和<code>path</code>并不指向同一个目录，后者其实是<code>/user/username/path</code>的简写形式。这一点与Linux本地文件系统类似。</p>
+<p>几种指令操作类似，下面以<code>hadoop fs</code>为例，介绍常用的几种操作。</p>
 <a id="more"></a>
+<h2 id="1-FS-Shell"><a href="#1-FS-Shell" class="headerlink" title="1. FS Shell"></a>1. FS Shell</h2><p>调用FS Shell指令为：<code>bin/hadoop fs &lt;args&gt;</code>的形式，如果在系统的环境变量的路径中添加了<code>$Hadoop_HOME/bin</code>，那么可以直接使用<code>hadoop fs &lt;args&gt;</code>指令。<br><img src="http://7xvvfk.com1.z0.glb.clouddn.com/blog/20161215/110801595.png" alt="环境变量" title="环境变量"></p>
+<h2 id="2-常用操作"><a href="#2-常用操作" class="headerlink" title="2. 常用操作"></a>2. 常用操作</h2><h3 id="2-1-创建文件夹"><a href="#2-1-创建文件夹" class="headerlink" title="2.1 创建文件夹"></a>2.1 创建文件夹</h3><p><code>hadoop fs -mkdir &lt;paths&gt;</code>：在HDFS上创建指令路径的目录。<br><figure class="highlight powershell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 在HDFS上新建一个data目录</span></div><div class="line">hadoop fs -mkdir /<span class="keyword">data</span></div></pre></td></tr></table></figure></p>
 <h3 id="2-2-上载文件"><a href="#2-2-上载文件" class="headerlink" title="2.2 上载文件"></a>2.2 上载文件</h3><p><code>hadoop fs -put &lt;localsrc&gt; ... &lt;dst&gt;</code>：将一个或多个本地文件上载到HDFS目录中。<br><figure class="highlight powershell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 将本地的u1.base和u1.test文件写入到HDFS中的data目录</span></div><div class="line">hadoop fs -put /home/linux/Documents/u1.base home/linux/Documents/u1.test /<span class="keyword">data</span></div></pre></td></tr></table></figure></p>
 <h3 id="2-3-下载文件"><a href="#2-3-下载文件" class="headerlink" title="2.3 下载文件"></a>2.3 下载文件</h3><p><code>hadoop fs -get &lt;src&gt; &lt;localdst&gt;</code>：复制文件到本地文件系统。<br><figure class="highlight powershell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 将HDFS中u1.base和u1.test复制到本地</span></div><div class="line">hadoop fs -get /<span class="keyword">data</span>/u1.base /home/linux/Documents</div><div class="line">hadoop fs -get /<span class="keyword">data</span>/u1.test /home/linux/Documents</div></pre></td></tr></table></figure></p>
 <h3 id="2-4-复制文件"><a href="#2-4-复制文件" class="headerlink" title="2.4 复制文件"></a>2.4 复制文件</h3><p><code>hadoop fs -cp URI [URI …] &lt;dest&gt;</code>：将文件从源路径复制到目的路径。<br><figure class="highlight powershell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 将data目录下的u1.base和u1.test文件复制到/data/ml100k文件夹下</span></div><div class="line">hadoop fs -cp /<span class="keyword">data</span>/u1.base /<span class="keyword">data</span>/u1.test /<span class="keyword">data</span>/ml100k</div></pre></td></tr></table></figure></p>
@@ -35,17 +43,28 @@
 <li>如果是目录：返回<code>目录名 &lt;dir&gt; 修改日期 修改时间 权限 用户ID 组ID</code><figure class="highlight powershell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 查看data目录下的直接子文件</span></div><div class="line">hadoop fs -ls /<span class="keyword">data</span></div></pre></td></tr></table></figure>
 </li>
 </ul>
-<h3 id="2-7-删除文件"><a href="#2-7-删除文件" class="headerlink" title="2.7 删除文件"></a>2.7 删除文件</h3><p><code>hadoop fs -rm URI [URI …]</code>：删除指令的文件。只删除非空目录和文件。<br><figure class="highlight powershell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 将data目录下u1.base、u1.test，以及/data/ml100k目录下所有文件删除</span></div><div class="line">hadoop fs -rm /<span class="keyword">data</span>/u1.base /<span class="keyword">data</span>/u1.test /<span class="keyword">data</span>/ml100k</div></pre></td></tr></table></figure></p>
+<h3 id="2-7-查看内容"><a href="#2-7-查看内容" class="headerlink" title="2.7 查看内容"></a>2.7 查看内容</h3><p><code>hadoop fs -cat URI [URI …]</code>：将路径指定文件的内容输出到stdout。<br><figure class="highlight powershell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">查看u1.test文件的内容</div><div class="line">hadoop fs -cat /<span class="keyword">data</span>/u1.test</div></pre></td></tr></table></figure></p>
+<h3 id="2-8-删除文件"><a href="#2-8-删除文件" class="headerlink" title="2.8 删除文件"></a>2.8 删除文件</h3><p><code>hadoop fs -rm [-R] URI [URI …]</code>：删除指定文件。<br><figure class="highlight powershell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 将data目录下u1.base、u1.test</span></div><div class="line">hadoop fs -rm /<span class="keyword">data</span>/u1.base /<span class="keyword">data</span>/u1.test</div></pre></td></tr></table></figure></p>
+<p>若想要删除文件夹及其路径内所有文件，则使用下面指令：<br><figure class="highlight powershell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">删除/<span class="keyword">data</span>/ml100k目录下所有文件</div><div class="line">hadoop fs -rm -R /<span class="keyword">data</span>/ml100k</div></pre></td></tr></table></figure></p>
 <h2 id="3-读取"><a href="#3-读取" class="headerlink" title="3. 读取"></a>3. 读取</h2><p>对于不同的文件系统，有不同的scheme，读取本地文件系统时候，应该使用<code>file:///localpath</code>；而对于HDFS，应该使用<code>hdfs:///hdfspath</code>。<br>HDFS所有节点都可以读取，但是本地文件系统只能够读取本地文件，如果程序需要读本地文件，应该在所有节点的相同目录下都有该文件的备份。</p>
-<p>更多指令，参考<a href="https://hadoop.apache.org/docs/r1.0.4/cn/hdfs_shell.html" target="_blank" rel="external">Hadoop官方文档</a>。</p>
+<hr>
+<p>阅读参考：</p>
+<p>关于三种指令的区别，参考<a href="http://stackoverflow.com/questions/18142960/whats-the-difference-between-hadoop-fs-shell-commands-and-hdfs-dfs-shell-co" target="_blank" rel="external">stackoverflow</a>。</p>
+<p>更多指令，参考Hadoop文档<a href="https://hadoop.apache.org/docs/r1.0.4/cn/hdfs_shell.html" target="_blank" rel="external">ch</a>或<a href="https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/FileSystemShell.html" target="_blank" rel="external">en</a><em>(最新稳定版)</em>。</p>
 <hr>
 <p><div><br><img src="http://7xvvfk.com1.z0.glb.clouddn.com/blog/20161214/101015213.png" alt="CC4.0" align="left"><br></div><br><em>本文采用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="external">CC4.0</a>协议授权，转载请注明出处：<a href="http://hijacking.cn/2016/12/15/HDFS-Commands/">http://hijacking.cn/2016/12/15/HDFS-Commands/</a>，其他请联系<a href="mailto:me@jiaweilu.com?subject=【hijacking.cn】" target="_blank" rel="external">Jiawei LU</a></em></p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;h2 id=&quot;1-FS-Shell&quot;&gt;&lt;a href=&quot;#1-FS-Shell&quot; class=&quot;headerlink&quot; title=&quot;1. FS Shell&quot;&gt;&lt;/a&gt;1. FS Shell&lt;/h2&gt;&lt;p&gt;调用FS Shell指令为：&lt;code&gt;bin/hadoop fs &amp;lt;args&amp;gt;&lt;/code&gt;的形式，如果在系统的环境变量的路径中添加了&lt;code&gt;$Hadoop_HOME/bin&lt;/code&gt;，那么可以直接使用&lt;code&gt;hadoop fs &amp;lt;args&amp;gt;&lt;/code&gt;指令。&lt;br&gt;&lt;img src=&quot;http://7xvvfk.com1.z0.glb.clouddn.com/blog/20161215/110801595.png&quot; alt=&quot;环境变量&quot; title=&quot;环境变量&quot;&gt;&lt;/p&gt;
-&lt;h2 id=&quot;2-常用指令&quot;&gt;&lt;a href=&quot;#2-常用指令&quot; class=&quot;headerlink&quot; title=&quot;2. 常用指令&quot;&gt;&lt;/a&gt;2. 常用指令&lt;/h2&gt;&lt;h3 id=&quot;2-1-创建文件夹&quot;&gt;&lt;a href=&quot;#2-1-创建文件夹&quot; class=&quot;headerlink&quot; title=&quot;2.1 创建文件夹&quot;&gt;&lt;/a&gt;2.1 创建文件夹&lt;/h3&gt;&lt;p&gt;&lt;code&gt;hadoop fs -mkdir &amp;lt;paths&amp;gt;&lt;/code&gt;：在HDFS上创建指令路径的目录。&lt;br&gt;&lt;figure class=&quot;highlight powershell&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;# 在HDFS上新建一个data目录&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;hadoop fs -mkdir /&lt;span class=&quot;keyword&quot;&gt;data&lt;/span&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+      &lt;h2 id=&quot;0-几种指令区别&quot;&gt;&lt;a href=&quot;#0-几种指令区别&quot; class=&quot;headerlink&quot; title=&quot;0. 几种指令区别&quot;&gt;&lt;/a&gt;0. 几种指令区别&lt;/h2&gt;&lt;p&gt;在操作HDFS上的文件的时候，Hadoop给我们提供了一下两种（三种，但有一种被废弃）指令，它们分别是：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;hadoop fs&lt;/code&gt;: 适用范围最广，操作通用文件系统，例如Local FS、HDFS、HFTP FS、S3 FS等。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;hadoop dfs&lt;/code&gt;: 进行与HDFS相关的操作，但是该方法已经被&lt;strong&gt;废弃&lt;/strong&gt;，使用&lt;code&gt;hdfs dfs&lt;/code&gt;代替。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;hdfs dfs&lt;/code&gt;: 进行HDFS的相关操作。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;值得注意&lt;/strong&gt;，如果&lt;code&gt;hadoop fs&lt;/code&gt;指令后未指明是何种文件系统，那么默认是HDFS，也就是说&lt;code&gt;hadoop fs -ls /&lt;/code&gt;相当于&lt;code&gt;hadoop fs -ls hdfs:///&lt;/code&gt;。&lt;br&gt;&lt;strong&gt;还有一点&lt;/strong&gt;，&lt;code&gt;/path&lt;/code&gt;路径和&lt;code&gt;path&lt;/code&gt;并不指向同一个目录，后者其实是&lt;code&gt;/user/username/path&lt;/code&gt;的简写形式。这一点与Linux本地文件系统类似。&lt;/p&gt;
+&lt;p&gt;几种指令操作类似，下面以&lt;code&gt;hadoop fs&lt;/code&gt;为例，介绍常用的几种操作。&lt;/p&gt;
     
     </summary>
     
