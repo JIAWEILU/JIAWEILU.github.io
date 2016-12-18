@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Giraffe.ME, 大数据, Spark" />
 
 
 
@@ -377,7 +377,7 @@
 
       
         
-          <h2 id="0-几种指令区别"><a href="#0-几种指令区别" class="headerlink" title="0. 几种指令区别"></a>0. 几种指令区别</h2><p>在操作HDFS上的文件的时候，Hadoop给我们提供了一下两种（三种，但有一种被废弃）指令，它们分别是：</p>
+          <h2 id="几种指令区别"><a href="#几种指令区别" class="headerlink" title="几种指令区别"></a>几种指令区别</h2><p>在操作HDFS上的文件的时候，Hadoop给我们提供了一下两种（三种，但有一种被废弃）指令，它们分别是：</p>
 <ul>
 <li><code>hadoop fs</code>: 适用范围最广，操作通用文件系统，例如Local FS、HDFS、HFTP FS、S3 FS等。</li>
 <li><code>hadoop dfs</code>: 进行与HDFS相关的操作，但是该方法已经被<strong>废弃</strong>，使用<code>hdfs dfs</code>代替。</li>
@@ -521,9 +521,9 @@
 
       
         
-          <h2 id="1-推荐"><a href="#1-推荐" class="headerlink" title="1. 推荐"></a>1. 推荐</h2><p><img src="http://7xvvfk.com1.z0.glb.clouddn.com/blog/20161212/111006385.png" alt="推荐算法分类" title="推荐算法分类"></p>
-<h2 id="2-SVD"><a href="#2-SVD" class="headerlink" title="2. SVD"></a>2. SVD</h2><p>Singular Value Decomposition, 奇异值分解</p>
-<h3 id="2-1-定义"><a href="#2-1-定义" class="headerlink" title="2.1 定义"></a>2.1 定义</h3>
+          <h2 id="推荐"><a href="#推荐" class="headerlink" title="推荐"></a>推荐</h2><p><img src="http://7xvvfk.com1.z0.glb.clouddn.com/blog/20161212/111006385.png" alt="推荐算法分类" title="推荐算法分类"></p>
+<h2 id="SVD"><a href="#SVD" class="headerlink" title="SVD"></a>SVD</h2><p>Singular Value Decomposition, 奇异值分解</p>
+<h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3>
 假设${\bf{M}}$是一个$m \times n$矩阵，其中的元素全部属于实数域或复数域。那么存在一个分解使得：
 $${{\bf{M}}_{m \times n}} = {{\bf{U}}_{m \times m}}{{\bf{\Sigma }}_{m \times n}}{\bf{V}}_{n \times n}^*$$
 其中，${\bf{U}}$、${\bf{V}}$分别称为左、右奇异向量，$*$表示共轭转置，${\bf{\Sigma}}$对角线上的值是奇异值，其值按从大到小排列，且下降迅速。因此我们可以用前$r$个奇异值来近似描述原矩阵：
@@ -668,7 +668,7 @@ $${{\bf{M}}_{m \times n}} \approx {{\bf{U}}_{m \times r}}{{\bf{\Sigma }}_{r \tim
       
         
           <p>此笔记是在学习 Coursera 上 <a href="https://www.coursera.org/learn/progfun1/home" title="课程链接"><em>Functional Programming Principles in Scala</em></a> 课程时所整理，方便今后查阅。</p>
-<h2 id="1-Getting-Started"><a href="#1-Getting-Started" class="headerlink" title="1. Getting Started"></a>1. Getting Started</h2><h3 id="1-1-SBT-相关知识以及作业提交"><a href="#1-1-SBT-相关知识以及作业提交" class="headerlink" title="1.1 SBT 相关知识以及作业提交"></a>1.1 SBT 相关知识以及作业提交</h3><p>在 sbt 的术语中，基础目录或者是项目的根目录，指的是包含项目的目录。而 <code>build.sbt</code> 就是基础目录。<br>src的目录结构：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">src/</div><div class="line">  main/</div><div class="line">    resources/</div><div class="line">       &lt;files to include in main jar here&gt;</div><div class="line">    scala/</div><div class="line">       &lt;main Scala sources&gt;</div><div class="line">    java/</div><div class="line">       &lt;main Java sources&gt;</div><div class="line">  test/</div><div class="line">    resources</div><div class="line">       &lt;files to include in test jar here&gt;</div><div class="line">    scala/</div><div class="line">       &lt;test Scala sources&gt;</div><div class="line">    java/</div><div class="line">       &lt;test Java sources&gt;</div><div class="line">Other directories in src/ will be ignored. Additionally, all hidden</div><div class="line">directories will be ignored.</div></pre></td></tr></table></figure></p>
+<h2 id="Getting-Started"><a href="#Getting-Started" class="headerlink" title="Getting Started"></a>Getting Started</h2><h3 id="SBT-相关知识以及作业提交"><a href="#SBT-相关知识以及作业提交" class="headerlink" title="SBT 相关知识以及作业提交"></a>SBT 相关知识以及作业提交</h3><p>在 sbt 的术语中，基础目录或者是项目的根目录，指的是包含项目的目录。而 <code>build.sbt</code> 就是基础目录。<br>src的目录结构：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">src/</div><div class="line">  main/</div><div class="line">    resources/</div><div class="line">       &lt;files to include in main jar here&gt;</div><div class="line">    scala/</div><div class="line">       &lt;main Scala sources&gt;</div><div class="line">    java/</div><div class="line">       &lt;main Java sources&gt;</div><div class="line">  test/</div><div class="line">    resources</div><div class="line">       &lt;files to include in test jar here&gt;</div><div class="line">    scala/</div><div class="line">       &lt;test Scala sources&gt;</div><div class="line">    java/</div><div class="line">       &lt;test Java sources&gt;</div><div class="line">Other directories in src/ will be ignored. Additionally, all hidden</div><div class="line">directories will be ignored.</div></pre></td></tr></table></figure></p>
 <p><code>project/</code> 文件夹下也可能有 <code>.sbt</code>文件，但是它们与基础目录的 sbt 文件作用不同。</p>
           <!--noindex-->
           <div class="post-more-link text-center">
@@ -806,7 +806,7 @@ $${{\bf{M}}_{m \times n}} \approx {{\bf{U}}_{m \times r}}{{\bf{\Sigma }}_{r \tim
 
       
         
-          <h2 id="1-备份电脑A："><a href="#1-备份电脑A：" class="headerlink" title="1. 备份电脑A："></a>1. 备份电脑A：</h2><p>1.在 Github 上新建一个仓库，例如 blog。<br>2.上传电脑A本地Hexo博客的源文件到 Github 的 blog 仓库中：<br>1) 删除根目录和主题目录下的 <code>.git</code> 文件夹<br>2) 修改根目录下的 <code>.gitignore</code> 文件为：</p>
+          <h2 id="备份电脑A："><a href="#备份电脑A：" class="headerlink" title="备份电脑A："></a>备份电脑A：</h2><p>1.在 Github 上新建一个仓库，例如 blog。<br>2.上传电脑A本地Hexo博客的源文件到 Github 的 blog 仓库中：<br>1) 删除根目录和主题目录下的 <code>.git</code> 文件夹<br>2) 修改根目录下的 <code>.gitignore</code> 文件为：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">.deploy*/</div><div class="line">public/</div></pre></td></tr></table></figure>
           <!--noindex-->
           <div class="post-more-link text-center">
@@ -945,18 +945,12 @@ $${{\bf{M}}_{m \times n}} \approx {{\bf{U}}_{m \times r}}{{\bf{\Sigma }}_{r \tim
       
         
           <p>此笔记是在阅读<a href="http://item.jd.com/11402853.html" title="京东链接"><em>《Effective Objective-C 2.0：编写高质量iOS与OS X代码的52个有效方法》</em></a> 时所整理，方便今后查阅。</p>
-<h2 id="第1章-熟悉OC"><a href="#第1章-熟悉OC" class="headerlink" title="第1章 熟悉OC"></a>第1章 熟悉OC</h2><h3 id="1-了解OC语言的起源"><a href="#1-了解OC语言的起源" class="headerlink" title="1. 了解OC语言的起源"></a>1. 了解OC语言的起源</h3><h3 id="2-在类的头文件中尽量少引入其他头文件"><a href="#2-在类的头文件中尽量少引入其他头文件" class="headerlink" title="2. 在类的头文件中尽量少引入其他头文件"></a>2. 在类的头文件中尽量少引入其他头文件</h3><p>尽量晚地#import需要的头文件，使用@class进行『向前声明』（forward declaring）。<br>如果两个类在各自头文件中引入对方的头文件，则会导致『循环引用』（chicken-and-egg situation）。虽然#import不会像#include导致死循环，但是两个类里有一个无法被正确编译。</p>
+<h2 id="熟悉OC"><a href="#熟悉OC" class="headerlink" title="熟悉OC"></a>熟悉OC</h2><h3 id="了解OC语言的起源"><a href="#了解OC语言的起源" class="headerlink" title="了解OC语言的起源"></a>了解OC语言的起源</h3><h3 id="在类的头文件中尽量少引入其他头文件"><a href="#在类的头文件中尽量少引入其他头文件" class="headerlink" title="在类的头文件中尽量少引入其他头文件"></a>在类的头文件中尽量少引入其他头文件</h3><p>尽量晚地#import需要的头文件，使用@class进行『向前声明』（forward declaring）。<br>如果两个类在各自头文件中引入对方的头文件，则会导致『循环引用』（chicken-and-egg situation）。虽然#import不会像#include导致死循环，但是两个类里有一个无法被正确编译。</p>
 <p>最好将协议单独放在一个头文件中，如果把协议放在某个大的头文件里，那么只要引入此协议，就必定会引入那个头文件中的全部内容。<br>然有些协议，例如委托协议（delegate protocol）就不用单独写一个头文件。</p>
-<h3 id="3-多用字面量语法，少用与之等价的方法"><a href="#3-多用字面量语法，少用与之等价的方法" class="headerlink" title="3. 多用字面量语法，少用与之等价的方法"></a>3. 多用字面量语法，少用与之等价的方法</h3><p>字面量语法（literal syntax），一种语法糖（syntactic sugar）</p>
+<h3 id="多用字面量语法，少用与之等价的方法"><a href="#多用字面量语法，少用与之等价的方法" class="headerlink" title="多用字面量语法，少用与之等价的方法"></a>多用字面量语法，少用与之等价的方法</h3><p>字面量语法（literal syntax），一种语法糖（syntactic sugar）</p>
 <figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">NSNumber</span> *someNumber = [<span class="built_in">NSNumber</span> numberWithInt:<span class="number">1</span>];</div></pre></td></tr></table></figure>
 <p>等价于：</p>
 <figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">NSNumber</span> *someNumber = @<span class="number">1</span>;</div></pre></td></tr></table></figure>
-<p>还可以使用：<br><strong>字面量字符串</strong></p>
-<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">NSString</span> *someString = @“Effective Objective-C <span class="number">2.0</span>”;</div></pre></td></tr></table></figure>
-<p><strong>字面量数值</strong></p>
-<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">NSNumber</span> *floatNumber = @<span class="number">2.5</span>f;</div></pre></td></tr></table></figure>
-<p><strong>字面量数组</strong></p>
-<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">NSArray</span> *animals = @[@“cat”, @“dog”, @“mouse”, @“badger”];</div><div class="line"><span class="built_in">NSString</span> *dog = animals[<span class="number">1</span>]; <span class="comment">// 取下标操作，subscripting</span></div></pre></td></tr></table></figure>
           <!--noindex-->
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/07/01/Effective-OC-Note-Part1/#more" rel="contents">
@@ -1094,7 +1088,7 @@ $${{\bf{M}}_{m \times n}} \approx {{\bf{U}}_{m \times r}}{{\bf{\Sigma }}_{r \tim
       
         
           <p>教程最早发表于威锋网，<a href="http://bbs.feng.com/read-htm-tid-8304000.html">原帖地址</a>。未经允许，不得转载。</p>
-<h2 id="1-修改hosts文件"><a href="#1-修改hosts文件" class="headerlink" title="1. 修改hosts文件"></a>1. 修改hosts文件</h2><p>1.打开 Finder，同时按住 Shift + Command + G ，输入 /private/etc/ ，然后前往，找到 hosts 文件。<br><img src="http://7xvvfk.com1.z0.glb.clouddn.com/blog/20161207/101621073.png" alt="前往文件夹" title="前往文件夹"></p>
+<h2 id="修改hosts文件"><a href="#修改hosts文件" class="headerlink" title="修改hosts文件"></a>修改hosts文件</h2><p>1.打开 Finder，同时按住 Shift + Command + G ，输入 /private/etc/ ，然后前往，找到 hosts 文件。<br><img src="http://7xvvfk.com1.z0.glb.clouddn.com/blog/20161207/101621073.png" alt="前往文件夹" title="前往文件夹"></p>
 <p>2.将 hosts 文件拷贝一份到桌面上，然后使用文本编辑器添加如下字段：</p>
           <!--noindex-->
           <div class="post-more-link text-center">
