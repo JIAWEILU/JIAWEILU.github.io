@@ -4,6 +4,25 @@
 
     
   <url>
+    <loc>http://hijacking.cn/2016/12/15/HDFS-Commands/</loc>
+    <lastmod>2016-12-18T05:21:38.120Z</lastmod>
+    <data>
+        <display>
+        <title>HDFS 常用操作</title>
+        <pubTime>2016-12-15T03:06:27.000Z</pubTime>
+        
+        <tag>大数据处理</tag>
+         
+        <tag>Hadoop</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://hijacking.cn/2016/07/01/Effective-OC-Note-Part1/</loc>
     <lastmod>2016-12-18T04:25:34.750Z</lastmod>
     <data>
@@ -14,25 +33,6 @@
         <tag>Objective-C</tag>
          
         <tag>iOS</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://hijacking.cn/2016/12/15/HDFS-Commands/</loc>
-    <lastmod>2016-12-18T04:25:17.150Z</lastmod>
-    <data>
-        <display>
-        <title>HDFS 常用操作</title>
-        <pubTime>2016-12-15T03:06:27.000Z</pubTime>
-        
-        <tag>大数据处理</tag>
-         
-        <tag>Hadoop</tag>
          
          
            
