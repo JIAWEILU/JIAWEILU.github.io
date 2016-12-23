@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://hijacking.cn/2016/12/07/Coursera-FP-in-Scala-Note-Part1/</loc>
+    
+    <lastmod>2016-12-23T14:44:25.688Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://hijacking.cn/2016/12/23/Coursera-FP-in-Scala-Note-Part2/</loc>
     
     <lastmod>2016-12-23T14:35:45.903Z</lastmod>
@@ -40,13 +47,6 @@
     <loc>http://hijacking.cn/2016/12/06/Hexo-Backup/</loc>
     
     <lastmod>2016-12-18T04:23:20.113Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://hijacking.cn/2016/12/07/Coursera-FP-in-Scala-Note-Part1/</loc>
-    
-    <lastmod>2016-12-18T04:21:30.599Z</lastmod>
     
   </url>
   
