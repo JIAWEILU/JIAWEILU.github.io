@@ -102,7 +102,7 @@ Two Su">
 Two Su">
 <meta property="og:image" content="http://7xvvfk.com1.z0.glb.clouddn.com/blog/20170101/183223334.png">
 <meta property="og:image" content="http://7xvvfk.com1.z0.glb.clouddn.com/blog/20161214/101015213.png">
-<meta property="og:updated_time" content="2017-01-01T10:38:25.705Z">
+<meta property="og:updated_time" content="2017-01-11T02:09:11.445Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Leetcode 题解 in Python (1)">
 <meta name="twitter:description" content="2017年了，给自己 订个目标 开个坑吧，一天一条 Leetcode 的算法题，把解题过程中自己的方法和大神的一些思路做个记录，希望能有所提高。先从 Easy 开始，十条一发，欢迎督促。如果有更好的解题思路，欢迎一起交流。
@@ -507,7 +507,7 @@ Two Su">
 <li>和第一种方法类似，不同的是将两个list连接成一个，然后再一次检查每一个是否是按照从小到大的顺序排列：52.80%</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># in-place, iteratively        </span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">mergeTwoLists</span><span class="params">(self, l1, l2)</span>:</span></div><div class="line">    <span class="keyword">if</span> <span class="keyword">None</span> <span class="keyword">in</span> (l1, l2):</div><div class="line">        <span class="keyword">return</span> l1 <span class="keyword">or</span> l2</div><div class="line">    dummy = cur = ListNode(<span class="number">0</span>)</div><div class="line">    dummy.next = l1</div><div class="line">    <span class="keyword">while</span> l1 <span class="keyword">and</span> l2:</div><div class="line">        <span class="keyword">if</span> l1.val &lt; l2.val:</div><div class="line">            l1 = l1.next</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            nxt = cur.next</div><div class="line">            cur.next = l2</div><div class="line">            tmp = l2.next</div><div class="line">            l2.next = nxt</div><div class="line">            l2 = tmp</div><div class="line">        cur = cur.next</div><div class="line">    cur.next = l1 <span class="keyword">or</span> l2</div><div class="line">    <span class="keyword">return</span> dummy.next</div></pre></td></tr></table></figure>
-<p>未完，接<a href="http://hijacking.cn/">下篇</a>。</p>
+<p>未完，接<a href="http://hijacking.cn/2017/01/11/Leetcode-Python-Solution-Part2/">下篇</a>。</p>
 <hr>
 <p><div><br><img src="http://7xvvfk.com1.z0.glb.clouddn.com/blog/20161214/101015213.png" alt="CC4.0" align="left"><br></div><br><em>本文采用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="external">CC4.0</a>协议授权，转载请注明出处：<a href="http://hijacking.cn/2017/01/01/Leetcode-Python-Solution-Part1/">http://hijacking.cn/2017/01/01/Leetcode-Python-Solution-Part1/</a>，其他请联系<a href="mailto:me@jiaweilu.com?subject=【hijacking.cn】" target="_blank" rel="external">Jiawei LU</a></em></p>
 
@@ -571,6 +571,10 @@ Two Su">
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/01/11/Leetcode-Python-Solution-Part2/" rel="prev" title="Leetcode 题解 in Python (2)">
+                Leetcode 题解 in Python (2) <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -665,7 +669,7 @@ Two Su">
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">8</span>
+              <span class="site-state-item-count">9</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

@@ -1,0 +1,1207 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Leetcode,Python,算法," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Giraffe.ME" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="接上篇。
+第二篇如期而至，其中有好好几道链表的题(用双指针有时候会很方便)，涉及到算法效率的问题（用迭代虽然方便，但是对于计算来说效率是很低)，以及分析后变为斐波那契数列求解的问题。题目变得越来越有趣，希望自己可以坚持下去。
+Swap Nodes in Pairs (#24)Given a linked list, swap every two adjacent nodes and return">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Leetcode 题解 in Python (2)">
+<meta property="og:url" content="http://hijacking.cn/2017/01/11/Leetcode-Python-Solution-Part2/index.html">
+<meta property="og:site_name" content="Giraffe.ME">
+<meta property="og:description" content="接上篇。
+第二篇如期而至，其中有好好几道链表的题(用双指针有时候会很方便)，涉及到算法效率的问题（用迭代虽然方便，但是对于计算来说效率是很低)，以及分析后变为斐波那契数列求解的问题。题目变得越来越有趣，希望自己可以坚持下去。
+Swap Nodes in Pairs (#24)Given a linked list, swap every two adjacent nodes and return">
+<meta property="og:image" content="http://7xvvfk.com1.z0.glb.clouddn.com/blog/20170111/100632671.png">
+<meta property="og:image" content="http://7xvvfk.com1.z0.glb.clouddn.com/blog/20161214/101015213.png">
+<meta property="og:updated_time" content="2017-01-11T02:08:18.628Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Leetcode 题解 in Python (2)">
+<meta name="twitter:description" content="接上篇。
+第二篇如期而至，其中有好好几道链表的题(用双指针有时候会很方便)，涉及到算法效率的问题（用迭代虽然方便，但是对于计算来说效率是很低)，以及分析后变为斐波那契数列求解的问题。题目变得越来越有趣，希望自己可以坚持下去。
+Swap Nodes in Pairs (#24)Given a linked list, swap every two adjacent nodes and return">
+<meta name="twitter:image" content="http://7xvvfk.com1.z0.glb.clouddn.com/blog/20170111/100632671.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '6360980307578979000',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://hijacking.cn/2017/01/11/Leetcode-Python-Solution-Part2/"/>
+
+
+
+
+
+  <title> Leetcode 题解 in Python (2) | Giraffe.ME </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?df211222742fcaeae537201dddb59d31";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Giraffe.ME</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://hijacking.cn/2017/01/11/Leetcode-Python-Solution-Part2/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Jiawei LU">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="http://7xvvfk.com1.z0.glb.clouddn.com/blog/20161207/000018373.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Giraffe.ME">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Giraffe.ME" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Leetcode 题解 in Python (2)
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-11T09:53:34+08:00">
+                2017-01-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2017/01/11/Leetcode-Python-Solution-Part2/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/11/Leetcode-Python-Solution-Part2/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2017/01/11/Leetcode-Python-Solution-Part2/" class="leancloud_visitors" data-flag-title="Leetcode 题解 in Python (2)">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>接<a href="http://hijacking.cn/2017/01/01/Leetcode-Python-Solution-Part1/">上篇</a>。</p>
+<p>第二篇如期而至，其中有好好几道<strong>链表</strong>的题(用双指针有时候会很方便)，涉及到算法<strong>效率</strong>的问题（用迭代虽然方便，但是对于计算来说效率是很低)，以及分析后变为<strong>斐波那契</strong>数列求解的问题。题目变得越来越有趣，希望自己可以坚持下去。</p>
+<h3 id="Swap-Nodes-in-Pairs-24"><a href="#Swap-Nodes-in-Pairs-24" class="headerlink" title="Swap Nodes in Pairs (#24)"></a>Swap Nodes in Pairs (#24)</h3><p>Given a linked list, swap every two adjacent nodes and return its head.<br>For example, Given <code>1-&gt;2-&gt;3-&gt;4</code>, you should return the list as <code>2-&gt;1-&gt;4-&gt;3</code>.<br>Your algorithm should use only constant space. You may not modify the values in the list, only nodes itself can be changed.</p>
+<a id="more"></a>
+<ul>
+<li>利用递归不停地将下两个数交换位置：22.61%</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ListNode</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, x)</span>:</span></div><div class="line">        self.val = x</div><div class="line">        self.next = <span class="keyword">None</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">swap</span><span class="params">(l)</span>:</span></div><div class="line">    <span class="keyword">if</span> l == <span class="keyword">None</span>:</div><div class="line">        <span class="keyword">return</span> l</div><div class="line">    <span class="keyword">elif</span> l.next == <span class="keyword">None</span>:</div><div class="line">        <span class="keyword">return</span> l</div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        ln = l.next</div><div class="line">        temp = l.next.next</div><div class="line">        l.next.next = l</div><div class="line">        l.next = temp</div><div class="line">        <span class="keyword">return</span> ln</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">swapPairs</span><span class="params">(self, head)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        :type head: ListNode</div><div class="line">        :rtype: ListNode</div><div class="line">        """</div><div class="line">        <span class="keyword">if</span> <span class="keyword">not</span> head:<span class="keyword">return</span> head</div><div class="line">        <span class="keyword">if</span> <span class="keyword">not</span> head.next:<span class="keyword">return</span> head</div><div class="line">        l1 = head</div><div class="line">        l2 = head.next</div><div class="line">        temp = ListNode(<span class="number">0</span>)</div><div class="line">        ret = temp</div><div class="line">        <span class="keyword">while</span> l1 <span class="keyword">and</span> l2:</div><div class="line">            temp.next = swap(l1)</div><div class="line">            temp = l1</div><div class="line">            l1 = l1.next</div><div class="line">            <span class="keyword">if</span> <span class="keyword">not</span> l1:<span class="keyword">break</span></div><div class="line">            l2 = l1.next</div><div class="line">        <span class="keyword">return</span> ret.next</div></pre></td></tr></table></figure>
+<ul>
+<li>将 <code>pre -&gt; a -&gt; b -&gt; b.next</code>  变成 <code>pre -&gt; b -&gt; a -&gt; b.next</code>：51.05% </li>
+</ul>
+<p><em>MARK：连续赋值、动态语言</em><br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">swapPairs</span><span class="params">(self, head)</span>:</span></div><div class="line">    <span class="string">"""</span></div><div class="line">    :type head: ListNode</div><div class="line">    :rtype: ListNode</div><div class="line">    """</div><div class="line">    pre, pre.next = self, head</div><div class="line">    <span class="keyword">while</span> pre.next <span class="keyword">and</span> pre.next.next:</div><div class="line">        a = pre.next</div><div class="line">        b = a.next</div><div class="line">        pre.next, b.next, a.next = b, a, b.next</div><div class="line">        pre = a</div><div class="line">    <span class="keyword">return</span> self.next</div></pre></td></tr></table></figure></p>
+<p>注意，Python中的属性可以动态添加，即 <code>self.next</code> 是后来添加的属性。<br>另外，Python中多个变量连续赋值的时候，是一下子将等号右边的数读取进来，不会再随着变量值的改变而改变，然后赋给左边的变量：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">a = <span class="number">1</span></div><div class="line">b = <span class="number">2</span></div><div class="line"></div><div class="line">a,b = b,a</div><div class="line"><span class="comment"># a = 2, b = 1</span></div><div class="line"><span class="comment"># 而不是 a = 2, b = 2</span></div></pre></td></tr></table></figure></p>
+<h3 id="Remove-Duplicates-from-Sorted-Array-26"><a href="#Remove-Duplicates-from-Sorted-Array-26" class="headerlink" title="Remove Duplicates from Sorted Array (#26)"></a>Remove Duplicates from Sorted Array (#26)</h3><p>Given a sorted array, remove the duplicates in place such that each element appear only once and return the new length.<br>Do not allocate extra space for another array, you must do this in place with constant memory.<br>For example, Given input array <code>nums = [1,1,2]</code>, Your function should return <code>length = 2</code>, with the first two elements of nums being <code>1</code> and <code>2</code> respectively. It doesn’t matter what you leave beyond the new length.</p>
+<ul>
+<li>每发现一个相同的值，将其移到最后，然后后面的值依次向前补充，直到循环过每个值：无法通过测试，<strong>效率太低</strong>，所有数向前挪这一步不需要进行。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">removeDuplicates</span><span class="params">(self, nums)</span>:</span></div><div class="line">	<span class="string">"""</span></div><div class="line">	:type nums: List[int]</div><div class="line">	:rtype: int</div><div class="line">	"""</div><div class="line">	<span class="keyword">if</span> nums == []:<span class="keyword">return</span> <span class="number">0</span></div><div class="line">	last = nums[<span class="number">0</span>]</div><div class="line">	i = c = count = <span class="number">1</span></div><div class="line">	<span class="keyword">while</span> c &lt; len(nums):</div><div class="line">		this = nums[i]</div><div class="line">		<span class="keyword">if</span> this == last:</div><div class="line">			<span class="keyword">for</span> j <span class="keyword">in</span> range(i,len(nums)<span class="number">-1</span>):</div><div class="line">				nums[j] = nums[j+<span class="number">1</span>]</div><div class="line">			nums[len(nums)<span class="number">-1</span>] = this</div><div class="line">		<span class="keyword">elif</span> this &lt; last:</div><div class="line">			<span class="keyword">return</span> count</div><div class="line">		<span class="keyword">else</span>:</div><div class="line">			count +=<span class="number">1</span></div><div class="line">			i += <span class="number">1</span></div><div class="line">		last = this</div><div class="line">		c += <span class="number">1</span></div><div class="line">	<span class="keyword">return</span> count</div></pre></td></tr></table></figure>
+<ul>
+<li>将不同的数替换相同数对应位置上的数字，然后返回对应长度的数组：58.91%</li>
+</ul>
+<p><em>MARK：双指针</em><br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">removeDuplicates</span><span class="params">(self, nums)</span>:</span></div><div class="line">    <span class="string">"""</span></div><div class="line">    :type nums: List[int]</div><div class="line">    :rtype: int</div><div class="line">    """</div><div class="line">    <span class="keyword">if</span> <span class="keyword">not</span> nums:</div><div class="line">        <span class="keyword">return</span> <span class="number">0</span></div><div class="line"></div><div class="line">    newTail = <span class="number">0</span></div><div class="line"></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, len(nums)):</div><div class="line">        <span class="keyword">if</span> nums[i] != nums[newTail]:</div><div class="line">            newTail += <span class="number">1</span></div><div class="line">            nums[newTail] = nums[i]</div><div class="line"></div><div class="line">    <span class="keyword">return</span> newTail + <span class="number">1</span></div></pre></td></tr></table></figure></p>
+<h3 id="Remove-Element-27"><a href="#Remove-Element-27" class="headerlink" title="Remove Element (#27)"></a>Remove Element (#27)</h3><p>Given an array and a value, remove all instances of that value in place and return the new length.<br>Do not allocate extra space for another array, you must do this in place with constant memory.<br>The order of elements can be changed. It doesn’t matter what you leave beyond the new length.<br>Example:<br>Given input array <code>nums = [3,2,2,3]</code>, <code>val = 3</code><br>Your function should return length = 2, with the first two elements of nums being 2.</p>
+<blockquote>
+<p><strong>Hint</strong></p>
+<ol>
+<li>Try two pointers.</li>
+<li>Did you use the property of “the order of elements can be changed”?</li>
+<li>What happens when the elements to remove are rare?</li>
+</ol>
+</blockquote>
+<ul>
+<li>在数组里的数，一个一个和 <code>val</code> 比较，如果不相同，则从数组头部开始加入，最后返回数组的长度（与 #26 类似）：35.64%</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">removeElement</span><span class="params">(self, nums, val)</span>:</span></div><div class="line">    <span class="string">"""</span></div><div class="line">    :type nums: List[int]</div><div class="line">    :type val: int</div><div class="line">    :rtype: int</div><div class="line">    """</div><div class="line">    newlen = <span class="number">0</span></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(nums)):</div><div class="line">        <span class="keyword">if</span> nums[i] != val:</div><div class="line">            nums[newlen] = nums[i]</div><div class="line">            newlen += <span class="number">1</span></div><div class="line">    <span class="keyword">return</span> newlen</div></pre></td></tr></table></figure>
+<ul>
+<li>如果需要取出的数在数组中很稀少，那么可以通过减小数组长度的方法来提高速度，但是这样的数组的顺序是乱的：35.64%</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">removeElement</span><span class="params">(self, nums, val)</span>:</span></div><div class="line">    <span class="string">"""</span></div><div class="line">    :type nums: List[int]</div><div class="line">    :type val: int</div><div class="line">    :rtype: int</div><div class="line">    """</div><div class="line">    i = <span class="number">0</span></div><div class="line">    n = len(nums)</div><div class="line">    <span class="keyword">while</span> i &lt; n:</div><div class="line">        <span class="keyword">if</span> nums[i] == val:</div><div class="line">            nums[i] = nums[n<span class="number">-1</span>]</div><div class="line">            n -= <span class="number">1</span></div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            i += <span class="number">1</span></div><div class="line">    <span class="keyword">return</span> n</div></pre></td></tr></table></figure>
+<h3 id="Implement-strStr-28"><a href="#Implement-strStr-28" class="headerlink" title="Implement strStr() (#28)"></a>Implement strStr() (#28)</h3><p>Implement strStr().<br>Returns the index of the first occurrence of needle in haystack, or -1 if needle is not part of haystack.</p>
+<ul>
+<li>首先找出特殊情况；对于一般情况，先查找第一个字符符合的 <code>index</code>，然后检验 <code>len(needle)</code> 个字符是否也一样，注意中间有一步需要判断 <code>haystack</code> 剩下的长度是否不小于 <code>needle</code> 的长度，否则会数组越界：22.46%</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">strStr</span><span class="params">(self, haystack, needle)</span>:</span></div><div class="line">    <span class="string">"""</span></div><div class="line">    :type haystack: str</div><div class="line">    :type needle: str</div><div class="line">    :rtype: int</div><div class="line">    """</div><div class="line">    <span class="keyword">if</span> needle == <span class="string">""</span>: <span class="keyword">return</span> <span class="number">0</span></div><div class="line">    <span class="keyword">if</span> len(needle)&gt;len(haystack): <span class="keyword">return</span> <span class="number">-1</span></div><div class="line">    n0 = needle[<span class="number">0</span>]</div><div class="line">    <span class="keyword">for</span> index <span class="keyword">in</span> range(len(haystack)):</div><div class="line">        has = <span class="keyword">False</span></div><div class="line">        <span class="keyword">if</span> haystack[index] == n0:</div><div class="line">            has = <span class="keyword">True</span></div><div class="line">            <span class="comment"># 检查剩余长度，否则越界</span></div><div class="line">            <span class="keyword">if</span> len(haystack)-index&lt;len(needle):<span class="keyword">return</span> <span class="number">-1</span></div><div class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, len(needle)):</div><div class="line">                <span class="keyword">if</span> <span class="keyword">not</span> needle[i] == haystack[index+i]:</div><div class="line">                    has = <span class="keyword">False</span></div><div class="line">        <span class="keyword">if</span> has: <span class="keyword">return</span> index</div><div class="line">    <span class="keyword">return</span> <span class="number">-1</span></div></pre></td></tr></table></figure>
+<ul>
+<li>使用切片来判断字符串是否相等，循环条件需要判断长度：38.69%</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">strStr</span><span class="params">(self, haystack, needle)</span>:</span></div><div class="line">    <span class="string">"""</span></div><div class="line">    :type haystack: str</div><div class="line">    :type needle: str</div><div class="line">    :rtype: int</div><div class="line">    """</div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(haystack) - len(needle)+<span class="number">1</span>):</div><div class="line">        <span class="keyword">if</span> haystack[i:i+len(needle)] == needle:</div><div class="line">            <span class="keyword">return</span> i</div><div class="line">    <span class="keyword">return</span> <span class="number">-1</span></div></pre></td></tr></table></figure>
+<h3 id="Valid-Sudoku-36"><a href="#Valid-Sudoku-36" class="headerlink" title="Valid Sudoku (#36)"></a>Valid Sudoku (#36)</h3><p>Determine if a Sudoku is valid, according to: <a href="http://sudoku.com.au/TheRules.aspx" target="_blank" rel="external">Sudoku Puzzles - The Rules</a>.<br>The Sudoku board could be partially filled, where empty cells are filled with the character <code>&#39;.&#39;</code>.</p>
+<p><img src="http://7xvvfk.com1.z0.glb.clouddn.com/blog/20170111/100632671.png" alt="A partially filled sudoku which is valid." title="A partially filled sudoku which is valid. "></p>
+<blockquote>
+<p><strong>Note</strong><br>A valid Sudoku board (partially filled) is not necessarily solvable. Only the filled cells need to be validated.</p>
+</blockquote>
+<ul>
+<li>分三种情况检验是否合法（利用一个函数），行、列、以及九宫格内，1-9 每个数字最多只能出现一次：21.52%</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">isValidEachNine</span><span class="params">(self, eachList)</span>:</span></div><div class="line">        before = list(filter(<span class="keyword">lambda</span> x:x!=<span class="string">'.'</span>,eachList))</div><div class="line">        after = set(before)</div><div class="line">        <span class="keyword">if</span> len(before) == len(after):</div><div class="line">            <span class="keyword">return</span> <span class="keyword">True</span></div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            <span class="keyword">return</span> <span class="keyword">False</span></div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">isValidSudoku</span><span class="params">(self, board)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        :type board: List[List[str]]</div><div class="line">        :rtype: bool</div><div class="line">        """</div><div class="line">        <span class="comment"># 检查行</span></div><div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(board)):</div><div class="line">            <span class="keyword">if</span> <span class="keyword">not</span> self.isValidEachNine(board[i]):</div><div class="line">                <span class="keyword">return</span> <span class="keyword">False</span>    </div><div class="line">        <span class="comment"># 检查列</span></div><div class="line">        <span class="keyword">for</span> index <span class="keyword">in</span> range(<span class="number">9</span>):</div><div class="line">            l = []</div><div class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> range(len(board)):</div><div class="line">                l.append(board[i][index])</div><div class="line">            <span class="keyword">if</span> <span class="keyword">not</span> self.isValidEachNine(l):</div><div class="line">                <span class="keyword">return</span> <span class="keyword">False</span>    </div><div class="line">        <span class="comment"># 检查九宫格</span></div><div class="line">        <span class="keyword">for</span> rowiter <span class="keyword">in</span> range(<span class="number">0</span>,<span class="number">9</span>,<span class="number">3</span>):</div><div class="line">            row = rowiter</div><div class="line">            <span class="keyword">for</span> coliter <span class="keyword">in</span> range(<span class="number">0</span>,<span class="number">9</span>,<span class="number">3</span>):</div><div class="line">                col = coliter</div><div class="line">                l = []</div><div class="line">                <span class="keyword">for</span> rownum <span class="keyword">in</span> range(<span class="number">3</span>):</div><div class="line">                    <span class="keyword">for</span> colnum <span class="keyword">in</span> range(<span class="number">3</span>):</div><div class="line">                        l.append(board[row+rownum][col+colnum])</div><div class="line">                <span class="keyword">if</span> <span class="keyword">not</span> self.isValidEachNine(l):</div><div class="line">                    <span class="keyword">return</span> <span class="keyword">False</span>        </div><div class="line">        <span class="comment"># 都满足</span></div><div class="line">        <span class="keyword">return</span> <span class="keyword">True</span></div></pre></td></tr></table></figure>
+<ul>
+<li>利用set去除相同元组来检测，<code>(c, i)</code>记录每个数字及其行号，<code>(j, c)</code>用来记录每个数字及其列号，<code>(i//3, j//3, c)</code>用来记录每个数字所属九宫格的行列号，<code>(c, i)</code>和<code>(j, c)</code>元组之所以顺序相反，是为了区分行和列，因为<code>c</code>是字符，<code>i</code>和<code>j</code>是整数：67.23%</li>
+</ul>
+<p><em>MARK：元组以及生成器的使用</em><br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">isValidSudoku</span><span class="params">(self, board)</span>:</span></div><div class="line">    seen = sum(([(c, i), (j, c), (i//<span class="number">3</span>, j//<span class="number">3</span>, c)]</div><div class="line">                <span class="keyword">for</span> i, row <span class="keyword">in</span> enumerate(board)</div><div class="line">                <span class="keyword">for</span> j, c <span class="keyword">in</span> enumerate(row)</div><div class="line">                <span class="keyword">if</span> c != <span class="string">'.'</span>), [])</div><div class="line">    <span class="keyword">return</span> len(seen) == len(set(seen))</div></pre></td></tr></table></figure></p>
+<h3 id="Count-and-Say-38"><a href="#Count-and-Say-38" class="headerlink" title="Count and Say (#38)"></a>Count and Say (#38)</h3><p>The count-and-say sequence is the sequence of integers beginning as follows: <code>1, 11, 21, 1211, 111221, ...</code><br><code>1</code> is read off as <code>&quot;one 1&quot;</code> or <code>11</code>.<br><code>11</code> is read off as <code>&quot;two 1s&quot;</code> or <code>21</code>.<br><code>21</code> is read off as <code>&quot;one 2, then one 1&quot;</code> or <code>1211</code>.<br>Given an integer <em>n</em>, generate the <em>nth</em> sequence.</p>
+<blockquote>
+<p><strong>NOTE</strong><br>The sequence of integers will be represented as a string.</p>
+</blockquote>
+<ul>
+<li>首先处理特殊情况，对于一般情况 (n&gt;1) 来说，每次循环上一次得到的字符串，特别处理一下当这个字符串是最后一个字符串的时候，需要添加进新的字符串中：14.21%</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">countAndSay</span><span class="params">(self, n)</span>:</span></div><div class="line">    <span class="string">"""</span></div><div class="line">    :type n: int</div><div class="line">    :rtype: str</div><div class="line">    """</div><div class="line">    <span class="keyword">if</span> n&lt;<span class="number">1</span>: <span class="keyword">return</span> <span class="string">""</span></div><div class="line">    <span class="keyword">elif</span> n==<span class="number">1</span>: <span class="keyword">return</span> <span class="string">"1"</span></div><div class="line"></div><div class="line">    result = <span class="string">"1"</span></div><div class="line">    newresult = <span class="string">""</span></div><div class="line">    <span class="keyword">for</span> iternum <span class="keyword">in</span> range(n<span class="number">-1</span>):</div><div class="line">        newresult = <span class="string">""</span></div><div class="line">        count = <span class="number">0</span></div><div class="line">        last = result[<span class="number">0</span>]</div><div class="line">        <span class="keyword">for</span> index <span class="keyword">in</span> range(len(result)):</div><div class="line">            c = result[index]</div><div class="line">            <span class="keyword">if</span> c == last:</div><div class="line">                count += <span class="number">1</span></div><div class="line">            <span class="keyword">else</span>:</div><div class="line">                newresult += <span class="string">"%d%s"</span>%(count,last)</div><div class="line">                count = <span class="number">1</span></div><div class="line">            last = c</div><div class="line">            <span class="comment"># 最后一个字符串</span></div><div class="line">            <span class="keyword">if</span> index == len(result) - <span class="number">1</span>:</div><div class="line">                newresult += <span class="string">"%d%s"</span>%(count,c)           </div><div class="line">        result = newresult</div><div class="line">    <span class="keyword">return</span> newresult</div></pre></td></tr></table></figure>
+<ul>
+<li>上面算法的改写，因为最后一个字符的结果总是没有添加，因此可以在循环外面加入，循环内部可以不需要 <code>index</code> 来判断是否是最后一个字符：47.21%</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">countAndSay</span><span class="params">(self, n)</span>:</span></div><div class="line">    <span class="string">"""</span></div><div class="line">    :type n: int</div><div class="line">    :rtype: str</div><div class="line">    """</div><div class="line">    s = <span class="string">'1'</span></div><div class="line">    <span class="keyword">for</span> _ <span class="keyword">in</span> range(n<span class="number">-1</span>):</div><div class="line">        let, temp, count = s[<span class="number">0</span>], <span class="string">''</span>, <span class="number">0</span></div><div class="line">        <span class="keyword">for</span> l <span class="keyword">in</span> s:</div><div class="line">            <span class="keyword">if</span> let == l:</div><div class="line">                count += <span class="number">1</span></div><div class="line">            <span class="keyword">else</span>:</div><div class="line">                temp += str(count)+let</div><div class="line">                let = l</div><div class="line">                count = <span class="number">1</span></div><div class="line">        temp += str(count)+let</div><div class="line">        s = temp</div><div class="line">    <span class="keyword">return</span> s</div></pre></td></tr></table></figure>
+<h3 id="Length-of-Last-Word-58"><a href="#Length-of-Last-Word-58" class="headerlink" title="Length of Last Word (#58)"></a>Length of Last Word (#58)</h3><p>Given a string s consists of upper/lower-case alphabets and empty space characters <code>&#39; &#39;</code>, return the length of last word in the string.<br>If the last word does not exist, return 0.</p>
+<blockquote>
+<p><strong>NOTE</strong><br>A word is defined as a character sequence consists of non-space characters only.</p>
+</blockquote>
+<p>For example, Given s = <code>&quot;Hello World&quot;</code>, return <code>5</code>.</p>
+<ul>
+<li>以 空格 为分隔符进行切割，去除切割后的最后一个元素，注意可能是空的情况，如果是空，则依次向前取一个：30.29%</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">lengthOfLastWord</span><span class="params">(self, s)</span>:</span></div><div class="line">    <span class="string">"""</span></div><div class="line">    :type s: str</div><div class="line">    :rtype: int</div><div class="line">    """</div><div class="line">    <span class="keyword">if</span> s==<span class="string">""</span>: <span class="keyword">return</span> <span class="number">0</span></div><div class="line">    l = s.split(<span class="string">" "</span>)</div><div class="line">    <span class="keyword">if</span> len(l) == <span class="number">0</span>: <span class="keyword">return</span> <span class="number">-1</span></div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        <span class="keyword">for</span> index <span class="keyword">in</span> range(len(l)):</div><div class="line">            <span class="keyword">if</span> <span class="keyword">not</span> l[<span class="number">-1</span>-index] == <span class="string">""</span>:</div><div class="line">                <span class="keyword">return</span> len(l[<span class="number">-1</span>-index])</div><div class="line">        <span class="keyword">return</span> <span class="number">0</span></div></pre></td></tr></table></figure>
+<ul>
+<li>一行代码，不具有参考性，利用了Python中字符串的一些方法：43.73%</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">lengthOfLastWord</span><span class="params">(s)</span>:</span></div><div class="line">    <span class="string">"""</span></div><div class="line">    :type s: str</div><div class="line">    :rtype: int</div><div class="line">    """</div><div class="line">    <span class="keyword">return</span> len(s.rstrip(<span class="string">' '</span>).split(<span class="string">' '</span>)[<span class="number">-1</span>])</div></pre></td></tr></table></figure>
+<ul>
+<li>不使用内置的方法解，利用双指针，<code>slow</code> 指向从后往前第一个非空格，<code>fast</code> 指向从 <code>slow</code> 往前第一个空格，两者之差就是长度：62.59%</li>
+</ul>
+<p><em>MARK：双指针应用</em><br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">lengthOfLastWord</span><span class="params">(s)</span>:</span></div><div class="line">    <span class="string">"""</span></div><div class="line">    :type s: str</div><div class="line">    :rtype: int</div><div class="line">    """</div><div class="line">    ls = len(s)</div><div class="line">    <span class="comment"># slow and fast pointers</span></div><div class="line">    slow = <span class="number">-1</span></div><div class="line">    <span class="comment"># iterate over trailing spaces</span></div><div class="line">    <span class="keyword">while</span> slow &gt;= -ls <span class="keyword">and</span> s[slow] == <span class="string">' '</span>:</div><div class="line">        slow-=<span class="number">1</span></div><div class="line">    fast = slow</div><div class="line">    <span class="comment"># iterate over last word</span></div><div class="line">    <span class="keyword">while</span> fast &gt;= -ls <span class="keyword">and</span> s[fast] != <span class="string">' '</span>:</div><div class="line">        fast-=<span class="number">1</span></div><div class="line">    <span class="keyword">return</span> slow - fast</div></pre></td></tr></table></figure></p>
+<h3 id="Plus-One-66"><a href="#Plus-One-66" class="headerlink" title="Plus One (#66)"></a>Plus One (#66)</h3><p>Given a non-negative integer represented as a non-empty array of digits, plus one to the integer.<br>You may assume the integer do not contain any leading zero, except the number 0 itself.<br>The digits are stored such that the most significant digit is at the head of the list.</p>
+<blockquote>
+<p>题意：<br>题目要求是给定一个装有int类型元素的数组，对这个数组加1，然后返回加1的结果。<br>例如，给定<code>[3]</code>，输出<code>[4]</code>；给定<code>[9]</code>，输出<code>[1,0]</code>；给定<code>[9,9]</code>，输出<code>[1,0,0]</code>。</p>
+</blockquote>
+<ul>
+<li>先将 <code>list</code> 变成 <code>int</code> 类型的数字，然后以 <code>int</code> 为基础进行 +1 操作，然后将 <code>int</code> 在转化为 <code>list</code>，且其中每个元素也是 <code>int</code>：64.68%</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">plusOne</span><span class="params">(self, digits)</span>:</span></div><div class="line">    <span class="string">"""</span></div><div class="line">    :type digits: List[int]</div><div class="line">    :rtype: List[int]</div><div class="line">    """</div><div class="line">    int_val = <span class="number">0</span></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(digits)):</div><div class="line">        int_val = <span class="number">10</span>*int_val + digits[i]</div><div class="line">    new_val = int_val + <span class="number">1</span></div><div class="line">    <span class="keyword">return</span> list(map(int, str(new_val)))</div><div class="line">    <span class="comment"># 最后一句亦可以改写成</span></div><div class="line">    <span class="keyword">return</span> [int(i) <span class="keyword">for</span> i <span class="keyword">in</span> str(new_val)]</div></pre></td></tr></table></figure>
+<ul>
+<li>不将 <code>list</code> 转为 <code>int</code>，直接对 <code>list</code> 进行操作，特殊判断末位为9，考虑需要进位（可能不止一位）：47.29%</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">plusOne</span><span class="params">(self, digits)</span>:</span></div><div class="line">    <span class="string">"""</span></div><div class="line">    :type digits: List[int]</div><div class="line">    :rtype: List[int]</div><div class="line">    """</div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(digits)<span class="number">-1</span>, <span class="number">-1</span>, <span class="number">-1</span>):</div><div class="line">        digits[i] = digits[i] + <span class="number">1</span> <span class="keyword">if</span> digits[i] &lt; <span class="number">9</span> <span class="keyword">else</span> <span class="number">0</span></div><div class="line">        <span class="keyword">if</span> digits[i]: </div><div class="line">            <span class="keyword">return</span> digits</div><div class="line">    digits.insert(<span class="number">0</span>, <span class="number">1</span>)</div><div class="line">    <span class="keyword">return</span> digits</div></pre></td></tr></table></figure>
+<h3 id="Add-Binary-67"><a href="#Add-Binary-67" class="headerlink" title="Add Binary (#67)"></a>Add Binary (#67)</h3><p>Given two binary strings, return their sum (also a binary string).<br>For example,<br>a = <code>&quot;11&quot;</code><br>b = <code>&quot;1&quot;</code><br>Return <code>&quot;100&quot;</code>.</p>
+<ul>
+<li>两个字符串从最后一位开始相加，当两个字符串长度不同时，将剩余长度的字符串与进位标志位相加，然后不断递归调用：36.56%</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">addBinary</span><span class="params">(self, a, b)</span>:</span></div><div class="line">    <span class="string">"""</span></div><div class="line">    :type a: str</div><div class="line">    :type b: str</div><div class="line">    :rtype: str</div><div class="line">    """</div><div class="line">    <span class="keyword">if</span> <span class="keyword">not</span> a: <span class="keyword">return</span> b</div><div class="line">    <span class="keyword">if</span> <span class="keyword">not</span> b: <span class="keyword">return</span> a</div><div class="line">    lplus = <span class="number">0</span></div><div class="line">    result = <span class="string">""</span></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">-1</span>, -min(len(a),len(b))<span class="number">-1</span>, <span class="number">-1</span>):</div><div class="line">        <span class="keyword">if</span> a[i] == <span class="string">'1'</span> <span class="keyword">and</span> b[i] == <span class="string">'1'</span>:</div><div class="line">            result = str(lplus) + result</div><div class="line">            lplus = <span class="number">1</span></div><div class="line">        <span class="keyword">elif</span> a[i] == <span class="string">'0'</span> <span class="keyword">and</span> b[i] == <span class="string">'0'</span>:</div><div class="line">            result = str(lplus) + result</div><div class="line">            lplus = <span class="number">0</span></div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            <span class="keyword">if</span> lplus:</div><div class="line">                result = <span class="string">'0'</span> + result</div><div class="line">                lplus = <span class="number">1</span></div><div class="line">            <span class="keyword">else</span>:</div><div class="line">                result = <span class="string">'1'</span> + result</div><div class="line">                lplus = <span class="number">0</span></div><div class="line">    m = len(a) - len(b)</div><div class="line">    <span class="keyword">if</span> m &lt; <span class="number">0</span>:</div><div class="line">        left = b[:-m]</div><div class="line">    <span class="keyword">elif</span> m &gt; <span class="number">0</span>:</div><div class="line">        left = a[:m]</div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        <span class="keyword">if</span> lplus:</div><div class="line">            <span class="keyword">return</span> str(lplus) + result</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            <span class="keyword">return</span> result</div><div class="line">    <span class="keyword">return</span> self.addBinary(left,str(lplus)) + result</div></pre></td></tr></table></figure>
+<ul>
+<li>直接使用递归，分三种情况考虑，但递归效率较低：22.13%</li>
+</ul>
+<p><em>MARK：递归</em><br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">addBinary</span><span class="params">(self, a, b)</span>:</span></div><div class="line">    <span class="keyword">if</span> len(a)==<span class="number">0</span>: <span class="keyword">return</span> b</div><div class="line">    <span class="keyword">if</span> len(b)==<span class="number">0</span>: <span class="keyword">return</span> a</div><div class="line">    <span class="keyword">if</span> a[<span class="number">-1</span>] == <span class="string">'1'</span> <span class="keyword">and</span> b[<span class="number">-1</span>] == <span class="string">'1'</span>:</div><div class="line">        <span class="keyword">return</span> self.addBinary(self.addBinary(a[<span class="number">0</span>:<span class="number">-1</span>],b[<span class="number">0</span>:<span class="number">-1</span>]),<span class="string">'1'</span>)+<span class="string">'0'</span></div><div class="line">    <span class="keyword">if</span> a[<span class="number">-1</span>] == <span class="string">'0'</span> <span class="keyword">and</span> b[<span class="number">-1</span>] == <span class="string">'0'</span>:</div><div class="line">        <span class="keyword">return</span> self.addBinary(a[<span class="number">0</span>:<span class="number">-1</span>],b[<span class="number">0</span>:<span class="number">-1</span>])+<span class="string">'0'</span></div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        <span class="keyword">return</span> self.addBinary(a[<span class="number">0</span>:<span class="number">-1</span>],b[<span class="number">0</span>:<span class="number">-1</span>])+<span class="string">'1'</span></div></pre></td></tr></table></figure></p>
+<h3 id="Climbing-Stairs-70"><a href="#Climbing-Stairs-70" class="headerlink" title="Climbing Stairs (#70)"></a>Climbing Stairs (#70)</h3><p>You are climbing a stair case. It takes n steps to reach to the top.<br>Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?</p>
+<blockquote>
+<p><strong>NOTE</strong><br>Given n will be a positive integer.</p>
+</blockquote>
+<ul>
+<li>使用递归的方法，每次爬楼梯的最后一步都可以选择1步或2步，如果选择1步，那么为 n-1 层的方法数；如果选择2步，那么为 n-2 层的方法数，两者相加就是总的方法数：无法通过测试，<strong>效率太低</strong></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">climbStairs</span><span class="params">(self, n)</span>:</span></div><div class="line">    <span class="string">"""</span></div><div class="line">    :type n: int</div><div class="line">    :rtype: int</div><div class="line">    """</div><div class="line">    <span class="keyword">if</span> n&lt;=<span class="number">0</span>: <span class="keyword">return</span> <span class="number">0</span></div><div class="line">    <span class="keyword">elif</span> n==<span class="number">1</span>: <span class="keyword">return</span> <span class="number">1</span></div><div class="line">    <span class="keyword">elif</span> n==<span class="number">2</span>: <span class="keyword">return</span> <span class="number">2</span></div><div class="line">    <span class="keyword">return</span> self.climbStairs(n<span class="number">-2</span>)+self.climbStairs(n<span class="number">-1</span>)</div></pre></td></tr></table></figure>
+<ul>
+<li>将前面的方法改写成使用循环：53.54%</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">climbStairs</span><span class="params">(self, n)</span>:</span></div><div class="line">    <span class="string">"""</span></div><div class="line">    :type n: int</div><div class="line">    :rtype: int</div><div class="line">    """</div><div class="line">    <span class="keyword">if</span> n&lt;=<span class="number">0</span>: <span class="keyword">return</span> <span class="number">0</span></div><div class="line">    <span class="keyword">elif</span> n==<span class="number">1</span>: <span class="keyword">return</span> <span class="number">1</span></div><div class="line">    <span class="keyword">elif</span> n==<span class="number">2</span>: <span class="keyword">return</span> <span class="number">2</span></div><div class="line">    inall = <span class="number">0</span></div><div class="line">    onestepway = <span class="number">2</span></div><div class="line">    twostepway = <span class="number">1</span></div><div class="line">    <span class="keyword">for</span> numiter <span class="keyword">in</span> range(n<span class="number">-2</span>):</div><div class="line">        inall = onestepway + twostepway</div><div class="line">        twostepway = onestepway</div><div class="line">        onestepway = inall</div><div class="line">    <span class="keyword">return</span> inall</div></pre></td></tr></table></figure>
+<ul>
+<li>其实问题的解是一个 <code>斐波那契(fibonacci)数列</code> 求解问题，因为每一步的值等于前一个值加上前前个的值：66.03%</li>
+</ul>
+<p><em>MARK：斐波那契数列 fibonacci</em><br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">climbStairs</span><span class="params">(self, n)</span>:</span></div><div class="line">    <span class="string">"""</span></div><div class="line">    :type n: int</div><div class="line">    :rtype: int</div><div class="line">    """</div><div class="line">    a = b = <span class="number">1</span></div><div class="line">    <span class="keyword">for</span> _ <span class="keyword">in</span> range(n):</div><div class="line">        a, b = b, a + b</div><div class="line">    <span class="keyword">return</span> a</div></pre></td></tr></table></figure></p>
+<p>未完，接<a href="http://hijacking.cn/">下篇</a>。</p>
+<hr>
+<p><div><br><img src="http://7xvvfk.com1.z0.glb.clouddn.com/blog/20161214/101015213.png" alt="CC4.0" align="left"><br></div><br><em>本文采用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="external">CC4.0</a>协议授权，转载请注明出处：<a href="http://hijacking.cn/2017/01/11/Leetcode-Python-Solution-Part2/">http://hijacking.cn/2017/01/11/Leetcode-Python-Solution-Part2/</a>，其他请联系<a href="mailto:me@jiaweilu.com?subject=【hijacking.cn】" target="_blank" rel="external">Jiawei LU</a></em></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div></div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="http://7xvvfk.com1.z0.glb.clouddn.com/blog/20161206/211739895.jpg" alt="Jiawei LU WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Leetcode/" rel="tag"># Leetcode</a>
+          
+            <a href="/tags/Python/" rel="tag"># Python</a>
+          
+            <a href="/tags/算法/" rel="tag"># 算法</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/01/01/Leetcode-Python-Solution-Part1/" rel="next" title="Leetcode 题解 in Python (1)">
+                <i class="fa fa-chevron-left"></i> Leetcode 题解 in Python (1)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/01/11/Leetcode-Python-Solution-Part2/"
+           data-title="Leetcode 题解 in Python (2)" data-url="http://hijacking.cn/2017/01/11/Leetcode-Python-Solution-Part2/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://7xvvfk.com1.z0.glb.clouddn.com/blog/20161207/000018373.jpg"
+               alt="Jiawei LU" />
+          <p class="site-author-name" itemprop="name">Jiawei LU</p>
+          <p class="site-description motion-element" itemprop="description">Writing and Sharing</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">9</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="mailto://me@jiaweilu.com?subject=*hijacking.cn*" target="_blank" title="e-mail">
+                  
+                    <i class="fa fa-fw fa-terminal"></i>
+                  
+                  e-mail
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/EA7ARO" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.facebook.com/findlujiawei" target="_blank" title="Facebook">
+                  
+                    <i class="fa fa-fw fa-facebook"></i>
+                  
+                  Facebook
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        
+        
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Swap-Nodes-in-Pairs-24"><span class="nav-number">1.</span> <span class="nav-text">Swap Nodes in Pairs (#24)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Remove-Duplicates-from-Sorted-Array-26"><span class="nav-number">2.</span> <span class="nav-text">Remove Duplicates from Sorted Array (#26)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Remove-Element-27"><span class="nav-number">3.</span> <span class="nav-text">Remove Element (#27)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Implement-strStr-28"><span class="nav-number">4.</span> <span class="nav-text">Implement strStr() (#28)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Valid-Sudoku-36"><span class="nav-number">5.</span> <span class="nav-text">Valid Sudoku (#36)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Count-and-Say-38"><span class="nav-number">6.</span> <span class="nav-text">Count and Say (#38)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Length-of-Last-Word-58"><span class="nav-number">7.</span> <span class="nav-text">Length of Last Word (#58)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Plus-One-66"><span class="nav-number">8.</span> <span class="nav-text">Plus One (#66)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Add-Binary-67"><span class="nav-number">9.</span> <span class="nav-text">Add Binary (#67)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Climbing-Stairs-70"><span class="nav-number">10.</span> <span class="nav-text">Climbing Stairs (#70)</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jiawei LU</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+<br/>
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+网站流量： PV <span id="busuanzi_value_site_pv"></span> &nbsp&nbsp&nbsp
+| &nbsp&nbsp&nbsp UV <span id="busuanzi_value_site_uv"></span>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"hijacking"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+      
+      <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+      <script src="/js/src/hook-duoshuo.js?v=5.1.0"></script>
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("I9SskD41kNQzE63mBwiBXsHj-gzGzoHsz", "XyYhL9GuwYxoH5z7l9rwYXKE");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+</body>
+</html>
