@@ -2,16 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://hijacking.cn/about/index.html</loc>
+    <loc>http://hijacking.cn/ss/index.html</loc>
     
-    <lastmod>2017-01-17T08:08:39.680Z</lastmod>
+    <lastmod>2017-01-17T09:02:32.607Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://hijacking.cn/ss/index.html</loc>
+    <loc>http://hijacking.cn/2017/01/17/ss/</loc>
     
-    <lastmod>2017-01-17T08:03:43.094Z</lastmod>
+    <lastmod>2017-01-17T08:59:53.593Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://hijacking.cn/about/index.html</loc>
+    
+    <lastmod>2017-01-17T08:26:00.438Z</lastmod>
     
   </url>
   

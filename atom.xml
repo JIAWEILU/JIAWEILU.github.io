@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://hijacking.cn/"/>
-  <updated>2017-01-11T02:13:48.084Z</updated>
+  <updated>2017-01-17T08:59:53.593Z</updated>
   <id>http://hijacking.cn/</id>
   
   <author>
@@ -14,6 +14,44 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>本站 ss 服务的邀请码</title>
+    <link href="http://hijacking.cn/2017/01/17/ss/"/>
+    <id>http://hijacking.cn/2017/01/17/ss/</id>
+    <published>2017-01-17T08:17:09.000Z</published>
+    <updated>2017-01-17T08:59:53.593Z</updated>
+    
+    <content type="html"><![CDATA[<p>平时不免需要纠正上网姿势，于是用 <a href="http://www.vultr.com/?ref=7084902-3B" title="Vultr 官网" target="_blank" rel="external">Vultr</a> 搭建了一个科学上网的 shadowsocks 服务，节点在日本，速度很快。点击 <a href="http://hijacking.cn/ss/" title="扶墙">扶墙</a> 了解更多。</p>
+<p>放几个邀请码，有需求的朋友可以使用邀请码先注册，然后 <a href="mailto:me@jiaweilu.com?subject=*ss 账户开通*" target="_blank" rel="external">邮件</a> 告诉我 <strong>用户名</strong>，我会帮你预充一些流量（5GB）和余额（30￥），自行兑换合适的套餐。</p>
+<a id="more"></a>
+<p>以下是兑换码：</p>
+<blockquote>
+<p><code>ljw1MjgyMGNkMGZlNjQ2ZDM4YmM</code></p>
+<p><code>ljwkZjIxNjZkZDQyNGE1NzEyNzQ</code></p>
+<p><code>ljwNTI4NDVlYzBhMzc4Mzk0MDAz</code></p>
+<p><code>ljwxZTRiYmQ2MzkzYzkxMTFlNjU</code></p>
+<p><code>ljwdlZTZmNWY5YWE1Y2QxN2NhMW</code></p>
+<p><code>ljwkNDhhYjMxZDAxNmZmY2JmMzM</code></p>
+<p><code>ljwZDFiMmRiNTRkNTViYzhiYmEy</code></p>
+<p><code>ljwRjODA1MWNmZDRlOWVhODA3Mm</code></p>
+<p><code>ljwY5OGQ1Njk2N2Q5NDY0NzFhZj</code></p>
+<p><code>ljwIzZGUwZDRlYWNiOWEzZTZlNT</code></p>
+</blockquote>
+<p>Enjoy~</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;平时不免需要纠正上网姿势，于是用 &lt;a href=&quot;http://www.vultr.com/?ref=7084902-3B&quot; title=&quot;Vultr 官网&quot;&gt;Vultr&lt;/a&gt; 搭建了一个科学上网的 shadowsocks 服务，节点在日本，速度很快。点击 &lt;a href=&quot;http://hijacking.cn/ss/&quot; title=&quot;扶墙&quot;&gt;扶墙&lt;/a&gt; 了解更多。&lt;/p&gt;
+&lt;p&gt;放几个邀请码，有需求的朋友可以使用邀请码先注册，然后 &lt;a href=&quot;mailto:me@jiaweilu.com?subject=*ss 账户开通*&quot;&gt;邮件&lt;/a&gt; 告诉我 &lt;strong&gt;用户名&lt;/strong&gt;，我会帮你预充一些流量（5GB）和余额（30￥），自行兑换合适的套餐。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="shadowsocks" scheme="http://hijacking.cn/tags/shadowsocks/"/>
+    
+  </entry>
   
   <entry>
     <title>Leetcode 题解 in Python (2)</title>
