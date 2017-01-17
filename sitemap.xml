@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://hijacking.cn/about/index.html</loc>
+    
+    <lastmod>2017-01-17T08:08:39.680Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://hijacking.cn/ss/index.html</loc>
+    
+    <lastmod>2017-01-17T08:03:43.094Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://hijacking.cn/2017/01/11/Leetcode-Python-Solution-Part2/</loc>
     
     <lastmod>2017-01-11T02:13:48.084Z</lastmod>
@@ -61,13 +75,6 @@
     <loc>http://hijacking.cn/2016/12/06/Hexo-Backup/</loc>
     
     <lastmod>2016-12-18T04:23:20.113Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://hijacking.cn/about/index.html</loc>
-    
-    <lastmod>2016-12-14T00:54:10.587Z</lastmod>
     
   </url>
   
