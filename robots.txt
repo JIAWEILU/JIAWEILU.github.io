@@ -8,6 +8,7 @@ Disallow: /css/
 Disallow: /lib/
 Disallow: /fonts/
 Disallow: /vendors/
+Disallow: /ss/
 
 Sitemap: http://www.hijacking.cn/sitemap.xml
 Sitemap: http://www.hijacking.cn/baidusitemap.xml
