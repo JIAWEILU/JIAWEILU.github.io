@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://hijacking.cn/"/>
-  <updated>2017-03-15T12:59:32.032Z</updated>
+  <updated>2017-03-15T13:05:47.025Z</updated>
   <id>http://hijacking.cn/</id>
   
   <author>
@@ -20,9 +20,9 @@
     <link href="http://hijacking.cn/2017/03/15/Eight-Sorting-Algorithms/"/>
     <id>http://hijacking.cn/2017/03/15/Eight-Sorting-Algorithms/</id>
     <published>2017-03-15T12:28:08.000Z</published>
-    <updated>2017-03-15T12:59:32.032Z</updated>
+    <updated>2017-03-15T13:05:47.025Z</updated>
     
-    <content type="html"><![CDATA[<p>最近准备实习面试，花了两天时间把八大经典的排序算法整理的一遍，按照 思想 - 步骤 - 动画演示 - Python 实现 - 性能分析 的顺序进行总结。</p>
+    <content type="html"><![CDATA[<p>最近准备实习面试，花了两天时间把八大经典排序算法整理了一遍，按照 思想 - 步骤 - 动画演示 - Python 实现 - 性能分析 的顺序进行总结。</p>
 <p>文中所有算法动画均来自网络，版权归原作者所有。</p>
 <p>全部算法的源代码放在了我的 <a href="https://github.com/JIAWEILU" target="_blank" rel="external">Github</a> 上，欢迎下载使用。</p>
 <a id="more"></a>
@@ -496,7 +496,7 @@
     
     <summary type="html">
     
-      &lt;p&gt;最近准备实习面试，花了两天时间把八大经典的排序算法整理的一遍，按照 思想 - 步骤 - 动画演示 - Python 实现 - 性能分析 的顺序进行总结。&lt;/p&gt;
+      &lt;p&gt;最近准备实习面试，花了两天时间把八大经典排序算法整理了一遍，按照 思想 - 步骤 - 动画演示 - Python 实现 - 性能分析 的顺序进行总结。&lt;/p&gt;
 &lt;p&gt;文中所有算法动画均来自网络，版权归原作者所有。&lt;/p&gt;
 &lt;p&gt;全部算法的源代码放在了我的 &lt;a href=&quot;https://github.com/JIAWEILU&quot;&gt;Github&lt;/a&gt; 上，欢迎下载使用。&lt;/p&gt;
     
